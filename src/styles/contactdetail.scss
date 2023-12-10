@@ -1,0 +1,38 @@
+@import "./variable.scss";
+
+.ContactDetail h2{
+    @extend %title;
+}
+.ContactDetail h2::after{
+    @extend %titleAffter;
+}
+.ContactDetail-body{
+    padding: 0px 20px;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    gap: 2%;
+}
+.ContactDetail-body-Item{
+    font-weight: bold;
+}
+.ContactDetail-body-Item p{
+    user-select: none;
+}
+.ContactDetail-body-Item form .form_profile{
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    justify-content: center;
+    column-gap: 2%;
+    input{
+        margin-top: 10px;
+        height: 30px;
+        padding-left: 10px;
+        caret-color: rgb(255, 0, 0);
+    }
+}
+@media only screen and (max-width : 46.1875em){
+    .ContactDetail-body{
+        grid-template-columns: 100%;
+    }
+}

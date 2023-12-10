@@ -1,0 +1,126 @@
+@import "./variable.scss";
+.blog{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+    position: relative;
+    table{
+        border: $border;
+        width: 90%;
+        caption{
+            text-transform: uppercase;
+            color: black;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        thead{
+            tr{
+                th{
+                    border: $border;
+                    &:nth-child(1){
+                        width: 200px;
+                    }
+                    &:nth-child(2){
+                        width: 200px;
+                    }
+                }
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    &:nth-child(1){
+                        border: $border;
+                        text-align: $txAlent;
+                    }
+                    &:nth-child(2){
+                        border: $border;
+                        text-align: $txAlent;
+                        padding: $pd;
+                    }
+                    &:nth-child(3){
+                        border: $border;
+                        padding: $pd;
+                    }
+                    &:nth-child(4){
+                        text-align: $txAlent;
+                        button{
+                            @include button(rgb(240, 240, 102));
+                            +button{
+                                margin-top: 10px;
+                            }
+                            &:nth-child(2){
+                                @include button(rgb(211, 112, 112));
+                            }
+                            &:nth-child(3){
+                                @include button(rgb(112, 196, 211));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        tfoot{
+            tr{
+                td{
+                    button{
+                        @include button(white)
+                    }
+                }
+            }
+        }
+    }
+    .modal{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 30px;
+        background-color: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        .box{
+            width: 300px;
+            height: 500px;
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: fixed;
+            form{
+                width: 90%;
+                height: 80%;
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    +div{
+                        margin-top: 30px;
+                    }
+                    label{
+                        margin-bottom: 10px;
+                        font-weight: bold;
+                    }
+                    input{
+                        padding: 5px 0px 5px 5px;
+                    }
+                    
+                }
+                
+            }
+        }
+    }
+}
+.btn-form{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button:nth-child(1){
+        @include button(rgb(179, 179, 243));
+    }
+    button:nth-child(2){
+        @include button(rgb(254, 253, 254));
+    }
+}

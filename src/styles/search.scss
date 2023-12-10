@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+@import "./variable.scss";
+.Search{
+    margin: 0;
+    padding: 10px;
+    height: 367px;
+    font-family: Verdana;
+    text-align: center;
+    font-family: Verdana;
+    color: #efefef;
+    background: linear-gradient(147deg, $cor-linear-1, $cor-linear-2);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.Search input{
+    background-color: #212123;
+    width: 260px;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+    outline: none;
+    border: none;
+    color: #efefef;
+}
+.Search-history{
+    width: 260px;
+    height: 300px;
+    margin-top: 10px;
+    background-color: #fff3;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.Search-history_display{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Search-history_display + 
+.Search-history_display{
+    margin-top: 10px;
+    border-top: 1px solid rgb(233, 214, 9);
+    padding-top: 10px;
+}

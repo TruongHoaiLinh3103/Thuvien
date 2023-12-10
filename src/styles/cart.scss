@@ -1,0 +1,58 @@
+@import "./variable.scss";
+
+.Cart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.Cart h2{
+    @extend %title;
+    text-transform: uppercase;
+}
+.Cart h2::after{
+    @extend %titleAffter;
+}
+.Cart p{
+    font-size: 24px;
+    color: rgb(31, 31, 31);
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    margin: 0px 20px;
+    user-select: none;
+}
+.Cart img{
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+}
+.Cart-Pay{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.Cart-Pay_money, .Cart-Pay_btn{
+    display: flex;
+    align-items: center;
+}
+.Cart-Pay_money p{
+    color: red;
+    font-size: 20px;
+}
+.Cart-Pay_btn button{
+    padding: 20px;
+    color: white;
+    background-color: black;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    + button{
+        margin: 0px 10px;
+    }
+}

@@ -1,0 +1,64 @@
+@import "./variable.scss";
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+.Nav{
+    position: sticky;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: $bgColor;
+    h3{
+        color: white;
+        font-size: 20px;
+        text-shadow: $textShadow;
+        font-family: 'Nothing You Could Do', cursive;
+        user-select: none;
+    }
+    .Nav-navbar-list {
+        padding-left: 0px;
+        display: flex;
+        align-items: center;
+        li{
+            list-style: none;
+            @extend %navbar;
+            + li{
+                margin-left: 20px;
+            }
+            &:hover{
+                @extend %navbarHover;
+            }
+            a{
+                @extend %navbar;
+                &:hover{
+                    @extend %navbarHover;
+                }
+            }
+        }
+        li.search-nav{
+            position: relative;
+            cursor: pointer;
+            &::before{
+                content: "";
+                width: 40px;
+                height: 30px;
+                background-color: transparent;
+                position: absolute;
+                bottom: -30px;
+                left: -10px;
+            }
+            .Search-box{
+                position: absolute;
+                bottom: -381.4px;
+                left: -150px;
+                display: none;
+            }
+            &:hover .Search-box{
+                display: block;
+            }
+        }
+    }
+}

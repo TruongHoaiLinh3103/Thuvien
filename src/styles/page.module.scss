@@ -1,0 +1,13 @@
+.main ul{
+    padding-left: 0px;
+    li{
+        list-style: none;
+        +li{
+            margin-top: 10px;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    }
+}

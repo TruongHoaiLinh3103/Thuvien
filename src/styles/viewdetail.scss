@@ -1,0 +1,13 @@
+@import "./variable.scss";
+.ViewDetail{
+    width: 300px;
+    margin: 0px auto;
+    p{
+        text-align: center;
+    }
+    button{
+        @include button(rgb(188, 130, 239));
+        width: 200px;
+        text-align: center;
+    }
+}

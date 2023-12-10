@@ -1,0 +1,18 @@
+@import "./variable.scss";
+
+.Introduce h2{
+    @extend %title;
+}
+.Introduce h2::after{
+    @extend %titleAffter;
+}
+.Introduce-body{
+    padding: 0px 20px;
+}
+.Introduce-body h3{
+    text-transform: uppercase;
+    user-select: none;
+}
+.Introduce-body p{
+    user-select: none;
+}
