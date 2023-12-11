@@ -80,6 +80,10 @@ const FormLogin = () => {
                         <span className="subtitulo">Visit LightShop's platform to shop</span>
                         <form>
                             <section className="caixa__input">
+                                <label>User name</label>
+                                <input type="text" placeholder="User name" />
+                            </section>
+                            <section className="caixa__input">
                                 <label>Email</label>
                                 <input type="text" placeholder="Email" />
                             </section>

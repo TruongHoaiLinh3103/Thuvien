@@ -6,8 +6,10 @@ import $ from "jquery";
 import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useRouter } from 'next/navigation';
 
 const Product = (props) => {
+    const router = useRouter();
     const handleRating = (rating) => {
         let htmlToReturn = "";
         const maximumRatingStars = 5;
@@ -57,8 +59,8 @@ const Product = (props) => {
                         <div className="card" key={item.id}>
                             <div className="like"></div>
                             <img className="product"
-                                src={item.image} alt={`Foto do produtos - ${item.name}`}/>
-                            <h4 className="title" title={item.name}>{item.name}</h4>
+                                src={item.img} alt={`Foto do produtos - ${item.name}`}/>
+                            <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} onClick={() => {router.push(`/${item.id}`)}}>{item.name}</h4>
                             <div className="rating">
                                 {handleRating(item.rating)}
                             </div>

@@ -25,6 +25,16 @@ $pd: 20px;
     font-weight: bold;
     cursor: pointer;
 }
+@mixin buttonDetail($bgColor: red){
+    width: 150px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px;
+    background-color: $bgColor;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}
 
 %navbar{
     color: white;
