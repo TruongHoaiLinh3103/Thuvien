@@ -3,7 +3,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 const inter = Inter({ subsets: ['latin'] })
 import "../styles/app.scss";
-import { application_id_jsonone } from '@/story/application_ld_jsonone';
+import { applicationIdJsonone } from '@/story/applicationIdJsonone';
 
 export const metadata = {
   title: 'LightShop',
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         <Footer/>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(application_id_jsonone) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(applicationIdJsonone) }}
         />
       </body>
     </html>

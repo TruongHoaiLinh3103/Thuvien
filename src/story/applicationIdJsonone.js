@@ -1,4 +1,4 @@
-export const application_id_jsonone = {
+export const applicationIdJsonone = {
     "@context": "https://schema.org",
     "@type": "Store",
     "name": "Tiki",
