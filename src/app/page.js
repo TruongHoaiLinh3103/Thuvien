@@ -2,7 +2,7 @@
 
 import ProductMenu from "@/layouts/ProductMenu";
 import style from "../styles/page.module.scss";
-import Slider from "@/layouts/Slider";
+import SliderBanner from "@/layouts/SliderBanner";
 import Product from "@/layouts/Product";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -23,7 +23,7 @@ function Home() {
   if (!data){return <p>No profile data</p>}
   return (
     <main className={`${style.main} maxWidth1400px`}>
-        <Slider/>
+        <SliderBanner/>
         <ProductMenu/>
         <Product data ={data}/>
     </main>

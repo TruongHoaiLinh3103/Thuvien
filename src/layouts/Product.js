@@ -1,9 +1,8 @@
 "use client";
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import "../styles/product.scss";
-import $ from "jquery";
-import 'slick-carousel';
+import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ViewProduct from '@/utils/ViewProduct';
@@ -14,11 +13,11 @@ const Product = (props) => {
         const maximumRatingStars = 5;
         
         for (let i = 0; i < rating; i++) {
-            htmlToReturn += "&#9733;";
+            htmlToReturn += "⭐";
         }
         
         for (let j = 0; j < maximumRatingStars - rating; j++) {
-            htmlToReturn += "&#9734;";
+            htmlToReturn += " ✩";
         }
         
         return htmlToReturn;
@@ -33,26 +32,24 @@ const Product = (props) => {
             currency: "BRL",
         });
     }
-    useEffect(() => {
-        $(".js-slider").not('.slick-initialized').slick({
-            dots: false,
-            infinite: true,
-            speed: 300,
-            arrows: false,
-            slidesToShow: 4,
-            variableWidth: true,
-            autoplaySpeed: 3000,
-            centerMode: true,
-            autoplay: true,
-            cssEase: "linear",
-            pauseOnHover: true
-        });
-    })
+    var settings = {
+        dots: false,
+        infinite: true,
+        speed: 300,
+        arrows: false,
+        slidesToShow: 4,
+        variableWidth: true,
+        autoplaySpeed: 3000,
+        centerMode: true,
+        autoplay: true,
+        cssEase: "linear",
+        pauseOnHover: true
+    }
     const data = props.data;
     return (
         <div className='Product maxWidth1400px'>
             <h2><b>SẢN PHẨM</b> MỚI NHẤT</h2>
-            <div className="slider js-slider">
+            <Slider {...settings} className="slider js-slider">
                 {data.map((item) => {
                     return(
                         <div className="card" key={item.id}>
@@ -67,11 +64,11 @@ const Product = (props) => {
                                 <h5>{handlePrice(item.price)}</h5>
                                 <h5>{handlePrice(item.price, true)}</h5>
                             </div>
-                            <a className="button">Adicionar ao Carrinho</a>
+                            <a className="button">Add to cart</a>
                         </div>
                     )
                 })}
-            </div>
+            </Slider>
         </div>
     );
 };

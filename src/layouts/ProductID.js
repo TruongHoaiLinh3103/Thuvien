@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight, faHeart, faCartShopping, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
-import Slider from './Slider';
+import SliderBanner from './SliderBanner';
 import { printfID } from '@/utils/ViewURL';
 
 const ProductID = (props) => {
@@ -41,6 +41,20 @@ const ProductID = (props) => {
         setPageTwo(pageTwo + 1);
         setPageThree(pageThree + 1);
     }
+    const handleRating = (rating) => {
+        let htmlToReturn = "";
+        const maximumRatingStars = 5;
+        
+        for (let i = 0; i < rating; i++) {
+            htmlToReturn += "⭐";
+        }
+        
+        for (let j = 0; j < maximumRatingStars - rating; j++) {
+            htmlToReturn += " ✩";
+        }
+        
+        return htmlToReturn;
+    }
     const handlePrice = (price, discount = false) => {
         if (discount) {
             price = price * 0.9;
@@ -68,7 +82,7 @@ const ProductID = (props) => {
                     </div>
                     <div className='ProductID-detail'>
                         <div className='Product-detai-img'>
-                            <Slider id={data.id}/>
+                            <SliderBanner id={data.id}/>
                             <div className='Product-detai-img_other'>
                                 <div>
                                     <img src={data.imgOne} alt={data.name} />
@@ -82,11 +96,7 @@ const ProductID = (props) => {
                             </div>
                             <h3>{data.name}</h3>
                             <div className="ProductID-detail_name_rating">
-                                <span><FontAwesomeIcon icon={faStar} /></span>
-                                <span><FontAwesomeIcon icon={faStar} /></span>
-                                <span><FontAwesomeIcon icon={faStar} /></span>
-                                <span><FontAwesomeIcon icon={faStar} /></span>
-                                <span><FontAwesomeIcon icon={faStar} /></span>
+                                {handleRating(data.rating)}
                             </div>
                             <div className="ProductID-detail_name_price">
                                 <h5>{handlePrice(data.price)}</h5>
