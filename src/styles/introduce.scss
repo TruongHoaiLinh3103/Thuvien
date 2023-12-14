@@ -1,5 +1,8 @@
 @import "./variable.scss";
 
+.Introduce{
+    margin-bottom: 50px
+}
 .Introduce h2{
     @extend %title;
 }
@@ -8,6 +11,7 @@
 }
 .Introduce-body{
     padding: 0px 20px;
+    margin-top: 30px;
 }
 .Introduce-body h3{
     text-transform: uppercase;

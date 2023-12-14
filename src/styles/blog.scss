@@ -53,9 +53,6 @@
                             &:nth-child(2){
                                 @include button(rgb(211, 112, 112));
                             }
-                            &:nth-child(3){
-                                @include button(rgb(112, 196, 211));
-                            }
                         }
                     }
                 }

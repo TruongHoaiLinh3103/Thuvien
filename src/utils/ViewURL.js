@@ -1,13 +1,4 @@
 import slugify from "slugify"
-import Link from "next/link";
-
-function Blog(props){
-    return(
-        <div>
-            <Link style={{textDecoration:"none", color: "black"}} href={`/blogs/${convertSlug(props.title)}-${props.id}.html`}>View</Link>
-        </div>
-    )
-}
 
 export const convertSlug = (string) => {
     if(!string){return ""}
@@ -26,4 +17,3 @@ export const printfID = (string) => {
     const tempTwo = temp[0].split("-");
     return tempTwo[tempTwo.length-1];
 }
-export default Blog;

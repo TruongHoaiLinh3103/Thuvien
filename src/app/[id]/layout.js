@@ -4,14 +4,14 @@ export async function generateMetadata({ params, searchParams }, parent) {
     // read route params
     const id = printfID(params.id)
     // fetch data
-    const TitleID = await fetch(`https://zfakeapi.vercel.app/blogs/${id}`).then((res) => res.json())
+    const TitleID = await fetch(`https://zfakeapi.vercel.app/product/${id}`).then((res) => res.json())
    
     // optionally access and extend (rather than replace) parent metadata
     // const previousImages = (await parent).openGraph?.images || []
    
     return {
-      title: TitleID.title,
-      description: TitleID.author,
+      title: TitleID.name,
+      description: TitleID.price,
       openGraph: {
         title: "Trương Hoài Linh",
         description: "Xin chào các bạn nha",
@@ -28,6 +28,5 @@ return (
     <>
         {children}
     </>
-)
+  )
 }
-  

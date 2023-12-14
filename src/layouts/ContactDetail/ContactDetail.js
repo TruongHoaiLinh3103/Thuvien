@@ -12,7 +12,7 @@ const ContactDetail = () => {
     const Title = useRef(null);
     return (
         <div className='ContactDetail'>
-            <h2><b>CONTACT</b> US</h2>
+            <h2><b>LIÊN HỆ</b> CHÚNG TÔI</h2>
             <div className='ContactDetail-body'>
                 <div className='ContactDetail-body-Item'>
                     <p>Bạn có bất kỳ thắc mắc nào hoặc có nhu cầu liên hệ hợp tác, vui lòng điền thông tin vào mẫu dưới đây. </p>
@@ -44,6 +44,9 @@ const ContactDetail = () => {
                                 console.log(Content)
                             } }
                         />
+                        <div className='ContactDetail-body-Item-btn'>
+                            <button>Gửi</button>
+                        </div>
                     </form>
                 </div>
             </div>

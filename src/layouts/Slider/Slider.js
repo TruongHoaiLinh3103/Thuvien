@@ -1,20 +1,32 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../styles/slider.scss";
 import ic1 from "../../assets/Img/ic-1.jpg";
 import ic2 from "../../assets/Img/ic-2.jpg";
 import ic3 from "../../assets/Img/ic-3.jpg";
 import ic4 from "../../assets/Img/ic-4.jpg";
 import ic5 from "../../assets/Img/ic-5.jpg";
+import ic6 from "../../assets/Img/ic-6.jpg";
 import Image from 'next/image';
 import $ from "jquery";
 import "slick-carousel";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import axios from 'axios';
+import { usePathname } from 'next/navigation';
+import { convertSlug } from '@/utils/ViewURL';
 
-const Slider = () => {  
+const Slider = (props) => {
+    const [data, setData] = useState({});
+    const pathname = usePathname();
     useEffect(() => {
+        const id = props.id;
+        if(id){
+            axios.get(`https://zfakeapi.vercel.app/product/${id}`).then((res) => {
+                setData(res.data)
+            });
+        }
         $(".SliderCarousel").not('.slick-initialized').slick({
             arrows: false,
             dots: false,
@@ -25,7 +37,7 @@ const Slider = () => {
             variableWidth: true,
             draggable: false,
             autoplay: true,
-            autoplaySpeed: 2000,
+            autoplaySpeed: 4000,
             pauseOnHover: true
         });
         $(".SliderCarousel")
@@ -70,6 +82,7 @@ const Slider = () => {
             </svg>
             <button type='button' className='slick-prev'>Previous</button>
             <button type='button' className='slick-next'>Next</button>
+            {pathname === "/" && 
             <div className="SliderCarousel">
                 <div>
                     <Image src={ic1} alt=''/>
@@ -86,7 +99,22 @@ const Slider = () => {
                 <div>
                     <Image src={ic5} alt=''/>
                 </div>
-            </div>
+                <div>
+                    <Image src={ic6} alt=''/>
+                </div>
+            </div>}
+            {pathname === `/${convertSlug(data.name)}-${data.id}.html` &&
+            <div className="SliderCarousel">
+                <div>
+                    <img src={data.imgOne} alt=''/>
+                </div>
+                <div>
+                    <img src={data.imgTwo} alt=''/>
+                </div>
+                <div>
+                    <img src={data.imgThree} alt=''/>
+                </div>
+            </div>}
         </div>
     );
 };

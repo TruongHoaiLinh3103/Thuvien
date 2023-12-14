@@ -1,5 +1,8 @@
 @import "./variable.scss";
 
+.ContactDetail{
+    margin-bottom: 50px
+}
 .ContactDetail h2{
     @extend %title;
 }
@@ -29,6 +32,14 @@
         height: 30px;
         padding-left: 10px;
         caret-color: rgb(255, 0, 0);
+    }
+}
+.ContactDetail-body-Item-btn{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    button{
+        @include button(rgb(124, 124, 230));
     }
 }
 @media only screen and (max-width : 46.1875em){

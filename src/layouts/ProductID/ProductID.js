@@ -3,18 +3,59 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faHeart, faCartShopping, faStar } from '@fortawesome/free-solid-svg-icons';
 import "../../styles/productid.scss";
 import { useRouter } from 'next/navigation';
+import Slider from '../Slider/Slider';
+import { printfID } from '@/utils/ViewURL';
 
 const ProductID = (props) => {
     const [data, setData] = useState({});
-    const router = useRouter()
+    const [pageOne, setPageOne] = useState(1);
+    const [pageTwo, setPageTwo] = useState(2);
+    const [pageThree, setPageThree] = useState(3);
+    const router = useRouter();
+    const setDownPage = () => {
+        if(pageOne === 1){
+            setPageOne(1);
+            setPageTwo(2);
+            setPageThree(3);
+        }else{
+            setPageOne(pageOne - 1);
+            setPageTwo(pageTwo - 1);
+            setPageThree(pageThree - 1);
+        }
+    }
+    const setOne = () => {
+        setPageOne(pageOne + 1);
+        setPageTwo(pageTwo + 1);
+        setPageThree(pageThree + 1);
+    }
+    const setTwo = () => {
+        setPageOne(pageOne + 2);
+        setPageTwo(pageTwo + 2);
+        setPageThree(pageThree + 2);
+    }
+    const setUpPage = () => {
+        setPageOne(pageOne + 1);
+        setPageTwo(pageTwo + 1);
+        setPageThree(pageThree + 1);
+    }
+    const handlePrice = (price, discount = false) => {
+        if (discount) {
+            price = price * 0.9;
+            // price *= 0.9;
+        }
+        return price.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        });
+    }
     useEffect(() => {
-        const id = props.id;
-        axios.get(`http://localhost:4000/Product/${id}`).then((res) => {
+        const id = printfID(props.id);
+        axios.get(`https://zfakeapi.vercel.app/product/${id}`).then((res) => {
             setData(res.data)
-        })
+        });
     },[])
     const Data = Object.keys(data).length === 0
     return (
@@ -27,38 +68,56 @@ const ProductID = (props) => {
                     </div>
                     <div className='ProductID-detail'>
                         <div className='Product-detai-img'>
-                            <img src={data.img} alt={data.name} />
+                            <Slider id={data.id}/>
                             <div className='Product-detai-img_other'>
-                                <img src={data.img} alt={data.name} />
-                                <img src={data.img} alt={data.name} />
-                                <img src={data.img} alt={data.name} />
-                                <img src={data.img} alt={data.name} />
-                                <img src={data.img} alt={data.name} />
-                                <img src={data.img} alt={data.name} />
+                                <div>
+                                    <img src={data.imgOne} alt={data.name} />
+                                </div>
+                                <div>
+                                    <img src={data.imgTwo} alt={data.name} />
+                                </div>
+                                <div>
+                                    <img src={data.imgThree} alt={data.name} />
+                                </div>
+                            </div>
+                            <h3>{data.name}</h3>
+                            <div className="ProductID-detail_name_rating">
+                                <span><FontAwesomeIcon icon={faStar} /></span>
+                                <span><FontAwesomeIcon icon={faStar} /></span>
+                                <span><FontAwesomeIcon icon={faStar} /></span>
+                                <span><FontAwesomeIcon icon={faStar} /></span>
+                                <span><FontAwesomeIcon icon={faStar} /></span>
+                            </div>
+                            <div className="ProductID-detail_name_price">
+                                <h5>{handlePrice(data.price)}</h5>
+                                <h5>{handlePrice(data.price, true)}</h5>
+                            </div>
+                            <div className='ProductID-detail_name-btn'>
+                                <button><FontAwesomeIcon icon={faHeart} /></button>
+                                <button><FontAwesomeIcon icon={faCartShopping} /></button>
                             </div>
                         </div>
-                        <div className='ProductID-detail_name'>
-                            <h3>{data.name}</h3>
-                            <h4>{data.price}$</h4>
-                            <div className='ProductID-detail_name-btn'>
-                                <button>Like</button>
-                                <button>Add to cart</button>
+                        <div className='ProductID-cmt'>
+                            <nav>
+                                <h3>Mô tả</h3>
+                            </nav>
+                            <div className='ProductID-des-box'>
+                                
                             </div>
-                            <div className='ProductID-cmt'>
-                                <nav>
-                                    <h3>Mô tả</h3>
-                                    <h3>Bình luận</h3>
-                                </nav>
-                                <div className='ProductID-cmt-box'>
-                                    
-                                </div>
-                                <div className='ProductID-cmt_page'>
-                                    <button><FontAwesomeIcon icon={faAngleLeft} /></button>
-                                    <button>1</button>
-                                    <button>2</button>
-                                    <button>3</button>
-                                    <button><FontAwesomeIcon icon={faAngleRight} /></button>
-                                </div>
+                        </div>
+                        <div className='ProductID-cmt'>
+                            <nav>
+                                <h3>Bình luận</h3>
+                            </nav>
+                            <div className='ProductID-cmt-box'>
+                                
+                            </div>
+                            <div className='ProductID-cmt_page'>
+                                <button style={{opacity: pageOne === 1 ? 0 : 1, cursor: pageOne === 1 ? "default" : "pointer"}} onClick={() => setDownPage()}><FontAwesomeIcon icon={faAngleLeft}/></button>
+                                <button >{pageOne}</button>
+                                <button onClick={() => setOne()}>{pageTwo}</button>
+                                <button onClick={() => setTwo()}>{pageThree}</button>
+                                <button onClick={() => setUpPage()}><FontAwesomeIcon icon={faAngleRight}/></button>
                             </div>
                         </div>
                     </div>

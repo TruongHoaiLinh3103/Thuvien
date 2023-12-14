@@ -25,15 +25,20 @@ $pd: 20px;
     font-weight: bold;
     cursor: pointer;
 }
-@mixin buttonDetail($bgColor: red){
-    width: 150px;
-    border: 1px solid rgb(255, 255, 255);
+@mixin buttonDetail($bgColor: red, $text: white, $bd: yellow){
+    width: 100px;
+    border: 3px $bd double;
     padding: 10px;
     background-color: $bgColor;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
+    color: $text;
     cursor: pointer;
-    font-size: 15px;
+}
+
+@mixin ProductID--box($heghtBox: 420px){
+    margin-top: 10px;
+    width: 100%;
+    height: $heghtBox;
+    border: 1px solid black;
 }
 
 %navbar{
@@ -50,7 +55,6 @@ $pd: 20px;
     color: #000;
     font-weight: 300;
     position: relative;
-    margin-bottom: 3rem;
     text-align: center;
 }
 %titleAffter{

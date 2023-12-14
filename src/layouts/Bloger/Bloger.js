@@ -4,11 +4,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import "../../styles/blog.scss";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { useRouter } from 'next/navigation';
-import Blog from '@/utils/ViewURL';
 
 const Bloger = () => {
-    // const router = useRouter();
     const [data, setData] = useState([]);
     const [isLooding, setLooding] = useState(true);
     const [modal, setModal] = useState(false);
@@ -35,9 +32,6 @@ const Bloger = () => {
         setModal(true)
         setNameBtn("Submit")
     }
-    // const viewItem = (item) => {
-    //     router.push(`/blogs/${item.id}`)
-    // }
     const submit = () => {
         if (title.current.value === '') {
             title.current.focus();
@@ -128,8 +122,6 @@ const Bloger = () => {
                             <td>
                                 <button onClick={() => editItem(item)}>Edit</button>
                                 <button onClick={() => deleteItem(item)}>Delete</button>
-                                <button><Blog title={item.title} id={item.id}></Blog></button>
-                                {/* onClick={() => viewItem(item)} */}
                             </td>
                         </tr>
                     )

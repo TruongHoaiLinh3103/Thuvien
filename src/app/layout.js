@@ -3,7 +3,6 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 const inter = Inter({ subsets: ['latin'] })
 import "../styles/app.scss";
-import Script from 'next/script';
 import { application_id_jsonone } from '@/story/application_ld_jsonone';
 
 export const metadata = {

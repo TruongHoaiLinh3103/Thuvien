@@ -6,10 +6,9 @@ import $ from "jquery";
 import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useRouter } from 'next/navigation';
+import ViewProduct from '@/utils/ViewProduct';
 
 const Product = (props) => {
-    const router = useRouter();
     const handleRating = (rating) => {
         let htmlToReturn = "";
         const maximumRatingStars = 5;
@@ -52,15 +51,15 @@ const Product = (props) => {
     const data = props.data;
     return (
         <div className='Product maxWidth1400px'>
-            <h2><b>PRODUTOS</b> EM DESTAQUE</h2>
+            <h2><b>SẢN PHẨM</b> MỚI NHẤT</h2>
             <div className="slider js-slider">
                 {data.map((item) => {
                     return(
                         <div className="card" key={item.id}>
                             <div className="like"></div>
                             <img className="product"
-                                src={item.img} alt={`Foto do produtos - ${item.name}`}/>
-                            <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} onClick={() => {router.push(`/${item.id}`)}}>{item.name}</h4>
+                                src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
+                            <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id}></ViewProduct></h4>
                             <div className="rating">
                                 {handleRating(item.rating)}
                             </div>
