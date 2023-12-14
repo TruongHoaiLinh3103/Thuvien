@@ -5,7 +5,7 @@ import { convertSlug } from './ViewURL';
 const ViewProduct = (props) => {
     return(
         <div>
-            <Link style={{textDecoration:"none", color: "black"}} href={`/${convertSlug(props.name)}-${props.id}.html`}>{props.name}</Link>
+            <Link style={{textDecoration:"none", color: "black"}} href={`/product/${convertSlug(props.name)}-${props.id}.html`}>{props.name}</Link>
         </div>
     )
 };
