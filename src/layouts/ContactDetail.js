@@ -1,11 +1,11 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import "../styles/contactdetail.scss";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import dynamic from 'next/dynamic';
+
+const Edit = dynamic(() => import("./Edit"),{ssr: false});
 
 const ContactDetail = () => {
-    const [Content, setContent] = useState([]);
     const Name = useRef(null);
     const Email = useRef(null);
     const Tel = useRef(null);
@@ -30,20 +30,7 @@ const ContactDetail = () => {
                             <input type='tel' placeholder='Số điện thoại(*)' ref={Tel} onChange={() => {console.log(Tel.current.value)}}/>
                             <input type='text' placeholder='Tiêu đề(*)' ref={Title} onChange={() => {console.log(Title.current.value)}}/>
                         </div>
-                        {/* <CKEditor
-                            editor={ ClassicEditor }
-                            data={Content}
-                            onReady={ editor => {
-                                editor.editing.view.change((writer) => {
-                                    writer.setStyle("height", "150px", editor.editing.view.document.getRoot())
-                                })
-                            }}
-                            onChange={ ( event, editor ) => {
-                                const data = editor.getData();
-                                setContent(...Content, data)
-                                console.log(Content)
-                            } }
-                        /> */}
+                        <Edit/>
                         <div className='ContactDetail-body-Item-btn'>
                             <button>Gửi</button>
                         </div>
