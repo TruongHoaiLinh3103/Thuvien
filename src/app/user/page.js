@@ -1,4 +1,4 @@
-import FormLogin from '@/layouts/FormLogin/FormLogin';
+import FormLogin from '@/layouts/FormLogin';
 import React from 'react';
 
 const page = () => {

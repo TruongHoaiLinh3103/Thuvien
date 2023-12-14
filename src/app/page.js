@@ -1,9 +1,9 @@
 "use client";
 
-import ProductMenu from "@/layouts/ProductMenu/ProductMenu";
+import ProductMenu from "@/layouts/ProductMenu";
 import style from "../styles/page.module.scss";
-import Slider from "@/layouts/Slider/Slider";
-import Product from "@/layouts/Product/Product";
+import Slider from "@/layouts/Slider";
+import Product from "@/layouts/Product";
 import { useState, useEffect } from "react";
 import axios from "axios";
 

@@ -1,12 +1,12 @@
 "use client";
 
 import React,  { useState } from 'react';
-import logo from "../../assets/Svg/ic-logo.png";
-import google from "../../assets/Svg/ic-google.png";
-import facebook from "../../assets/Svg/ic-facebook.png";
-import direita from "../../assets/Svg/ic-background-direita.svg";
+import logo from "../../public/ic-logo.png";
+import google from "../../public/ic-google.png";
+import facebook from "../../public/ic-facebook.png";
+import direita from "../../public/ic-background-direita.svg";
 import Image from 'next/image';
-import "../../styles/formlogin.scss";
+import "../styles/formlogin.scss";
 
 const FormLogin = () => {
     const [logout, setLogout] = useState(false);

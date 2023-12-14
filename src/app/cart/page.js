@@ -1,4 +1,4 @@
-import DetailCart from '@/layouts/DetailCart/DetailCart';
+import DetailCart from '@/layouts/DetailCart';
 import React from 'react';
 
 const page = () => {

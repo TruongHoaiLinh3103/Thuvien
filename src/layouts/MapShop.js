@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../styles/map.scss";
+import "../styles/map.scss";
 
 const MapShop = () => {
     return (

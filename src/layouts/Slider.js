@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import "../../styles/slider.scss";
-import ic1 from "../../assets/Img/ic-1.jpg";
-import ic2 from "../../assets/Img/ic-2.jpg";
-import ic3 from "../../assets/Img/ic-3.jpg";
-import ic4 from "../../assets/Img/ic-4.jpg";
-import ic5 from "../../assets/Img/ic-5.jpg";
-import ic6 from "../../assets/Img/ic-6.jpg";
+import "../styles/slider.scss";
+import ic1 from "../../public/ic-1.jpg";
+import ic2 from "../../public/ic-2.jpg";
+import ic3 from "../../public/ic-3.jpg";
+import ic4 from "../../public/ic-4.jpg";
+import ic5 from "../../public/ic-5.jpg";
+import ic6 from "../../public/ic-6.jpg";
 import Image from 'next/image';
 import $ from "jquery";
 import "slick-carousel";

@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductID from '@/layouts/ProductID/ProductID';
+import ProductID from '@/layouts/ProductID';
 
 const page = (props) => {
     return (

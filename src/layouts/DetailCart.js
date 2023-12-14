@@ -1,6 +1,6 @@
 import React from 'react';
-import img from "../../assets/Img/cart-empty.png";
-import "../../styles/cart.scss";
+import img from "../../public/cart-empty.png";
+import "../styles/cart.scss";
 import Image from 'next/image';
 
 const DetailCart = () => {

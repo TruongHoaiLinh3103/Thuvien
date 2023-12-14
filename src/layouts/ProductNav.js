@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../styles/productnav.scss";
+import "../styles/productnav.scss";
 const ProductNav = () => {
     return (
         <div className='ProductNav'>

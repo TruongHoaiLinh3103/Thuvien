@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import "../../styles/contactdetail.scss";
+import "../styles/contactdetail.scss";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../styles/productmenu.scss";
+import "../styles/productmenu.scss";
 import Link from 'next/link';
 
 const ProductMenu = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Bloger from '@/layouts/Bloger/Bloger';
+import Bloger from '@/layouts/Bloger';
 
 export const metadata = {
     title: 'Blog',

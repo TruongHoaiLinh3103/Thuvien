@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight, faHeart, faCartShopping, faStar } from '@fortawesome/free-solid-svg-icons';
-import "../../styles/productid.scss";
+import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
-import Slider from '../Slider/Slider';
+import Slider from './Slider';
 import { printfID } from '@/utils/ViewURL';
 
 const ProductID = (props) => {

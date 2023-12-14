@@ -1,7 +1,7 @@
 "use client";
 
 import React, {useEffect} from 'react';
-import "../../styles/product.scss";
+import "../styles/product.scss";
 import $ from "jquery";
 import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';

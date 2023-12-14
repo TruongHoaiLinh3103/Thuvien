@@ -1,6 +1,6 @@
-import Introduce from '@/components/Introduce/Introduce';
-import ContactDetail from '@/layouts/ContactDetail/ContactDetail';
-import MapShop from '@/layouts/MapShop/MapShop';
+import Introduce from '@/components/Introduce';
+import ContactDetail from '@/layouts/ContactDetail';
+import MapShop from '@/layouts/MapShop';
 import React from 'react';
 
 const page = () => {

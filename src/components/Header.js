@@ -1,9 +1,9 @@
 "use client";
 
 import React from 'react';
-import "../../styles/header.scss";
+import "../styles/header.scss";
 import Link from 'next/link';
-import ProductNav from '@/layouts/ProductNav/ProductNav';
+import ProductNav from '@/layouts/ProductNav';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faBlog, faPhone, faCartShopping, faUser,faBars, faHeart, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';

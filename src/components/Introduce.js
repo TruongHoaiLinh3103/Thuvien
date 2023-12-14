@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../styles/introduce.scss";
+import "../styles/introduce.scss";
 const Introduce = () => {
     return (
         <div className='Introduce'>
