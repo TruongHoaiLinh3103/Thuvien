@@ -21,7 +21,7 @@ const FormLogin = () => {
                     <section className="esquerda">
                         <Image src={logo} alt="Imagem logo" className="imagem__logo" />
                         <h3 className="titulo__login">Login</h3>
-                        <span className="subtitulo">Visit LightShop's platform to shop</span>
+                        <span className="subtitulo">Visit LightShop&apos;s platform to shop</span>
                         <form>
                             <section className="caixa__input">
                                 <label>Email</label>
@@ -77,7 +77,7 @@ const FormLogin = () => {
                     <section className="esquerda">
                         <Image src={logo} alt="Imagem logo" className="imagem__logo" />
                         <h3 className="titulo__login">Register</h3>
-                        <span className="subtitulo">Visit LightShop's platform to shop</span>
+                        <span className="subtitulo">Visit LightShop&apos;s platform to shop</span>
                         <form>
                             <section className="caixa__input">
                                 <label>User name</label>
