@@ -20,11 +20,12 @@ const SliderBanner = (props) => {
     const pathname = usePathname();
     const [banner, setbanner] = useState([]);
     var settings = {
-        arrows: true,
+        arrows: false,
         dots: false,
         infinite: true,
         speed: 300,
         slidesToShow: 1,
+        slidesToScroll: 1,
         centerMode: true,
         variableWidth: true,
         draggable: false,
