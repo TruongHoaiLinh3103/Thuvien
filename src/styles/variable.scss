@@ -34,7 +34,7 @@ $pd: 20px;
     cursor: pointer;
 }
 
-@mixin ProductID--box($heghtBox: 420px){
+@mixin ProductID--box($heghtBox: 0px){
     margin-top: 10px;
     width: 100%;
     height: $heghtBox;

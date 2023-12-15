@@ -14,9 +14,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 30% 30% 30%;
-    gap: 2%;
-    margin-bottom: 10px;
-    padding-bottom: 30px;
+    column-gap: 2%;
     justify-content: center;
     .Product-detai-img{
         width: 100%;
@@ -48,15 +46,18 @@
         }
         h3{
             margin: 0px;
+            padding: 0px 10px;
         }
         .ProductID-detail_name_rating{
             margin-top: 10px;
             display: flex;
             color: rgb(248, 199, 51);
+            padding: 0px 10px;
         }
         .ProductID-detail_name_price{
             display: flex;
             align-items: center;
+            padding: 0px 10px;
             h5{
                 &:nth-child(1){
                     opacity: 0.5;
@@ -71,6 +72,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
+            padding: 0px 10px;
             svg{
                 font-size: 15px;
             }
@@ -83,33 +85,33 @@
             }
         }
     }
-    .ProductID-cmt{
-        padding: 0px 10px;
-        nav{
-            display: flex;
-            align-items: center;
-            h3{
-                margin: 0px;
-                color: black;
-                border: 1px solid black;
-                user-select: none;
-                padding: 10px;
-            }
-        }
-        .ProductID-cmt-box{
-            @include ProductID--box(720px);
-            overflow-y: scroll;
-            overflow-x: hidden;
-            &::-webkit-scrollbar{
-                display: none;
-            }
-        }
-        .ProductID-des-box{
-            @include ProductID--box(720px);
-        }
-    }
 }
 
+.ProductID-cmt{
+    padding: 0px 10px;
+    nav{
+        display: flex;
+        align-items: center;
+        h3{
+            margin: 0px;
+            color: black;
+            border: 1px solid black;
+            user-select: none;
+            padding: 10px;
+        }
+    }
+    .ProductID-cmt-box{
+        @include ProductID--box(700px);
+        overflow-y: scroll;
+        overflow-x: hidden;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+    .ProductID-des-box{
+        @include ProductID--box(700px);
+    }
+}
 .cmt-box_item{
     width: 100%;
     background-color: rgb(255, 255, 255);
@@ -187,8 +189,5 @@
 @media only screen and (max-width : 46.1875em) {
     .ProductID-detail{
         grid-template-columns: 100%;
-    }
-    .ProductID-detail{
-        padding: 0px 0px 50px;
     }
 }
