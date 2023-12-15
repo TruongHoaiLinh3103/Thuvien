@@ -1,0 +1,22 @@
+.BntPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    button{
+        border: none;
+        font-size: 20px;
+        color: white;
+        background-color: black;
+        padding: 5px 10px;
+        border-radius: 10px;
+        transition: linear .3s all;
+        cursor: pointer;
+        +button{
+            margin-left: 10px;
+        }
+        &:nth-child(2){
+            background-color: orange;
+        }
+    }
+}

@@ -96,33 +96,91 @@
         }
         .ProductID-cmt-box{
             @include ProductID--box(720px);
+            overflow-y: scroll;
+            overflow-x: hidden;
+            &::-webkit-scrollbar{
+                display: none;
+            }
         }
         .ProductID-des-box{
             @include ProductID--box(720px);
         }
-        .ProductID-cmt_page{
+    }
+}
+
+.cmt-box_item{
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid orange;
+    margin: 10px;
+}
+.avatarAndAuth{
+    display: flex;
+    align-items: center;
+}
+.avatarAndAuth-img{
+    @extend %imgChat;
+}
+.Auth{
+    display: flex;
+    flex-direction: column;
+    h3{
+        color: gray;
+        font-weight: 400;
+        margin: 0px;
+    }
+    p{
+        font-size: 10px;
+    }
+}
+.cmtAndLike{
+    p{
+        @extend %cmtBox;
+    }
+    .LikeAndDislike{
+        margin: 10px 0px;
+        div{
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10px;
-            button{
-                border: none;
-                font-size: 20px;
-                color: white;
-                background-color: black;
-                padding: 5px 10px;
-                border-radius: 10px;
-                transition: linear .3s all;
+            span{
+                font-size: 15px;
                 cursor: pointer;
-                +button{
-                    margin-left: 10px;
-                }
-                &:nth-child(2){
-                    background-color: orange;
+                +span{
+                    margin-left: 10px
                 }
             }
+        }  
+    }
+}
+.unChat{
+    margin-top: 10px;
+    display: flex;
+}
+.unChatImgAndAuth{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .Auth{
+        margin-top: 10px;
+        p{
+            margin: 10px 0px;
         }
     }
+}
+.cmtAndLikeUnChat{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+.seeAll{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    font-size: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 @media only screen and (max-width : 46.1875em) {
     .ProductID-detail{
