@@ -41,14 +41,21 @@ const Product = (props) => {
         slidesToScroll: 5,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1260,
+                settings: {
+                slidesToShow: 4,
+                slidesToScroll: 4,
+                },
+            },
+            {
+                breakpoint: 1000,
                 settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 },
             },
             {
-                breakpoint: 600,
+                breakpoint: 740,
                 settings: {
                 slidesToShow: 2,
                 slidesToScroll: 2,
