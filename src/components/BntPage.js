@@ -54,20 +54,6 @@ const BntPage = (props) => {
     })
     return (
         <>
-            {pathname === "/product/comic" && 
-            <div className='BntPage'>
-                <button style={{opacity: pageOne === 1 ? 0 : 1, cursor: pageOne === 1 ? "default" : "pointer"}} onClick={() => setDownPage(pageOne)}><FontAwesomeIcon icon={faAngleLeft}/></button>
-                <button >{pageOne}</button>
-                {/* {pageTwo <= number && */}
-                    <button onClick={() => setOne(pageTwo)}>{pageTwo}</button>
-                {/* } */}
-                {/* {pageTwo < number && */}
-                    <button onClick={() => setTwo(pageThree)}>{pageThree}</button>
-                {/* } */}
-                {/* {pageTwo < number && */}
-                    <button onClick={() => setUpPage(pageOne)}><FontAwesomeIcon icon={faAngleRight}/></button>
-                {/* } */}
-            </div>}
             {pathname === `/product/${props.data.menu}/${convertSlug(props.data.name)}-${props.data.id}.html` &&
             <div className='BntPage'>
                 <button style={{opacity: pageOne === 1 ? 0 : 1, cursor: pageOne === 1 ? "default" : "pointer"}} onClick={() => setDownPage(pageOne)}><FontAwesomeIcon icon={faAngleLeft}/></button>
