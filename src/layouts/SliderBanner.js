@@ -89,7 +89,7 @@ const SliderBanner = (props) => {
                     <Image src={ic6} alt='comic'/>
                 </div>
             </Slider>}
-            {pathname === `/product/${convertSlug(data.name)}-${data.id}.html` &&
+            {pathname === `/product/${data.menu}/${convertSlug(data.name)}-${data.id}.html` &&
             <Slider {...settings} className="SliderCarousel">
                 <div>
                     <img src={data.imgOne} alt='Product'/>

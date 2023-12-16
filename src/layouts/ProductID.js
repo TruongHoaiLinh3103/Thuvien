@@ -146,7 +146,7 @@ const ProductID = (props) => {
                                     )
                                 })}
                             </div>
-                            <BntPage numberPage={resetPage} id={props.id}/>
+                            <BntPage numberPage={resetPage} id={props.id} data={data}/>
                         </div>
                     </div>
                 </div>

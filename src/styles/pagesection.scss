@@ -1,0 +1,62 @@
+@import "./variable.scss";
+
+.PageSection{
+    margin: 10px 0px;
+    width: 100%;
+}
+.PageSection-section{
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+.PageSection-section_data{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.PageSection-section_data 
+.PageSection-section_data-card {
+    @include card();
+  }
+  
+  .PageSection-section_data-card 
+  .data-card_like {
+    @extend %like;
+  }
+  
+  .PageSection-section_data .data-card_like:hover {
+    @extend %likeHover;
+  }
+  
+  .PageSection-section_data img {
+    @include imgCard();
+  }
+  
+  .PageSection-section_data .data-card_title {
+    @extend %titleCard;
+  }
+  
+  .PageSection-section_data .data-card_rating {
+    @extend %ratingCard;
+  }
+  
+  .PageSection-section_data .data-card_price {
+    @extend %priceCard;
+  }
+  
+  .PageSection-section_data .data-card_price h5:first-child {
+    @extend %priceFirst;
+  }
+  
+.PageSection-section_data .data-card_price h5:last-child {
+    @extend %priceLast;
+  }
+  
+.PageSection-section_data a.button {
+    @extend %btnCard;
+  }
+  
+.PageSection-section_data a.button:hover {
+    @extend %btnHvCard;
+  }

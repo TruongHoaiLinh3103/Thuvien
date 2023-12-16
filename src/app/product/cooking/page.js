@@ -8,7 +8,7 @@ const page = () => {
         <section>
             <SliderBanner/>
             <PageSection/>
-            <BntPage/>
+            {/* <BntPage/> */}
         </section>
     );
 };

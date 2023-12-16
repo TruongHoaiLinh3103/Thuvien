@@ -81,7 +81,7 @@ const Product = (props) => {
                             <div className="like"></div>
                             <img className="product"
                                 src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
-                            <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id}></ViewProduct></h4>
+                            <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                             <div className="rating">
                                 {handleRating(item.rating)}
                             </div>

@@ -6,12 +6,15 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import "../styles/btnpage.scss";
 import axios from 'axios';
 import { printfID } from '@/utils/ViewURL';
+import { usePathname } from 'next/navigation';
+import { convertSlug } from '@/utils/ViewURL';
 
 const BntPage = (props) => {
     const [pageOne, setPageOne] = useState(1);
     const [pageTwo, setPageTwo] = useState(2);
     const [pageThree, setPageThree] = useState(3);
-    const [number, setNumber] = useState()
+    const [number, setNumber] = useState();
+    const pathname = usePathname();
     const setDownPage = (page) => {
         if(pageOne === 1){
             setPageOne(1);
@@ -50,19 +53,36 @@ const BntPage = (props) => {
         });
     })
     return (
-        <div className='BntPage'>
-            <button style={{opacity: pageOne === 1 ? 0 : 1, cursor: pageOne === 1 ? "default" : "pointer"}} onClick={() => setDownPage(pageOne)}><FontAwesomeIcon icon={faAngleLeft}/></button>
-            <button >{pageOne}</button>
-            {pageTwo <= number &&
-                <button onClick={() => setOne(pageTwo)}>{pageTwo}</button>
-            }
-            {pageTwo < number &&
-                <button onClick={() => setTwo(pageThree)}>{pageThree}</button>
-            }
-            {pageTwo < number &&
-                <button onClick={() => setUpPage(pageOne)}><FontAwesomeIcon icon={faAngleRight}/></button>
-            }
-        </div>
+        <>
+            {pathname === "/product/comic" && 
+            <div className='BntPage'>
+                <button style={{opacity: pageOne === 1 ? 0 : 1, cursor: pageOne === 1 ? "default" : "pointer"}} onClick={() => setDownPage(pageOne)}><FontAwesomeIcon icon={faAngleLeft}/></button>
+                <button >{pageOne}</button>
+                {/* {pageTwo <= number && */}
+                    <button onClick={() => setOne(pageTwo)}>{pageTwo}</button>
+                {/* } */}
+                {/* {pageTwo < number && */}
+                    <button onClick={() => setTwo(pageThree)}>{pageThree}</button>
+                {/* } */}
+                {/* {pageTwo < number && */}
+                    <button onClick={() => setUpPage(pageOne)}><FontAwesomeIcon icon={faAngleRight}/></button>
+                {/* } */}
+            </div>}
+            {pathname === `/product/${props.data.menu}/${convertSlug(props.data.name)}-${props.data.id}.html` &&
+            <div className='BntPage'>
+                <button style={{opacity: pageOne === 1 ? 0 : 1, cursor: pageOne === 1 ? "default" : "pointer"}} onClick={() => setDownPage(pageOne)}><FontAwesomeIcon icon={faAngleLeft}/></button>
+                <button >{pageOne}</button>
+                {pageTwo <= number &&
+                    <button onClick={() => setOne(pageTwo)}>{pageTwo}</button>
+                }
+                {pageTwo < number &&
+                    <button onClick={() => setTwo(pageThree)}>{pageThree}</button>
+                }
+                {pageTwo < number &&
+                    <button onClick={() => setUpPage(pageOne)}><FontAwesomeIcon icon={faAngleRight}/></button>
+                }
+            </div>}
+        </>
     );
 };
 
