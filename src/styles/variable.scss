@@ -17,7 +17,7 @@ $txAlent: center;
 $pd: 20px;
 
 @mixin button($bgColor: red){
-    width: 100px;
+    width: 120px;
     border: 1px solid black;
     padding: 5px;
     background-color: $bgColor;

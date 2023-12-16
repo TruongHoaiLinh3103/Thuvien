@@ -39,7 +39,8 @@ const ProductID = (props) => {
         });
     }
     const resetPage = async(childData) => {
-        axios.get(`https://zfakeapi.vercel.app/comment?_page=${childData}&_limit=9`).then((res) => {
+        const id = printfID(props.id);
+        axios.get(`https://zfakeapi.vercel.app/comment?productId=${id}&_page=${childData}&_limit=9`).then((res) => {
             setComment(res.data)
         });
     }
@@ -48,7 +49,7 @@ const ProductID = (props) => {
         axios.get(`https://zfakeapi.vercel.app/product/${id}`).then((res) => {
             setData(res.data)
         });
-        axios.get(`https://zfakeapi.vercel.app/comment?_page=1&_limit=9`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/comment?productId=${id}&_page=1&_limit=9`).then((res) => {
             setComment(res.data)
         });
     },[])
@@ -113,7 +114,7 @@ const ProductID = (props) => {
                                                 </div>
                                             </div>
                                             <div className='cmtAndLike'>
-                                                <p>{item.commet}</p>
+                                                <p>{item.comment}</p>
                                                 <div className='LikeAndDislike'>
                                                     <div>
                                                         <span>👍 {item.like}</span>
@@ -145,7 +146,7 @@ const ProductID = (props) => {
                                     )
                                 })}
                             </div>
-                            <BntPage numberPage={resetPage}/>
+                            <BntPage numberPage={resetPage} id={props.id}/>
                         </div>
                     </div>
                 </div>

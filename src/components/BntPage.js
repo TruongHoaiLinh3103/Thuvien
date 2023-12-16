@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import "../styles/btnpage.scss";
 import axios from 'axios';
+import { printfID } from '@/utils/ViewURL';
 
 const BntPage = (props) => {
     const [pageOne, setPageOne] = useState(1);
@@ -42,7 +43,8 @@ const BntPage = (props) => {
         props.numberPage(page + 1)
     }
     useEffect(() => {
-        axios.get(`https://zfakeapi.vercel.app/comment`).then((res) => {
+        const id = printfID(props.id);
+        axios.get(`https://zfakeapi.vercel.app/comment?productId=${id}`).then((res) => {
             const number = res.data.length/9;
             setNumber(Math.ceil(number));
         });
