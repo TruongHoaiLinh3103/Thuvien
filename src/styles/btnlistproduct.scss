@@ -1,0 +1,22 @@
+.BtnListProduct{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px;
+    button{
+        border: none;
+        font-size: 20px;
+        color: white;
+        background-color: black;
+        padding: 5px 10px;
+        border-radius: 10px;
+        transition: linear .3s all;
+        cursor: pointer;
+        +button{
+            margin-left: 5px;
+        }
+    }
+    .activeBtn{
+        background-color: orange;
+    }
+}

@@ -57,7 +57,7 @@ const BntPage = (props) => {
             {pathname === `/product/${props.data.menu}/${convertSlug(props.data.name)}-${props.data.id}.html` &&
             <div className='BntPage'>
                 <button style={{opacity: pageOne === 1 ? 0 : 1, cursor: pageOne === 1 ? "default" : "pointer"}} onClick={() => setDownPage(pageOne)}><FontAwesomeIcon icon={faAngleLeft}/></button>
-                <button >{pageOne}</button>
+                <button>{pageOne}</button>
                 {pageTwo <= number &&
                     <button onClick={() => setOne(pageTwo)}>{pageTwo}</button>
                 }

@@ -38,7 +38,7 @@ const ProductID = (props) => {
             currency: "BRL",
         });
     }
-    const resetPage = async(childData) => {
+    const resetPage = (childData) => {
         const id = printfID(props.id);
         axios.get(`https://zfakeapi.vercel.app/comment?productId=${id}&_page=${childData}&_limit=9`).then((res) => {
             setComment(res.data)
