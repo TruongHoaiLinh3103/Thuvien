@@ -5,8 +5,8 @@ import "../styles/classify.scss";
 
 
 const Classify = () => {
-    const max = "Giá cao đến thấp";
-    const min = "Giá thấp đến cao";
+    const max = "Giá ⬆ đến ⬇";
+    const min = "Giá ⬇ đến ⬆";
     const [title, setTitle] = useState(max);
     const namePrice = () => {
         if(title === max){

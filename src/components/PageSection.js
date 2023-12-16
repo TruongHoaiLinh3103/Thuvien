@@ -39,19 +39,19 @@ const PageSection = () => {
         });
     }
     useEffect(() => {
-        axios.get("https://zfakeapi.vercel.app/product?menu=cooking&_page=1&_limit=12").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=cooking&_page=1&_limit=18").then((res) => {
             setCooking(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=comic&_page=1&_limit=12").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=comic&_page=1&_limit=18").then((res) => {
             setComic(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=website&_page=1&_limit=12").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=website&_page=1&_limit=18").then((res) => {
             setWebsite(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=game&_page=1&_limit=12").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=game&_page=1&_limit=18").then((res) => {
             setGame(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=calligraphy&_page=1&_limit=12").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=calligraphy&_page=1&_limit=18").then((res) => {
             setCalligraphy(res.data)
         })
     }, [])
