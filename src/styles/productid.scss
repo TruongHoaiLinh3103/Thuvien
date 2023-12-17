@@ -7,10 +7,19 @@
     display: flex;
     align-items: center;
     padding: 0px 10px;
+    width: 70%;
     svg{
         font-size: 20px;
-        margin-right: 10px;
         cursor: pointer;
+    }
+    span{
+        margin: 0px 10px;
+    }
+    h3.ttProductID{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        user-select: none;
     }
 }
 .ProductID-detail{
@@ -101,6 +110,7 @@
             border: 3px double black;
             user-select: none;
             padding: 10px;
+            cursor: pointer;
         }
     }
     .ProductID-cmt-box{
@@ -113,6 +123,12 @@
     }
     .ProductID-des-box{
         @include ProductID--box(700px);
+        font-size: 20px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        &::-webkit-scrollbar{
+            display: none;
+        }
     }
 }
 .cmt-box_item{

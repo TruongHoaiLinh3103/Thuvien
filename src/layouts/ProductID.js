@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faCartShopping, faHouse } from '@fortawesome/free-solid-svg-icons';
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
 import SliderBanner from './SliderBanner';
@@ -60,8 +60,11 @@ const ProductID = (props) => {
             {!Data && 
                 <div className='ProductID'>
                     <div className='ProductID-title'>
-                        <FontAwesomeIcon icon={faAngleLeft} onClick={() => router.push("/")}/>
-                        <h3>{data.name}</h3>
+                        <FontAwesomeIcon icon={faHouse} onClick={() => router.push("/")}/>
+                        <span>/</span>
+                        <h3 style={{cursor: "pointer", userSelect:"none"}} onClick={() => router.push(`/product/${data.menu}`)}>{data.menu}</h3>
+                        <span>/</span>
+                        <h3 className='ttProductID'>{data.name}</h3>
                     </div>
                     <div className='ProductID-detail'>
                         <div className='Product-detai-img'>
@@ -95,7 +98,7 @@ const ProductID = (props) => {
                                 <h3>Mô tả</h3>
                             </nav>
                             <div className='ProductID-des-box'>
-                                
+                                {data.text}
                             </div>
                         </div>
                         <div className='ProductID-cmt'>
