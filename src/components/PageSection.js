@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Children, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Classify from './Classify';
 import { usePathname } from 'next/navigation';
 import axios from 'axios';
@@ -107,9 +107,6 @@ const PageSection = () => {
                                 )
                             })}
                         </div>
-                        <div className='PageSection-section_navbar'>
-                            
-                        </div>
                     </section>
                     <BtnListProduct page={"cooking"} numberPage={cookingPage}/>
                 </>
@@ -136,9 +133,6 @@ const PageSection = () => {
                                     </div>
                                 )
                             })}
-                        </div>
-                        <div className='PageSection-section_navbar'>
-                            
                         </div>
                     </section>
                     <BtnListProduct page={"comic"} numberPage={comicPage}/>
@@ -167,9 +161,6 @@ const PageSection = () => {
                                 )
                             })}
                         </div>
-                        <div className='PageSection-section_navbar'>
-                            
-                        </div>
                     </section>
                     <BtnListProduct page={"website"} numberPage={websitePage}/>
                 </>
@@ -197,9 +188,6 @@ const PageSection = () => {
                                 )
                             })}
                         </div>
-                        <div className='PageSection-section_navbar'>
-                            
-                        </div>
                     </section>
                     <BtnListProduct page={"game"} numberPage={gamePage}/>
                 </>
@@ -226,9 +214,6 @@ const PageSection = () => {
                                     </div>
                                 )
                             })}
-                        </div>
-                        <div className='PageSection-section_navbar'>
-                            
                         </div>
                     </section>
                     <BtnListProduct page={"calligraphy"} numberPage={calligraphyPage}/>

@@ -6,6 +6,7 @@ import SliderBanner from "@/layouts/SliderBanner";
 import Product from "@/layouts/Product";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "../styles/home.scss";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -19,7 +20,20 @@ function Home() {
     }
     fecher();
   }, [])
-  if (isLoading){return <p>Loading...</p>}
+  if (isLoading){return(
+    <ul className="wave-menu">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  )}
   if (!data){return <p>No profile data</p>}
   return (
     <main className={`${style.main} maxWidth1400px`}>

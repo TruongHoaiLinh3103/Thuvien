@@ -3,7 +3,7 @@ import "../styles/map.scss";
 
 const MapShop = () => {
     return (
-        <div className='MapShop'>
+        <div className='MapShop' id='MapShop'>
             <h2><b>VỊ TRÍ</b> CÔNG TY</h2>
             <div className='MapShop-Detail'>
                 <div className='MapShop-Detail_location'>

@@ -7,12 +7,19 @@
     justify-content: center;
     background-color: $bgColor;
     .Footer-item{
-        width: 420px;
+        width: 300px;
         padding: 20px;
-        text-align: center;
         h3{
             color: white;
             font-family: 'Nothing You Could Do', cursive;
+        }
+        hr{
+            width: 100%;
+            height: 3px;
+            background-color: rgb(116, 20, 119);
+            border-radius: 30px;
+            outline: none;
+            border: none;
         }
         h4{
             color: white;
@@ -23,6 +30,8 @@
             li{
                 // list-style: url("../assets/Svg/icons8-tick-24.png");
                 list-style: none;
+                display: flex;
+                align-items: center;
                 p{
                     color: white;
                     margin: 0px;
@@ -35,13 +44,24 @@
                 + li{
                     margin-top: 10px;
                 }
+                svg{
+                    color: white;
+                    margin-right: 5px;
+                }
             }
     
         }
     }
 }
-@media only screen and (max-width: 78.75em){
+.Footer-item_social{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     
+}
+@media only screen and (max-width: 78.75em){
+
 }
 @media only screen and (max-width: 62.5em){
     
