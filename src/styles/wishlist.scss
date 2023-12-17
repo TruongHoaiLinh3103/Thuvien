@@ -1,20 +1,20 @@
 @import "./variable.scss";
 
-.Cart{
+.WishList{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 0px 20px
 }
-.Cart h2{
+.WishList h2{
     @extend %title;
     text-transform: uppercase;
 }
-.Cart h2::after{
+.WishList h2::after{
     @extend %titleAffter;
 }
-.Cart p{
+.WishList p{
     font-size: 24px;
     color: rgb(31, 31, 31);
     font-weight: 400;
@@ -23,12 +23,12 @@
     margin: 0px 10px;
     user-select: none;
 }
-.Cart img{
+.WishList img{
     width: 300px;
     height: 200px;
     object-fit: cover;
 }
-.Cart-Pay{
+.WishList-Total{
     width: 100%;
     display: flex;
     align-items: flex-end;
@@ -36,24 +36,21 @@
     justify-content: center;
     margin-bottom: 10px;
 }
-.Cart-Pay_money, .Cart-Pay_btn{
+.WishList-Total_d, .WishList-Total_btn{
     display: flex;
     align-items: center;
 }
-.Cart-Pay_money p{
+.WishList-Total_d p{
     color: red;
     font-size: 20px;
 }
-.Cart-Pay_btn button{
-    padding: 20px;
+.WishList-Total_btn button{
+    padding: 15px;
     color: white;
     background-color: black;
-    font-size: 18px;
+    font-size: 15px;
     border: none;
     outline: none;
     border-radius: 10px;
     cursor: pointer;
-    + button{
-        margin: 0px 10px;
-    }
 }

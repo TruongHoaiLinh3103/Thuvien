@@ -21,7 +21,7 @@ const FormLogin = () => {
                     <section className="esquerda">
                         <Image src={logo} alt="Imagem logo" className="imagem__logo" />
                         <h3 className="titulo__login">Login</h3>
-                        <span className="subtitulo">Visit LightShop&apos;s platform to shop</span>
+                        <span className="subtitulo">Visit LisohAnikey&apos;s platform</span>
                         <form>
                             <section className="caixa__input">
                                 <label>Email</label>
@@ -63,7 +63,7 @@ const FormLogin = () => {
                         <div className="background__imagem">
                             <div className="detalhe__vidro">
                                 <div className="detalhe__vidro--interno">
-                                    <span>This is a website specializing in providing household appliances and feng shui items</span>
+                                    <span>This is a website developed by Anikey, and is an extremely large archive</span>
                                 </div>
                             </div>
                             <Image src={direita} alt="Imagem fundo" />
@@ -77,7 +77,7 @@ const FormLogin = () => {
                     <section className="esquerda">
                         <Image src={logo} alt="Imagem logo" className="imagem__logo" />
                         <h3 className="titulo__login">Register</h3>
-                        <span className="subtitulo">Visit LightShop&apos;s platform to shop</span>
+                        <span className="subtitulo">Visit LisohAnikey&apos;s platform</span>
                         <form>
                             <section className="caixa__input">
                                 <label>User name</label>

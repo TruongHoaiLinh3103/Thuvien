@@ -15,6 +15,7 @@ $cor-borda-desfocado: rgba(255, 255, 255, 0.2);
 $border: 1px solid black;
 $txAlent: center;
 $pd: 20px;
+$ctColor: white;
 
 @mixin button($bgColor: red){
     width: 120px;

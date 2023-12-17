@@ -1,6 +1,6 @@
 import Introduce from '@/components/Introduce';
 import ContactDetail from '@/layouts/ContactDetail';
-import MapShop from '@/layouts/MapShop';
+import Map from '@/layouts/Map';
 import React from 'react';
 
 const page = () => {
@@ -8,7 +8,7 @@ const page = () => {
         <section>
             <Introduce/>
             <ContactDetail/>
-            <MapShop/>
+            <Map/>
         </section>
     );
 };

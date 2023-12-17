@@ -1,10 +1,10 @@
-import DetailCart from '@/layouts/DetailCart';
+import WishList from '@/layouts/WishList';
 import React from 'react';
 
 const page = () => {
     return (
         <section>
-            <DetailCart/>
+            <WishList/>
         </section>
     );
 };

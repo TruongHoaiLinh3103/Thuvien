@@ -1,31 +1,31 @@
 @import "./variable.scss";
 
-.MapShop h2{
+.Map h2{
     @extend %title;
 }
-.MapShop h2::after{
+.Map h2::after{
     @extend %titleAffter;
 }
-.MapShop-Detail{
+.Map-Detail{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 30px;
 }
-.MapShop-Detail_location{
+.Map-Detail_location{
     width: 80%;
     height: 700px;
 }
 @media only screen and (max-width: 89.9374em){
 }
 @media only screen and (max-width: 78.9375em){
-    .MapShop-Detail_location{
+    .Map-Detail_location{
         height: 600px;
     }
 }
 @media only screen and (max-width : 46.1875em){
-    .MapShop-Detail_location{
+    .Map-Detail_location{
         height: 300px;
     }
 }
