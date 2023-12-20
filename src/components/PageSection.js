@@ -1,12 +1,13 @@
 "use client";
 
-import React, { Children, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Classify from './Classify';
 import { usePathname } from 'next/navigation';
 import axios from 'axios';
 import ViewProduct from '@/utils/ViewProduct';
 import "../styles/pagesection.scss";
 import BtnListProduct from './BtnListProduct';
+import SeeMoreProduct from './SeeMoreProduct';
 
 const PageSection = () => {
     const pathname = usePathname();
@@ -15,7 +16,8 @@ const PageSection = () => {
     const [website, setWebsite] = useState([]);
     const [game, setGame] = useState([]);
     const [calligraphy, setCalligraphy] = useState([]);
-    const [status, setStatus] = useState(false)
+    const [status, setStatus] = useState(false);
+    const [indexSeeMore, setIndexSeeMore] = useState(21);
     const handleRating = (rating) => {
         let htmlToReturn = "";
         const maximumRatingStars = 5;
@@ -101,6 +103,9 @@ const PageSection = () => {
         })
         setStatus(true);
     }
+    const resetIndexSeeMore = (Children) => {
+        setIndexSeeMore(indexSeeMore + Children)
+    }
     const total = (Children) => {
         axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_sort=price&_order=${Children}`).then((res) => {
             setCooking(res.data)
@@ -143,8 +148,9 @@ const PageSection = () => {
                 <>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
-                            {cooking.map((item) => {
+                            {cooking.map((item, index) => {
                                 return(
+                                    index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
                                         <div className="data-card_like"></div>
                                         <img className="data-card_product"
@@ -163,15 +169,20 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    {status ? "" : <BtnListProduct page={"cooking"} numberPage={cookingPage}/>}
+                    {status ? 
+                        <SeeMoreProduct resetIndex={resetIndexSeeMore}/>
+                    : 
+                        <BtnListProduct page={"cooking"} numberPage={cookingPage}/>
+                    }
                 </>
             }
             {pathname === "/product/comic" && 
                 <>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
-                            {comic.map((item) => {
+                            {comic.map((item, index) => {
                                 return(
+                                    index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
                                         <div className="data-card_like"></div>
                                         <img className="data-card_product"
@@ -190,15 +201,16 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    {status ? "" : <BtnListProduct page={"comic"} numberPage={comicPage}/>}
+                    {status ? <SeeMoreProduct resetIndex={resetIndexSeeMore}/> : <BtnListProduct page={"comic"} numberPage={comicPage}/>}
                 </>
             }
             {pathname === "/product/website" && 
                 <>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
-                            {website.map((item) => {
+                            {website.map((item, index) => {
                                 return(
+                                    index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
                                         <div className="data-card_like"></div>
                                         <img className="data-card_product"
@@ -217,15 +229,16 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    {status ? "" : <BtnListProduct page={"website"} numberPage={websitePage}/>}
+                    {status ? <SeeMoreProduct resetIndex={resetIndexSeeMore}/> : <BtnListProduct page={"website"} numberPage={websitePage}/>}
                 </>
             }
             {pathname === "/product/game" && 
                 <>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
-                            {game.map((item) => {
+                            {game.map((item, index) => {
                                 return(
+                                    index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
                                         <div className="data-card_like"></div>
                                         <img className="data-card_product"
@@ -244,15 +257,16 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    {status ? "" : <BtnListProduct page={"game"} numberPage={gamePage}/>}
+                    {status ? <SeeMoreProduct resetIndex={resetIndexSeeMore}/> : <BtnListProduct page={"game"} numberPage={gamePage}/>}
                 </>
             }
             {pathname === "/product/calligraphy" && 
                 <>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
-                            {calligraphy.map((item) => {
+                            {calligraphy.map((item, index) => {
                                 return(
+                                    index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
                                         <div className="data-card_like"></div>
                                         <img className="data-card_product"
@@ -271,7 +285,7 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    {status ? "" : <BtnListProduct page={"calligraphy"} numberPage={calligraphyPage}/>}
+                    {status ? <SeeMoreProduct resetIndex={resetIndexSeeMore}/> : <BtnListProduct page={"calligraphy"} numberPage={calligraphyPage}/>}
                 </>
             }
         </div>

@@ -60,6 +60,7 @@
 .PageSection-section_data a.button:hover {
     @extend %btnHvCard;
   }
+  
 @media only screen and (max-width: 62.5em){
   .PageSection-section{
     grid-template-columns: 100%;
