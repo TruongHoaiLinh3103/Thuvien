@@ -1,23 +1,24 @@
+"use client";
+
 import React, {useState} from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+// import { EditorState } from 'draft-js';
+import { ContentState, convertToRaw } from 'draft-js';
+import "../styles/edit.scss";
 
 const Edit = () => {
-    const [Content, setContent] = useState([]);
+    const _contentState = ContentState.createFromText('Sample content state');
+    const raw = convertToRaw(_contentState);  // RawDraftContentState JSON
+    const [contentState, setContentState] = useState(raw); // ContentState JSON
     return (
-        <CKEditor
-            editor={ ClassicEditor }
-            data={Content}
-            onReady={ editor => {
-                editor.editing.view.change((writer) => {
-                    writer.setStyle("height", "150px", editor.editing.view.document.getRoot())
-                })
-            }}
-            onChange={ ( event, editor ) => {
-                const data = editor.getData();
-                setContent(...Content, data)
-                console.log(Content)
-            } }
+        <Editor
+            // editorState={Content}
+            defaultEditorState={contentState}
+            wrapperClassName="wrapper-class"
+            editorClassName="editor-class"
+            toolbarClassName="toolbar-class"
+            onEditorStateChange={setContentState}
         />
     );
 };

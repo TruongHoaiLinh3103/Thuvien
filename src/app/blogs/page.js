@@ -8,7 +8,7 @@ export const metadata = {
 
 const page = () => {
     return (
-        <div>
+        <div className='maxWidth1400px'>
            <Bloger/>
         </div>
     );

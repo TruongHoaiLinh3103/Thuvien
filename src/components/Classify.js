@@ -4,22 +4,30 @@ import React, {useState} from 'react';
 import "../styles/classify.scss";
 
 
-const Classify = () => {
-    const max = "Giá ⬆ đến ⬇";
-    const min = "Giá ⬇ đến ⬆";
+const Classify = (props) => {
+    const max = "R$ ⬆ đến ⬇";
+    const min = "R$ ⬇ đến ⬆";
     const [title, setTitle] = useState(max);
-    const namePrice = () => {
+    const totalMain = () => {
         if(title === max){
             setTitle(min);
+            props.totalPage("desc")
         }else{
             setTitle(max);
+            props.totalPage("asc")
         }
+    }
+    const News = () => {
+        props.new("desc")
+    }
+    const Rating = () => {
+        props.rating("desc")
     }
     return (
         <div className='Classify'>
-            <button>Mới nhất</button>
-            <button>Phổ biến</button>
-            <button onClick={() => namePrice()}>{title}</button>
+            <button onClick={() => News()}>Mới nhất</button>
+            <button onClick={() => Rating()}>Phổ biến</button>
+            <button onClick={() => totalMain()}>{title}</button>
         </div>
     );
 };

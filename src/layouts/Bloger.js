@@ -4,6 +4,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import "../styles/blog.scss";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+import BtnBlogs from '@/components/BtnBlogs';
 
 const Bloger = () => {
     const [data, setData] = useState([]);
@@ -40,37 +42,23 @@ const Bloger = () => {
         }else if(content.current.value === ''){
             content.current.focus();
         } else {
-            fetch("https://zfakeapi.vercel.app/blogs", {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: title.current.value,
-                    author: author.current.value,
-                    content: content.current.value
-                })
-            })
-            .then((res) => res.json())
+            const dataBlog = {
+                title: title.current.value,
+                author: author.current.value,
+                content: content.current.value
+            }
+            axios.post("http://localhost:4000/blog", dataBlog )
             .then((res) => toast.success("Đã cập nhật dữ liệu"))
             setModal(false);
         }
     }
     const updateData = () => {
-        fetch(`https://zfakeapi.vercel.app/blogs/${id}`, {
-            method: "PUT",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                title: title.current.value,
-                author: author.current.value,
-                content: content.current.value
-            })
-        })
-        .then((res) => res.json())
+        const dataBlog = {
+            title: title.current.value,
+            author: author.current.value,
+            content: content.current.value
+        }
+        axios.patch(`http://localhost:4000/blog/${id}`, dataBlog)
         .then((res) => toast.success("Đã cập nhật dữ liệu"))
         setModal(false);
     }
@@ -80,25 +68,28 @@ const Bloger = () => {
         author.current.value = "";
         content.current.value = ""
     }
-    const deleteItem = (item) => {
-        fetch(`https://zfakeapi.vercel.app/blogs/${item.id}`, {
-            method: "DELETE",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+    const resetPage = async (Children) => {
+        if(data.length > 0){
+            const res = await axios.get(`http://localhost:4000/blog?page=${Children}&limit=4&sortBy=desc`)
+            if(res && res.data && res.data.data && res.data.data.data){
+                setData(res.data.data.data);
             }
-        })
-        .then((res) => res.json())
+        }
+    }
+    const deleteItem = (item) => {
+        axios.delete(`http://localhost:4000/blog/${item.id}`)
         .then((res) => toast.success("Đã cập nhật dữ liệu"))
     }
     useEffect(() => {
-        fetch("https://zfakeapi.vercel.app/blogs")
-        .then((res) => res.json())
-        .then((data) => {
-            setData(data)
-            setLooding(false)
-        })
-    })
+        const fecher = async () => {
+            const res = await axios.get("http://localhost:4000/blog?sortBy=desc");
+            if(res && res.data && res.data.data && res.data.data.data){
+                setData(res.data.data.data);
+                setLooding(false);
+            }
+        }
+        fecher();
+    },[])
     if (!data){return <p>No profile data</p>}
     if (isLooding){return <p>Loading...</p>}
     return (
@@ -106,27 +97,45 @@ const Bloger = () => {
             <table>
                 <caption>Blogs</caption>
                 <thead>
-                    <tr>
+                    <tr className='tr-desktop'>
                         <th>Title</th>
                         <th>Author</th>
                         <th>Content</th>
                     </tr>
                 </thead>
-                <tbody>
                 {data.map((item) => {
                     return(
-                        <tr key={item.id}>
-                            <td>{item.title}</td>
-                            <td>{item.author}</td>
-                            <td>{item.content}</td>
-                            <td>
-                                <button onClick={() => editItem(item)}>Edit</button>
-                                <button onClick={() => deleteItem(item)}>Delete</button>
-                            </td>
-                        </tr>
+                        <tbody key={item.id}>
+                            <tr className='tr-desktop'>
+                                <td><span>{item.title}</span></td>
+                                <td><span>{item.author}</span></td>
+                                <td><span>{item.content}</span></td>
+                                <td>
+                                    <button onClick={() => editItem(item)}>Edit</button>
+                                    <button onClick={() => deleteItem(item)}>Delete</button>
+                                </td>
+                            </tr>
+                            <tr className='tr_Mobile'>
+                                <td><h3>Title</h3></td>
+                                <td><span>{item.title}</span></td>
+                            </tr>
+                            <tr className='tr_Mobile'>
+                                <td><h3>Author</h3></td>
+                                <td><span>{item.author}</span></td>
+                            </tr>
+                            <tr className='tr_Mobile'>
+                                <td><h3>Content</h3></td>
+                                <td><span>{item.content}</span></td>
+                            </tr>
+                            <tr className='btnTR_Mobile'>
+                                <td className='btnTR_Mobile_td'>
+                                    <button onClick={() => editItem(item)}>Edit</button>
+                                    <button onClick={() => deleteItem(item)}>Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
                     )
                 })}
-                </tbody>
                 <tfoot>
                     <tr><td><button onClick={() => addItem()}>Add blog</button></td></tr>
                 </tfoot>
@@ -153,6 +162,7 @@ const Bloger = () => {
                     </div>
                 </div>
             </div>
+            <BtnBlogs numberPage={resetPage}/>
             <ToastContainer/>
         </div>
     );

@@ -30,7 +30,7 @@ const ContactDetail = () => {
                             <input type='tel' placeholder='Số điện thoại(*)' ref={Tel} onChange={() => {console.log(Tel.current.value)}}/>
                             <input type='text' placeholder='Tiêu đề(*)' ref={Title} onChange={() => {console.log(Title.current.value)}}/>
                         </div>
-                        <Edit/>
+                        {/* <Edit/> */}
                         <div className='ContactDetail-body-Item-btn'>
                             <button>Gửi</button>
                         </div>

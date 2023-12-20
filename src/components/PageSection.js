@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { Children, useEffect, useState } from 'react';
 import Classify from './Classify';
 import { usePathname } from 'next/navigation';
 import axios from 'axios';
@@ -15,6 +15,7 @@ const PageSection = () => {
     const [website, setWebsite] = useState([]);
     const [game, setGame] = useState([]);
     const [calligraphy, setCalligraphy] = useState([]);
+    const [status, setStatus] = useState(false)
     const handleRating = (rating) => {
         let htmlToReturn = "";
         const maximumRatingStars = 5;
@@ -40,50 +41,104 @@ const PageSection = () => {
         });
     }
     const cookingPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=18`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=21`).then((res) => {
             setCooking(res.data)
         })
     }
     const comicPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Children}&_limit=18`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Children}&_limit=21`).then((res) => {
             setComic(res.data)
         })
     }
     const gamePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Children}&_limit=18`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Children}&_limit=21`).then((res) => {
             setGame(res.data)
         })
     }
     const websitePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Children}&_limit=18`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Children}&_limit=21`).then((res) => {
             setWebsite(res.data)
         })
     }
     const calligraphyPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Children}&_limit=18`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Children}&_limit=21`).then((res) => {
             setCalligraphy(res.data)
         })
     }
-    useEffect(() => {
-        axios.get("https://zfakeapi.vercel.app/product?menu=cooking&_page=1&_limit=18").then((res) => {
+    const newReq = (Children) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_sort=id&_order=${Children}`).then((res) => {
             setCooking(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=comic&_page=1&_limit=18").then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_sort=id&_order=${Children}`).then((res) => {
             setComic(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=website&_page=1&_limit=18").then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_sort=id&_order=${Children}`).then((res) => {
             setWebsite(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=game&_page=1&_limit=18").then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_sort=id&_order=${Children}`).then((res) => {
             setGame(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=calligraphy&_page=1&_limit=18").then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_sort=id&_order=${Children}`).then((res) => {
+            setCalligraphy(res.data)
+        })
+        setStatus(true);
+    }
+    const ratingReq = (Children) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_sort=rating&_order=${Children}`).then((res) => {
+            setCooking(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_sort=rating&_order=${Children}`).then((res) => {
+            setComic(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_sort=rating&_order=${Children}`).then((res) => {
+            setWebsite(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_sort=rating&_order=${Children}`).then((res) => {
+            setGame(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_sort=rating&_order=${Children}`).then((res) => {
+            setCalligraphy(res.data)
+        })
+        setStatus(true);
+    }
+    const total = (Children) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_sort=price&_order=${Children}`).then((res) => {
+            setCooking(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_sort=price&_order=${Children}`).then((res) => {
+            setComic(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_sort=price&_order=${Children}`).then((res) => {
+            setWebsite(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_sort=price&_order=${Children}`).then((res) => {
+            setGame(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_sort=price&_order=${Children}`).then((res) => {
+            setCalligraphy(res.data)
+        })
+        setStatus(true);
+    }
+    useEffect(() => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=cooking&_page=1&_limit=21").then((res) => {
+            setCooking(res.data)
+        })
+        axios.get("https://zfakeapi.vercel.app/product?menu=comic&_page=1&_limit=21").then((res) => {
+            setComic(res.data)
+        })
+        axios.get("https://zfakeapi.vercel.app/product?menu=website&_page=1&_limit=21").then((res) => {
+            setWebsite(res.data)
+        })
+        axios.get("https://zfakeapi.vercel.app/product?menu=game&_page=1&_limit=21").then((res) => {
+            setGame(res.data)
+        })
+        axios.get("https://zfakeapi.vercel.app/product?menu=calligraphy&_page=1&_limit=21").then((res) => {
             setCalligraphy(res.data)
         })
     }, [])
     return (
         <div className='PageSection'>
-            <Classify/>
+            <Classify new={newReq} rating={ratingReq} totalPage={total}/>
             {pathname === "/product/cooking" && 
                 <>
                     <section className='PageSection-section'>
@@ -108,7 +163,7 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    <BtnListProduct page={"cooking"} numberPage={cookingPage}/>
+                    {status ? "" : <BtnListProduct page={"cooking"} numberPage={cookingPage}/>}
                 </>
             }
             {pathname === "/product/comic" && 
@@ -135,7 +190,7 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    <BtnListProduct page={"comic"} numberPage={comicPage}/>
+                    {status ? "" : <BtnListProduct page={"comic"} numberPage={comicPage}/>}
                 </>
             }
             {pathname === "/product/website" && 
@@ -162,7 +217,7 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    <BtnListProduct page={"website"} numberPage={websitePage}/>
+                    {status ? "" : <BtnListProduct page={"website"} numberPage={websitePage}/>}
                 </>
             }
             {pathname === "/product/game" && 
@@ -189,7 +244,7 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    <BtnListProduct page={"game"} numberPage={gamePage}/>
+                    {status ? "" : <BtnListProduct page={"game"} numberPage={gamePage}/>}
                 </>
             }
             {pathname === "/product/calligraphy" && 
@@ -216,7 +271,7 @@ const PageSection = () => {
                             })}
                         </div>
                     </section>
-                    <BtnListProduct page={"calligraphy"} numberPage={calligraphyPage}/>
+                    {status ? "" : <BtnListProduct page={"calligraphy"} numberPage={calligraphyPage}/>}
                 </>
             }
         </div>

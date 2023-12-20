@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import "../styles/btnlistproduct.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-const BtnListProduct = (props) => {
+const BtnBlogs = (props) => {
     const [one, setOne] = useState(1);
     const [two, setTwo] = useState(2);
     const [three, setThree] = useState(3)
@@ -70,9 +70,11 @@ const BtnListProduct = (props) => {
         props.numberPage(four);
     }
     useEffect(() => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=${props.page}`).then((res) => {
-            const number = res.data.length/21;
-            setMax(Math.ceil(number));
+        axios.get("http://localhost:4000/blog").then((res) => {
+            if(res && res.data && res.data.data && res.data.data.totalPages){
+                const numberMax = res.data.data.totalPages
+                setMax(numberMax);
+            }
         });
     })
     return (
@@ -118,4 +120,4 @@ const BtnListProduct = (props) => {
     );
 };
 
-export default BtnListProduct;
+export default BtnBlogs;

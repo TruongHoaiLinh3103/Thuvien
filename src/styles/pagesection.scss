@@ -17,7 +17,7 @@
 }
 .PageSection-section_data 
 .PageSection-section_data-card {
-    @include card(120px);
+    @include card(150px);
   }
   
   .PageSection-section_data-card 
@@ -30,7 +30,7 @@
   }
   
   .PageSection-section_data img {
-    @include imgCard(160px);
+    @include imgCard(190px);
   }
   
   .PageSection-section_data .data-card_title {

@@ -3,11 +3,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     margin: 30px;
     position: relative;
     table{
         border: $border;
         width: 90%;
+        margin: 0px 10px;
         caption{
             text-transform: uppercase;
             color: black;
@@ -30,6 +32,9 @@
         tbody{
             tr{
                 td{
+                    span{
+                        margin: 0px;
+                    }
                     &:nth-child(1){
                         border: $border;
                         text-align: $txAlent;
@@ -120,4 +125,57 @@
     button:nth-child(2){
         @include button(rgb(254, 253, 254));
     }
+}
+
+.tr_Mobile{
+    display: none;
+    width: 100%;
+    grid-template-columns: 30% 70%;
+    td{
+        &:nth-child(1){
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &:nth-child(2)span{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    }
+}
+.btnTR_Mobile{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 30px;
+    td.btnTR_Mobile_td{
+        border: none;
+        button{
+            @include button(rgb(240, 240, 102));
+            +button{
+                margin-left: 10px;
+            }
+            &:nth-child(2){
+                @include button(rgb(211, 112, 112));
+            }
+        }
+    }
+}
+@media only screen and (max-width: 62.5em){
+    .tr-desktop{
+        display: none;
+    }
+    .tr_Mobile{
+        display: grid;
+    }
+    .btnTR_Mobile{
+        display: flex;
+    }
+    
+}
+@media only screen and (max-width : 46.25em){
+}
+@media only screen and (max-width : 30em){
+
 }
