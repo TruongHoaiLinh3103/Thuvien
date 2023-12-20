@@ -70,10 +70,17 @@ const BtnListProduct = (props) => {
         props.numberPage(four);
     }
     useEffect(() => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=${props.page}`).then((res) => {
-            const number = res.data.length/21;
-            setMax(Math.ceil(number));
-        });
+        if(props.page){
+            axios.get(`https://zfakeapi.vercel.app/product?menu=${props.page}`).then((res) => {
+                const number = res.data.length/21;
+                setMax(Math.ceil(number));
+            });
+        }else{
+            axios.get(`https://zfakeapi.vercel.app/product?q=${props.namePage}`).then((res) => {
+                const number = res.data.length/21;
+                setMax(Math.ceil(number));
+            });
+        }
     })
     return (
         <div className='BtnListProduct'>

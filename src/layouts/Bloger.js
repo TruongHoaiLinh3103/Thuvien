@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import BtnBlogs from '@/components/BtnBlogs';
+import "../styles/home.scss";
 
 const Bloger = () => {
     const [data, setData] = useState([]);
@@ -91,7 +92,20 @@ const Bloger = () => {
         fecher();
     },[])
     if (!data){return <p>No profile data</p>}
-    if (isLooding){return <p>Loading...</p>}
+    if (isLooding){return(
+        <ul className="wave-menu">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    )}
     return (
         <div className="blog">  
             <table>

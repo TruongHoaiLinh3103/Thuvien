@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faCartShopping, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faBookOpen, faHouse } from '@fortawesome/free-solid-svg-icons';
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
 import SliderBanner from './SliderBanner';
@@ -90,7 +90,7 @@ const ProductID = (props) => {
                             </div>
                             <div className='ProductID-detail_name-btn'>
                                 <button><FontAwesomeIcon icon={faHeart} /></button>
-                                <button><FontAwesomeIcon icon={faCartShopping} /></button>
+                                <button><FontAwesomeIcon icon={faBookOpen} /></button>
                             </div>
                         </div>
                         <div className='ProductID-cmt'>

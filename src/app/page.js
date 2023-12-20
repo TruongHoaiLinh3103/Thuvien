@@ -13,7 +13,7 @@ function Home() {
   const [isLoading, setLoading] = useState(true)
   useEffect(() => {
     const fecher = async () => {
-      const res = await axios.get('https://zfakeapi.vercel.app/product?_page=1&_limit=10');
+      const res = await axios.get('https://zfakeapi.vercel.app/product?_page=1&_limit=10&_sort=id&_order=desc');
       // https://raw.githubusercontent.com/Cassianosch/programador.cs-reels/develop/slider-produtos-simples/assets/data/data.json
       setData(res.data);
       setLoading(false);
