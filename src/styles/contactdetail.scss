@@ -20,6 +20,7 @@
 }
 .ContactDetail-body-Item p{
     user-select: none;
+    text-align: center;
 }
 .ContactDetail-body-Item form .form_profile{
     margin-bottom: 20px;
@@ -33,6 +34,12 @@
         padding-left: 10px;
         caret-color: rgb(255, 0, 0);
     }
+}
+textarea.content_Textarea{
+    width: 100%;
+    padding: 10px;
+    height: 120px;
+    box-sizing: border-box;
 }
 .ContactDetail-body-Item-btn{
     display: flex;

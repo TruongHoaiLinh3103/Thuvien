@@ -1,26 +1,30 @@
 "use client";
+
 import React, { useRef } from 'react';
 import "../styles/contactdetail.scss";
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone, faEnvelope, faMapLocation } from '@fortawesome/free-solid-svg-icons';
 
-const Edit = dynamic(() => import("./Edit"),{ssr: false});
+// const Edit = dynamic(() => import("./Edit"),{ssr: false});
 
 const ContactDetail = () => {
     const Name = useRef(null);
     const Email = useRef(null);
     const Tel = useRef(null);
     const Title = useRef(null);
+    const Content = useRef(null)
     return (
         <div className='ContactDetail'>
-            <h2><b>LIÊN HỆ</b> VỚI TÔI</h2>
+            <h2><b>LIÊN </b>HỆ</h2>
             <div className='ContactDetail-body'>
                 <div className='ContactDetail-body-Item'>
-                    <p>Bạn có bất kỳ thắc mắc nào hoặc có nhu cầu liên hệ hợp tác, vui lòng điền thông tin vào mẫu dưới đây. </p>
-                    <p>Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất có thể. Trân trọng cảm ơn! </p>
-                    <p>Công ty Nội thất LightShop</p>
-                    <p>Văn phòng: 12/9, Tân Thới Nhất 5, Tân Thới Nhất, TP. HCM</p>
-                    <p>Hotline: 0356381315</p>
-                    <p>Email: truonghoailinh3103@gmail.com</p>
+                    <p>Bạn có bất kỳ thắc mắc nào, vui lòng điền thông tin vào mẫu dưới đây.</p>
+                    <p>Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất có thể.</p>
+                    <p><FontAwesomeIcon icon={faMapLocation} /> 12/9, Tân Thới Nhất 5, Tân Thới Nhất, TP. HCM</p>
+                    <p><FontAwesomeIcon icon={faEnvelope} /> truonghoailinh3103@gmail.com</p>
+                    <p><FontAwesomeIcon icon={faPhone} /> 0356381315</p>
+                    <p>Trân trọng cảm ơn!</p>
                 </div>
                 <div className='ContactDetail-body-Item'>
                     <form>
@@ -30,7 +34,7 @@ const ContactDetail = () => {
                             <input type='tel' placeholder='Số điện thoại(*)' ref={Tel} onChange={() => {console.log(Tel.current.value)}}/>
                             <input type='text' placeholder='Tiêu đề(*)' ref={Title} onChange={() => {console.log(Title.current.value)}}/>
                         </div>
-                        {/* <Edit/> */}
+                        <textarea className='content_Textarea' placeholder='Nội dung(*)' ref={Content} onChange={() => {console.log(Content.current.value)}}/>
                         <div className='ContactDetail-body-Item-btn'>
                             <button>Gửi</button>
                         </div>
