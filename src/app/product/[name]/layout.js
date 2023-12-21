@@ -1,5 +1,5 @@
-export const metadata = {
-    title: 'Contact',
+  export const metadata = {
+    title: 'Search',
     description: 'Library in Anikey',
     openGraph: {
       title: "LisohAnikey",
@@ -11,7 +11,7 @@ export const metadata = {
     },
   }
   
-  export default function ContactLayout({ children }) {
+  export default function SearchLayout({ children }) {
     return (
       <>
           {children}

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faBookOpen, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faBookOpen, faHouse, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
 import SliderBanner from './SliderBanner';
@@ -80,6 +80,9 @@ const ProductID = (props) => {
                                     <img src={data.imgThree} alt={data.name} />
                                 </div>
                             </div>
+                            
+                        </div>
+                        <div className='ProductID-cmt'>
                             <h3>{data.name}</h3>
                             <div className="ProductID-detail_name_rating">
                                 {handleRating(data.rating)}
@@ -92,8 +95,6 @@ const ProductID = (props) => {
                                 <button><FontAwesomeIcon icon={faHeart} /></button>
                                 <button><FontAwesomeIcon icon={faBookOpen} /></button>
                             </div>
-                        </div>
-                        <div className='ProductID-cmt'>
                             <nav>
                                 <h3>Mô tả</h3>
                             </nav>
@@ -105,6 +106,10 @@ const ProductID = (props) => {
                             <nav>
                                 <h3>Bình luận</h3>
                             </nav>
+                            <div className='ProductID-cmt-add'>
+                                <input type='text' placeholder='Thêm bình luận...' />
+                                <FontAwesomeIcon icon={faPaperPlane} />
+                            </div>
                             <div className='ProductID-cmt-box'>
                                 {comment.map((item) => {
                                     return(
@@ -121,8 +126,9 @@ const ProductID = (props) => {
                                                 <div className='LikeAndDislike'>
                                                     <div>
                                                         <span>👍 {item.like}</span>
-                                                        <span>👎 {item.unlike}</span>
                                                         <span>💬 {item.unchat}</span>
+                                                        <span style={{color:"blue"}}>edit</span>
+                                                        <span style={{color:"red"}}>delete</span>
                                                     </div>
                                                     {/* <div className='unChat'>
                                                         <div className='unChatImgAndAuth'>

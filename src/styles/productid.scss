@@ -56,65 +56,81 @@
                 }
             }
         }
-        h3{
-            margin: 0px;
-            padding: 0px 10px;
-        }
-        .ProductID-detail_name_rating{
-            margin-top: 10px;
-            display: flex;
-            color: rgb(248, 199, 51);
-            padding: 0px 10px;
-        }
-        .ProductID-detail_name_price{
-            display: flex;
-            align-items: center;
-            padding: 0px 10px;
-            h5{
-                &:nth-child(1){
-                    opacity: 0.5;
-                    text-decoration:line-through;
-                }
-                +h5{
-                    margin-left: 10px;
-                }
-            }
-        }
-        .ProductID-detail_name-btn{
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 0px 10px;
-            svg{
-                font-size: 15px;
-            }
-            button:nth-child(1){
-                @include buttonDetail(black, red, white);
-                margin-right: 10px;
-            }
-            button:nth-child(2){
-                @include buttonDetail(white, green, black);
-            }
-        }
     }
 }
 
 .ProductID-cmt{
     padding: 0px 10px;
+    h3{
+        margin: 0px;
+    }
+    .ProductID-detail_name_rating{
+        margin-top: 10px;
+        display: flex;
+        color: rgb(248, 199, 51);
+    }
+    .ProductID-detail_name_price{
+        display: flex;
+        align-items: center;
+        h5{
+            &:nth-child(1){
+                opacity: 0.5;
+                text-decoration:line-through;
+            }
+            +h5{
+                margin-left: 10px;
+            }
+        }
+    }
+    .ProductID-detail_name-btn{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        svg{
+            font-size: 15px;
+        }
+        button:nth-child(1){
+            @include buttonDetail(black, red, white);
+            margin-right: 10px;
+        }
+        button:nth-child(2){
+            @include buttonDetail(white, green, black);
+        }
+    }
     nav{
         display: flex;
         align-items: center;
+        margin-top: 10px;
         h3{
             margin: 0px;
             color: black;
             border: 3px double black;
             user-select: none;
             padding: 10px;
+        }
+    }
+    .ProductID-cmt-add{
+        display: flex;
+        align-items: center;
+        input{
+            width: 70%;
+            margin: 10px 0px;
+            padding: 5px 0px 5px 5px;
+            font-size: 18px;
+            border: none;
+            outline: none
+        }
+        svg{
+            color: rgb(81, 81, 227);
+            padding: 5px;
+            border-radius: 100vh;
+            margin-left: 5px;
+            font-size: 18px;
             cursor: pointer;
         }
     }
     .ProductID-cmt-box{
-        @include ProductID--box(700px);
+        @include ProductID--box(430px);
         overflow-y: scroll;
         overflow-x: hidden;
         &::-webkit-scrollbar{
@@ -122,7 +138,7 @@
         }
     }
     .ProductID-des-box{
-        @include ProductID--box(auto);
+        @include ProductID--box(350px);
         font-size: 20px;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -159,6 +175,9 @@
 .cmtAndLike{
     p{
         @extend %cmtBox;
+        &::-webkit-scrollbar{
+            display: none;
+        }
     }
     .LikeAndDislike{
         margin: 10px 0px;
