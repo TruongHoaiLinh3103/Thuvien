@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-const BtnListProduct = (props) => {
+const BtnHome = (props) => {
     const [one, setOne] = useState(1);
     const [two, setTwo] = useState(2);
     const [three, setThree] = useState(3)
@@ -70,17 +70,10 @@ const BtnListProduct = (props) => {
         props.numberPage(four);
     }
     useEffect(() => {
-        if(props.page){
-            axios.get(`https://zfakeapi.vercel.app/product?menu=${props.page}`).then((res) => {
-                const number = res.data.length/21;
-                setMax(Math.ceil(number));
-            });
-        }else{
-            axios.get(`https://zfakeapi.vercel.app/product?q=${props.namePage}`).then((res) => {
-                const number = res.data.length/21;
-                setMax(Math.ceil(number));
-            });
-        }
+        axios.get(`https://zfakeapi.vercel.app/product`).then((res) => {
+            const number = res.data.length/21;
+            setMax(Math.ceil(number));
+        });
     })
     return (
         <div className='BtnListProduct'>
@@ -125,4 +118,4 @@ const BtnListProduct = (props) => {
     );
 };
 
-export default BtnListProduct;
+export default BtnHome;

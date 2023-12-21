@@ -9,6 +9,7 @@ import "../styles/pagesection.scss";
 import BtnListProduct from './BtnListProduct';
 import SeeMoreProduct from './SeeMoreProduct';
 import { resultSearch } from '@/utils/ViewURL';
+import BtnHome from './BtnHome';
 
 const PageSection = (props) => {
     const pathname = usePathname();
@@ -195,7 +196,7 @@ const PageSection = (props) => {
                             })}
                         </div>
                     </section>
-                    <BtnListProduct numberPage={homePage}/>
+                    <BtnHome numberPage={homePage}/>
                 </>
             }
             {pathname === `/product/${props.name}` && 
