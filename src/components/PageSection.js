@@ -21,7 +21,7 @@ const PageSection = (props) => {
     const [status, setStatus] = useState(false);
     const [indexSeeMore, setIndexSeeMore] = useState(21);
     const [resultS, setResultS] = useState(false);
-
+    const [home, setHome] = useState([]);
     const paragraph = props.name;
 
     const handleRating = (rating) => {
@@ -51,6 +51,11 @@ const PageSection = (props) => {
     const productPage = (Children) => {
         axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=21&q=${resultSearch(paragraph)}`).then((res) => {
             setProduct(res.data)
+        })
+    }
+    const homePage = (Children) => {
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=21`).then((res) => {
+            setHome(res.data)
         })
     }
     const cookingPage = (Children) => {
@@ -159,9 +164,40 @@ const PageSection = (props) => {
                 setResultS(true);
             }
         })
+        axios.get("https://zfakeapi.vercel.app/product?_page=1&_limit=21").then((res) => {
+            setHome(res.data);
+        })
     }, [])
     return (
         <div className='PageSection'>
+            {pathname === `/` && 
+                <>
+                    <h2 className='PageSection_title'><b>SẢN</b> PHẨM</h2>
+                    <section className='PageSection-section'>
+                        <div className='PageSection-section_data'>
+                            {home.map((item) => {
+                                return(
+                                    <div className='PageSection-section_data-card' key={item.id}>
+                                        <div className="data-card_like"></div>
+                                        <img className="data-card_product"
+                                            src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
+                                        <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
+                                        <div className="data-card_rating">
+                                            {handleRating(item.rating)}
+                                        </div>
+                                        <div className="data-card_price">
+                                            <h5>{handlePrice(item.price)}</h5>
+                                            <h5>{handlePrice(item.price, true)}</h5>
+                                        </div>
+                                        <a className="button">Add to cart</a>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </section>
+                    <BtnListProduct numberPage={homePage}/>
+                </>
+            }
             {pathname === `/product/${props.name}` && 
                 <>
                     <div style={{display: !resultS ? "block" : "none"}}>
@@ -189,11 +225,7 @@ const PageSection = (props) => {
                                 })}
                             </div>
                         </section>
-                        {status ? 
-                            <SeeMoreProduct resetIndex={resetIndexSeeMore}/>
-                        : 
-                            <BtnListProduct numberPage={productPage} namePage={resultSearch(paragraph)}/>
-                        }
+                        <BtnListProduct numberPage={productPage} namePage={resultSearch(paragraph)}/>
                     </div>
                     <div style={{display: resultS ? "flex" : "none", alignItems: "center", justifyContent: 'center'}}>
                         <p style={{fontSize: "20px", margin: "10px"}}><b>404</b> | Không tìm thấy kết quả tìm kiếm</p>

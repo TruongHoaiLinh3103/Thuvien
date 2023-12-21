@@ -73,7 +73,7 @@ const Product = (props) => {
     const data = props.data;
     return (
         <div className='Product maxWidth1400px'>
-            <h2><b>SẢN PHẨM</b> MỚI NHẤT</h2>
+            <h2><b>MỚI </b>NHẤT</h2>
             <Slider {...settings} className="slider js-slider">
                 {data.map((item) => {
                     return(

@@ -7,6 +7,7 @@ import Product from "@/layouts/Product";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/home.scss";
+import PageSection from "@/components/PageSection";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -40,6 +41,7 @@ function Home() {
         <SliderBanner/>
         <ProductMenu/>
         <Product data ={data}/>
+        <PageSection/>
     </main>
   )
 }

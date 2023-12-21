@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import "../styles/header.scss";
 import Link from 'next/link';
 import ProductNav from '@/layouts/ProductNav';
@@ -10,18 +10,49 @@ import { faHouse, faBlog, faPhone, faUser,faBars, faHeart, faMagnifyingGlass } f
 import { convertSearch } from '@/utils/ViewURL';
 
 const Header = () => {
-    const [search,setSearch] = useState("");
     const router = useRouter();
+    const search = useRef("");
+    const loop = useRef("");
     const nextSearch = () => {
-        router.push(`/product/${convertSearch(search)}`);
+        if(search.current.value === ""){
+            search.current.focus();
+        }else{
+            router.push(`/product/${convertSearch(search.current.value)}`);
+        }
+        
+    }
+    const nextLoop = () => {
+        if(loop.current.value === ""){
+            loop.current.focus();
+        }else{
+            router.push(`/product/${convertSearch(loop.current.value)}`);
+        }
+    }
+    const nextSearchEnter = (e) => {
+        if(e.which === 13){
+            if(search.current.value === ""){
+                search.current.focus();
+            }else{
+                router.push(`/product/${convertSearch(search.current.value)}`);
+            }
+        }
+    }
+    const nextLoopEnter = (e) => {
+        if(e.which === 13){
+            if(loop.current.value === ""){
+                loop.current.focus();
+            }else{
+                router.push(`/product/${convertSearch(loop.current.value)}`);
+            }
+        }
     }
     return (
         <nav className='Nav maxWidth1400px'>
             <div className='Nav_top'>
                 <h3 title='Home' onClick={() => {router.push("/")}}>LisohAnikey</h3>
                 <div className='Nav_top_search'>
-                    <input type='text' placeholder='Tìm kiếm' className='search-ip' value={search} onChange={(e) => setSearch(e.target.value)}/>
-                    <span onClick={() => nextSearch()} className='search-span'><FontAwesomeIcon icon={faMagnifyingGlass} /></span>
+                    <input type='text' placeholder='Tìm kiếm' className='search-ip' ref={loop} onKeyDown={(e) => nextLoopEnter(e)}/>
+                    <span onClick={() => nextLoop()} className='search-span'><FontAwesomeIcon icon={faMagnifyingGlass} /></span>
                 </div>
                 <nav className='Nav-navbar'>
                     <ul className='Nav-navbar-list' style={{padding: "0px 10px"}}>
@@ -30,7 +61,7 @@ const Header = () => {
                 </nav>
             </div>
             <div className='Nav_center'>
-                <input type='text' placeholder='Tìm kiếm' className='search-ip' value={search} onChange={(e) => setSearch(e.target.value)}/>
+                <input type='text' placeholder='Tìm kiếm' className='search-ip' ref={search} onKeyDown={(e) => nextSearchEnter(e)}/>
                 <span onClick={() => nextSearch()} className='search-span'><FontAwesomeIcon icon={faMagnifyingGlass} /></span>
             </div>
             <div className='Nav_down'>

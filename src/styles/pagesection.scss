@@ -4,6 +4,12 @@
     margin: 10px 0px;
     width: 100%;
 }
+.PageSection_title{
+  @extend %title;
+}
+.PageSection_title::after{
+  @extend %titleAffter
+}
 .PageSection-section{
     display: grid;
     grid-template-columns: 100%;

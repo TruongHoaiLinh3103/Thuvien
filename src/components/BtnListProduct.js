@@ -75,8 +75,13 @@ const BtnListProduct = (props) => {
                 const number = res.data.length/21;
                 setMax(Math.ceil(number));
             });
-        }else{
+        }else if(props.namePage){
             axios.get(`https://zfakeapi.vercel.app/product?q=${props.namePage}`).then((res) => {
+                const number = res.data.length/21;
+                setMax(Math.ceil(number));
+            });
+        }else{
+            axios.get(`https://zfakeapi.vercel.app/product`).then((res) => {
                 const number = res.data.length/21;
                 setMax(Math.ceil(number));
             });
