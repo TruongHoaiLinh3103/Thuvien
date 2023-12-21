@@ -71,7 +71,7 @@ const BtnHome = (props) => {
     }
     useEffect(() => {
         axios.get(`https://zfakeapi.vercel.app/product`).then((res) => {
-            const number = res.data.length/21;
+            const number = res.data.length/14;
             setMax(Math.ceil(number));
         });
     })
