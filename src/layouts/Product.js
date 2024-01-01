@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ViewProduct from '@/utils/ViewProduct';
+import axios from 'axios';
 
 const Product = (props) => {
     const handleRating = (rating) => {
@@ -21,6 +22,30 @@ const Product = (props) => {
         }
         
         return htmlToReturn;
+    }
+    const addWishlist = (item) => {
+        const data = {
+            imgOne: item.imgOne,
+            imgTwo: item.imgTwo,
+            imgThree: item.imgThree,
+            menu: item.menu,
+            name: item.name,
+            rating: item.rating,
+            price: item.price,
+            text: item.text,
+            user: sessionStorage.user
+        }
+        axios.post("http://localhost:4000/wishlist", data, {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken")
+            }
+        }).then((res) => {
+            if(res.data.error){
+                alert("User not logged in!")
+            }else{
+                location.reload();
+            }
+        })
     }
     const handlePrice = (price, discount = false) => {
         if (discount) {
@@ -73,12 +98,12 @@ const Product = (props) => {
     const data = props.data;
     return (
         <div className='Product maxWidth1400px'>
-            <h2><b>MỚI </b>NHẤT</h2>
+            <h2><b>LATEST </b>PRODUCT</h2>
             <Slider {...settings} className="slider js-slider">
                 {data.map((item) => {
                     return(
                         <div className="card" key={item.id}>
-                            <div className="like"></div>
+                            {/* <div className="like"></div> */}
                             <img className="product"
                                 src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                             <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -89,7 +114,7 @@ const Product = (props) => {
                                 <h5>{handlePrice(item.price)}</h5>
                                 <h5>{handlePrice(item.price, true)}</h5>
                             </div>
-                            <a className="button">Add to cart</a>
+                            <a className="button" onClick={() => addWishlist(item)}>Add to wishlist</a>
                         </div>
                     )
                 })}

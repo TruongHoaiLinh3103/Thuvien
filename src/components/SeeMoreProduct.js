@@ -2,7 +2,7 @@ import React from 'react';
 import "../styles/seemoreproduct.scss";
 const SeeMoreProduct = (props) => {
     const addItem = () => {
-        props.resetIndex(14)
+        props.resetIndex(35)
     }
     return (
         <div className='SeeMoreProduct'>

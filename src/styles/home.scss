@@ -113,4 +113,8 @@
       transform: scaleY(0.5);
     }
   }
-  
+
+  .Home-section{
+    display: grid;
+    grid-template-columns: 70% 30%;
+  }

@@ -20,7 +20,7 @@ const PageSection = (props) => {
     const [calligraphy, setCalligraphy] = useState([]);
     const [product, setProduct] = useState([]);
     const [status, setStatus] = useState(false);
-    const [indexSeeMore, setIndexSeeMore] = useState(14);
+    const [indexSeeMore, setIndexSeeMore] = useState(35);
     const [resultS, setResultS] = useState(false);
     const [home, setHome] = useState([]);
     const paragraph = props.name;
@@ -50,37 +50,37 @@ const PageSection = (props) => {
         });
     }
     const productPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=14&q=${resultSearch(paragraph)}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=35&q=${resultSearch(paragraph)}`).then((res) => {
             setProduct(res.data)
         })
     }
     const homePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=14`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=30`).then((res) => {
             setHome(res.data)
         })
     }
     const cookingPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=14`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=35`).then((res) => {
             setCooking(res.data)
         })
     }
     const comicPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Children}&_limit=14`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Children}&_limit=35`).then((res) => {
             setComic(res.data)
         })
     }
     const gamePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Children}&_limit=14`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Children}&_limit=35`).then((res) => {
             setGame(res.data)
         })
     }
     const websitePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Children}&_limit=14`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Children}&_limit=35`).then((res) => {
             setWebsite(res.data)
         })
     }
     const calligraphyPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Children}&_limit=14`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Children}&_limit=35`).then((res) => {
             setCalligraphy(res.data)
         })
     }
@@ -142,22 +142,22 @@ const PageSection = (props) => {
         setStatus(true);
     }
     useEffect(() => {
-        axios.get("https://zfakeapi.vercel.app/product?menu=cooking&_page=1&_limit=14").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=cooking&_page=1&_limit=35").then((res) => {
             setCooking(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=comic&_page=1&_limit=14").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=comic&_page=1&_limit=35").then((res) => {
             setComic(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=website&_page=1&_limit=14").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=website&_page=1&_limit=35").then((res) => {
             setWebsite(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=game&_page=1&_limit=14").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=game&_page=1&_limit=35").then((res) => {
             setGame(res.data)
         })
-        axios.get("https://zfakeapi.vercel.app/product?menu=calligraphy&_page=1&_limit=14").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?menu=calligraphy&_page=1&_limit=35").then((res) => {
             setCalligraphy(res.data)
         })
-        axios.get(`https://zfakeapi.vercel.app/product?_page=1&_limit=14&q=${resultSearch(paragraph)}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?_page=1&_limit=35&q=${resultSearch(paragraph)}`).then((res) => {
             if(res.data.length >= 1){
                 setProduct(res.data);
             }
@@ -165,7 +165,7 @@ const PageSection = (props) => {
                 setResultS(true);
             }
         })
-        axios.get("https://zfakeapi.vercel.app/product?_page=1&_limit=14").then((res) => {
+        axios.get("https://zfakeapi.vercel.app/product?_page=1&_limit=30").then((res) => {
             setHome(res.data);
         })
     }, [])
@@ -173,13 +173,13 @@ const PageSection = (props) => {
         <div className='PageSection'>
             {pathname === `/` && 
                 <>
-                    <h2 className='PageSection_title'><b>SẢN</b> PHẨM</h2>
+                    <h2 className='PageSection_title'><b>ALL</b> PRODUCTS</h2>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
                             {home.map((item) => {
                                 return(
                                     <div className='PageSection-section_data-card' key={item.id}>
-                                        <div className="data-card_like"></div>
+                                        {/* <div className="data-card_like"></div> */}
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -190,7 +190,7 @@ const PageSection = (props) => {
                                             <h5>{handlePrice(item.price)}</h5>
                                             <h5>{handlePrice(item.price, true)}</h5>
                                         </div>
-                                        <a className="button">Add to cart</a>
+                                        <a className="button">Add to wishlist</a>
                                     </div>
                                 )
                             })}
@@ -209,7 +209,7 @@ const PageSection = (props) => {
                                     return(
                                         index < indexSeeMore &&
                                         <div className='PageSection-section_data-card' key={item.id}>
-                                            <div className="data-card_like"></div>
+                                            {/* <div className="data-card_like"></div> */}
                                             <img className="data-card_product"
                                                 src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -220,7 +220,7 @@ const PageSection = (props) => {
                                                 <h5>{handlePrice(item.price)}</h5>
                                                 <h5>{handlePrice(item.price, true)}</h5>
                                             </div>
-                                            <a className="button">Add to cart</a>
+                                            <a className="button">Add to wishlist</a>
                                         </div>
                                     )
                                 })}
@@ -242,7 +242,7 @@ const PageSection = (props) => {
                                 return(
                                     index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
-                                        <div className="data-card_like"></div>
+                                        {/* <div className="data-card_like"></div> */}
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -253,7 +253,7 @@ const PageSection = (props) => {
                                             <h5>{handlePrice(item.price)}</h5>
                                             <h5>{handlePrice(item.price, true)}</h5>
                                         </div>
-                                        <a className="button">Add to cart</a>
+                                        <a className="button">Add to wishlist</a>
                                     </div>
                                 )
                             })}
@@ -275,7 +275,7 @@ const PageSection = (props) => {
                                 return(
                                     index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
-                                        <div className="data-card_like"></div>
+                                        {/* <div className="data-card_like"></div> */}
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -286,7 +286,7 @@ const PageSection = (props) => {
                                             <h5>{handlePrice(item.price)}</h5>
                                             <h5>{handlePrice(item.price, true)}</h5>
                                         </div>
-                                        <a className="button">Add to cart</a>
+                                        <a className="button">Add to wishlist</a>
                                     </div>
                                 )
                             })}
@@ -304,7 +304,7 @@ const PageSection = (props) => {
                                 return(
                                     index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
-                                        <div className="data-card_like"></div>
+                                        {/* <div className="data-card_like"></div> */}
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -315,7 +315,7 @@ const PageSection = (props) => {
                                             <h5>{handlePrice(item.price)}</h5>
                                             <h5>{handlePrice(item.price, true)}</h5>
                                         </div>
-                                        <a className="button">Add to cart</a>
+                                        <a className="button">Add to wishlist</a>
                                     </div>
                                 )
                             })}
@@ -333,7 +333,7 @@ const PageSection = (props) => {
                                 return(
                                     index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
-                                        <div className="data-card_like"></div>
+                                        {/* <div className="data-card_like"></div> */}
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -344,7 +344,7 @@ const PageSection = (props) => {
                                             <h5>{handlePrice(item.price)}</h5>
                                             <h5>{handlePrice(item.price, true)}</h5>
                                         </div>
-                                        <a className="button">Add to cart</a>
+                                        <a className="button">Add to wishlist</a>
                                     </div>
                                 )
                             })}
@@ -362,7 +362,7 @@ const PageSection = (props) => {
                                 return(
                                     index < indexSeeMore &&
                                     <div className='PageSection-section_data-card' key={item.id}>
-                                        <div className="data-card_like"></div>
+                                        {/* <div className="data-card_like"></div> */}
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -373,7 +373,7 @@ const PageSection = (props) => {
                                             <h5>{handlePrice(item.price)}</h5>
                                             <h5>{handlePrice(item.price, true)}</h5>
                                         </div>
-                                        <a className="button">Add to cart</a>
+                                        <a className="button">Add to wishlist</a>
                                     </div>
                                 )
                             })}

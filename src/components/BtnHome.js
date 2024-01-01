@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import "../styles/btnlistproduct.scss";
+import "../styles/btnbutton.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
@@ -71,7 +71,7 @@ const BtnHome = (props) => {
     }
     useEffect(() => {
         axios.get(`https://zfakeapi.vercel.app/product`).then((res) => {
-            const number = res.data.length/14;
+            const number = res.data.length/30;
             setMax(Math.ceil(number));
         });
     })

@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/home.scss";
 import PageSection from "@/components/PageSection";
+import LatestComments from "@/layouts/LatestComments";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -15,7 +16,6 @@ function Home() {
   useEffect(() => {
     const fecher = async () => {
       const res = await axios.get('https://zfakeapi.vercel.app/product?_page=1&_limit=10&_sort=id&_order=desc');
-      // https://raw.githubusercontent.com/Cassianosch/programador.cs-reels/develop/slider-produtos-simples/assets/data/data.json
       setData(res.data);
       setLoading(false);
     }
@@ -41,7 +41,12 @@ function Home() {
         <SliderBanner/>
         <ProductMenu/>
         <Product data ={data}/>
-        <PageSection/>
+        <div className="Home-section">
+          <PageSection/>
+          <div style={{margin: "10px 0px"}}>
+            <LatestComments/>
+          </div>
+        </div>
     </main>
   )
 }

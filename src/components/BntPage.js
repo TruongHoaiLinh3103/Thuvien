@@ -3,70 +3,126 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import "../styles/btnpage.scss";
+import "../styles/btnbutton.scss";
 import axios from 'axios';
 import { printfID } from '@/utils/ViewURL';
 import { usePathname } from 'next/navigation';
 import { convertSlug } from '@/utils/ViewURL';
 
 const BntPage = (props) => {
-    const [pageOne, setPageOne] = useState(1);
-    const [pageTwo, setPageTwo] = useState(2);
-    const [pageThree, setPageThree] = useState(3);
-    const [number, setNumber] = useState();
+    const [one, setOne] = useState(1);
+    const [two, setTwo] = useState(2);
+    const [three, setThree] = useState(3)
+    const [four, setFour] = useState(4);
+    const [max, setMax] = useState(0);
+    const [active, setActive] = useState(1);
     const pathname = usePathname();
-    const setDownPage = (page) => {
-        if(pageOne === 1){
-            setPageOne(1);
-            setPageTwo(2);
-            setPageThree(3);
+    const next = () => {
+        setOne(one+1);
+        setTwo(two+1);
+        setThree(three+1);
+        setFour(four+1);
+        setActive(active+1);
+        props.numberPage(active+1);
+    }
+    const pre = () => {
+        if(one === 1){
+            setOne(1);
+            setTwo(2);
+            setThree(3);
+            setFour(4);
+            setActive(1);
         }else{
-            setPageOne(pageOne - 1);
-            setPageTwo(pageTwo - 1);
-            setPageThree(pageThree - 1);
-            props.numberPage(page -1)
+            setOne(one-1);
+            setTwo(two-1);
+            setThree(three-1);
+            setFour(four-1);
+            setActive(active-1);
+            props.numberPage(active-1);
         }
     }
-    const setOne = (page) => {
-        setPageOne(pageOne + 1);
-        setPageTwo(pageTwo + 1);
-        setPageThree(pageThree + 1);
-        props.numberPage(page)
+    const upMin = () => {
+        setOne(1);
+        setTwo(2);
+        setThree(3);
+        setFour(4);
+        setActive(1);
+        props.numberPage(1);
     }
-    const setTwo = (page) => {
-        setPageOne(pageOne + 2);
-        setPageTwo(pageTwo + 2);
-        setPageThree(pageThree + 2);
-        props.numberPage(page)
+    const upMax = () => {
+        setOne(max-3);
+        setTwo(max-2);
+        setThree(max-1);
+        setFour(max);
+        setActive(max);
+        props.numberPage(max);
     }
-    const setUpPage = (page) => {
-        setPageOne(pageOne + 1);
-        setPageTwo(pageTwo + 1);
-        setPageThree(pageThree + 1);
-        props.numberPage(page + 1)
+    const onePage = () => {
+        setActive(one);
+        props.numberPage(one);
+    }
+    const twoPage = () => {
+        setActive(two);
+        props.numberPage(two);
+    }
+    const threePage = () => {
+        setActive(three);
+        props.numberPage(three);
+    }
+    const fourPage = () => {
+        setActive(four);
+        props.numberPage(four);
     }
     useEffect(() => {
         const id = printfID(props.id);
-        axios.get(`https://zfakeapi.vercel.app/comment?productId=${id}`).then((res) => {
-            const number = res.data.length/9;
-            setNumber(Math.ceil(number));
+        axios.get(`http://localhost:4000/comment?keyword=${id}&page=1&limit=9&sortBy=desc&orderBy=id`).then((res) => {
+            if(res && res.data && res.data.data && res.data.data.totalPages){
+                const temp = res.data.data.totalPages
+                setMax(temp);
+            }
         });
     })
     return (
         <>
             {pathname === `/product/${props.data.menu}/${convertSlug(props.data.name)}-${props.data.id}.html` &&
-            <div className='BntPage'>
-                <button style={{opacity: pageOne === 1 ? 0 : 1, cursor: pageOne === 1 ? "default" : "pointer"}} onClick={() => setDownPage(pageOne)}><FontAwesomeIcon icon={faAngleLeft}/></button>
-                <button>{pageOne}</button>
-                {pageTwo <= number &&
-                    <button onClick={() => setOne(pageTwo)}>{pageTwo}</button>
-                }
-                {pageTwo < number &&
-                    <button onClick={() => setTwo(pageThree)}>{pageThree}</button>
-                }
-                {pageTwo < number &&
-                    <button onClick={() => setUpPage(pageOne)}><FontAwesomeIcon icon={faAngleRight}/></button>
-                }
+            <div className='BtnListProduct'>
+                <button style={{
+                    display: one === 1 || max === 1 ? "none" : 'block'
+                }}
+                onClick={() => upMin()}
+                ><FontAwesomeIcon icon={faAngleLeft}/><FontAwesomeIcon icon={faAngleLeft}/></button>
+
+                <button style={{
+                    display: one === 1 || max === 1 ? "none" : 'block'
+                }}
+                onClick={() => pre()}
+                ><FontAwesomeIcon icon={faAngleLeft}/></button>
+
+                <button className={one === active ? "activeBtn" : ""}
+                style={{ display: max === 1 ? "none" : 'block'}}
+                onClick={() => onePage()}>{one}</button>
+
+                <button className={two === active ? "activeBtn" : ""} 
+                style={{ display: max === 1 ? "none" : 'block'}}
+                onClick={() => twoPage()}>{two}</button>
+
+                <button className={three === active  ? "activeBtn" : ""} 
+                style={{ display: max === 1 || max === 2 ? "none" : 'block'}}
+                onClick={() => threePage()}>{three}</button>
+
+                <button className={four === active ? "activeBtn" : ""}
+                style={{ display: max === 1 || max === 3 || max === 2 ? "none" : 'block'}}
+                onClick={() => fourPage()}>{four}</button>
+
+                <button style={{
+                    display: four === max || max === 1 || max === 3 || max === 2 ? "none" : 'block'
+                }} onClick={() => next()}><FontAwesomeIcon icon={faAngleRight}/></button>
+
+                <button style={{
+                    display: four === max || max === 1 || max === 3 || max === 2 ? "none" : 'block'
+                }}
+                onClick={() => upMax()}
+                ><FontAwesomeIcon icon={faAngleRight}/><FontAwesomeIcon icon={faAngleRight}/></button>
             </div>}
         </>
     );

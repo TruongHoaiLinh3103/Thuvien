@@ -1,0 +1,217 @@
+@import "./variable.scss";
+
+.Profile{
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+.Profile_Deltai{
+    padding: 50px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    .Profile_Deltai-modal{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.533);
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        form{
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border-radius: 10px;
+            align-items: center;
+            legend{
+                margin: 0px 0px 10px;
+                color: black;
+                font-weight: 500;
+                font-size: 20px;
+            }
+            input[type="file"]{
+                @include button(rgb(216, 245, 190));
+                width: 80%;
+                margin: 0px auto;
+            }
+            img{
+                margin: 10px 0px;
+            }
+            .Profile_Deltai-modal_btn{
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                input[type="button"]:nth-child(1){
+                    @include button(rgb(187, 187, 255))
+                }
+                input[type="button"]:nth-child(2){
+                    @include button(rgb(245, 190, 190))
+                }
+            }
+        }
+    }
+    img{
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 100vh;
+        cursor: pointer;
+    }
+    h3{
+        margin: 10px;
+        color: rgb(67, 67, 67);
+        font-weight: 600;
+    }
+    .Profile_Deltai-btn{
+        @include button(white);
+        transition: all linear .2s;
+        &:hover{
+            @include button(rgb(215, 215, 215));
+        }
+    }
+    .Profile_Deltai-form{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .Profile_Deltai-form_item{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            label{
+                color: #1f2328;
+                font-family: -apple-system;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 21px;
+                margin: 10px 0px 4px;
+            }
+            input, textarea{
+                padding: 3px;
+            }
+            textarea{
+                height: 200px
+            }
+            input[type="file"]{
+                @include button(rgb(216, 245, 190));
+                width: 95.6%;
+            }
+            img{
+                margin: 5px auto;
+            }
+        }
+        .Profile_Deltai-form_other{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+            margin-top: 10px;
+            svg{
+                margin-right: 5px;
+            }
+        }
+        .Profile_Deltai-form_btn{
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            input[type='button']{
+                border: none;
+                border-radius: 10px;
+                padding: 5px;
+                color: white;
+                background-color: black;
+                cursor: pointer;
+            }
+            button{
+                border: none;
+                border-radius: 10px;
+                padding: 5px;
+                color: white;
+                background-color: black;
+                cursor: pointer;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+.Profile_Page{
+    padding: 0px 10px;
+    ul{
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        background-color: black;
+        justify-content: space-around;
+        padding: 20px;
+        li{
+            list-style: none;
+            color: white;
+            cursor: pointer;
+            svg{
+                font-size: 20px;
+            }
+            &:hover{
+                color: rgb(252, 159, 52);
+                transition: all linear .3s;
+            }
+        }
+    }
+    .Profile_Page-pass{
+        h2{
+            @extend %title;
+            &::after{
+                @extend %titleAffter;
+            }
+        }
+        form{
+            div{
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                label{
+                    color: #1f2328;
+                    font-family: -apple-system;
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 21px;
+                    margin: 10px 0px 4px;
+                }
+                input{
+                    padding: 5px;
+                    max-width: 300px;
+                    width: 90%;
+                }
+            }
+        }
+        .Profile_Page-pass_btn{
+            margin-top: 10px;
+            button{
+                @include button(rgb(216, 245, 190));
+            }
+        }
+    }
+}
+@media only screen and (max-width: 78.75em){
+
+}
+@media only screen and (max-width: 62.5em){
+    .Profile{
+        grid-template-columns: 100%;
+    }
+}
+@media only screen and (max-width : 46.25em){
+
+}
+@media only screen and (max-width : 30em){
+    .Profile_page-span{
+        display: none;
+    }
+}

@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import BtnBlogs from '@/components/BtnBlogs';
 import "../styles/home.scss";
+import dynamic from 'next/dynamic';
+const RichTextBlog = dynamic(() => import("./RichTextBlog"),{ssr: true});
 
 const Bloger = () => {
     const [data, setData] = useState([]);
@@ -14,9 +16,8 @@ const Bloger = () => {
     const [modal, setModal] = useState(false);
     const [nameBtn, setNameBtn] = useState("");
     const [id, setId] = useState();
+    const [content, setContent] = useState('')
     const title = useRef("");
-    const author = useRef("");
-    const content = useRef("");
     const editItem = (item) => {
         setModal(true)
         setNameBtn("Change")
@@ -24,50 +25,88 @@ const Bloger = () => {
         if(title.current.value === ''){
             title.current.value = item.title
         }
-        if(author.current.value === ''){
-            author.current.value = item.author
-        }
-        if(content.current.value === ''){
-            content.current.value = item.content
+        if(content === ""){
+            setContent(item.content)
         }
     }
     const addItem = () => {
-        setModal(true)
-        setNameBtn("Submit")
+        if(!sessionStorage.user){
+            alert("User not logged in!")
+        }else{
+            setModal(true)
+            setNameBtn("Submit")
+        }
     }
     const submit = () => {
-        if (title.current.value === '') {
+        if(title.current.value === '') {
             title.current.focus();
-        }else if(author.current.value === ''){
-            author.current.focus();
-        }else if(content.current.value === ''){
-            content.current.focus();
-        } else {
+        }else if(content === ""){
+            alert("Content cannot be empty!")
+        }else{
             const dataBlog = {
                 title: title.current.value,
-                author: author.current.value,
-                content: content.current.value
+                author: sessionStorage.user,
+                content: content
             }
-            axios.post("http://localhost:4000/blog", dataBlog )
-            .then((res) => toast.success("Đã cập nhật dữ liệu"))
-            setModal(false);
+            axios.post("http://localhost:4000/blog", dataBlog, {
+                headers: {
+                    accessToken: sessionStorage.getItem("accessToken")
+                }
+            })
+            .then((res) => {
+                if(res.data.error){
+                    alert("Title is too long!")
+                }else{
+                    const fecher = async () => {
+                        const res = await axios.get("http://localhost:4000/blog?sortBy=desc");
+                        if(res && res.data && res.data.data && res.data.data.data){
+                            setData(res.data.data.data);
+                            setLooding(false);
+                        }
+                    }
+                    fecher();
+                    setModal(false);
+                }
+            })
         }
     }
     const updateData = () => {
-        const dataBlog = {
-            title: title.current.value,
-            author: author.current.value,
-            content: content.current.value
+        if(title.current.value === '') {
+            title.current.focus();
+        }else if(content === ""){
+            alert("Content cannot be empty!")
+        }else{
+            const dataBlog = {
+                title: title.current.value,
+                author: sessionStorage.user,
+                content: content
+            }
+            axios.patch(`http://localhost:4000/blog/${id}`, dataBlog, {
+                headers: {
+                    accessToken: sessionStorage.getItem("accessToken")
+                }
+            })
+            .then((res) => {
+                if(res.data.error){
+                    alert("Title is too long!")
+                }else{
+                    const fecher = async () => {
+                        const res = await axios.get("http://localhost:4000/blog?sortBy=desc");
+                        if(res && res.data && res.data.data && res.data.data.data){
+                            setData(res.data.data.data);
+                            setLooding(false);
+                        }
+                    }
+                    fecher();
+                    setModal(false);
+                }
+            })
         }
-        axios.patch(`http://localhost:4000/blog/${id}`, dataBlog)
-        .then((res) => toast.success("Đã cập nhật dữ liệu"))
-        setModal(false);
     }
     const close = () => {
         setModal(false);
         title.current.value = "";
-        author.current.value = "";
-        content.current.value = ""
+        setContent("")
     }
     const resetPage = async (Children) => {
         if(data.length > 0){
@@ -77,9 +116,25 @@ const Bloger = () => {
             }
         }
     }
-    const deleteItem = (item) => {
-        axios.delete(`http://localhost:4000/blog/${item.id}`)
-        .then((res) => toast.success("Đã cập nhật dữ liệu"))
+    const deleteItem = (id) => {
+        axios.delete(`http://localhost:4000/blog/${id}`, {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken")
+            }
+        })
+        .then((res) => {
+            const fecher = async () => {
+                const res = await axios.get("http://localhost:4000/blog?sortBy=desc");
+                if(res && res.data && res.data.data && res.data.data.data){
+                    setData(res.data.data.data);
+                    setLooding(false);
+                }
+            }
+            fecher();
+        })
+    }
+    const setContents = (Children) => {
+        setContent(Children)
     }
     useEffect(() => {
         const fecher = async () => {
@@ -107,67 +162,52 @@ const Bloger = () => {
         </ul>
     )}
     return (
-        <div className="blog">  
-            <table>
-                <caption>Blogs</caption>
-                <thead>
-                    <tr className='tr-desktop'>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Content</th>
-                    </tr>
-                </thead>
+        <div className="blog">
+            <h2><b>NO</b>TE</h2>
+            <div className='blog-table'>
+                <div className='blog-thead'>
+                    <h3>Title</h3>
+                    <h3>Author</h3>
+                    <h3>Content</h3>
+                </div>
                 {data.map((item) => {
                     return(
-                        <tbody key={item.id}>
-                            <tr className='tr-desktop'>
-                                <td><span>{item.title}</span></td>
-                                <td><span>{item.author}</span></td>
-                                <td><span>{item.content}</span></td>
-                                <td>
+                        <div className='blog-tbody' key={item.id}>
+                            <div className='blog-item'>
+                                {item.title}
+                            </div>
+                            <div className='blog-item'>
+                                {item.author}
+                            </div>
+                            <div className='blog-item'>
+                                {item.content}
+                            </div>
+                            {sessionStorage.user === item.author ?
+                                <div className='blog-item'>
                                     <button onClick={() => editItem(item)}>Edit</button>
-                                    <button onClick={() => deleteItem(item)}>Delete</button>
-                                </td>
-                            </tr>
-                            <tr className='tr_Mobile'>
-                                <td><h3>Title</h3></td>
-                                <td><span>{item.title}</span></td>
-                            </tr>
-                            <tr className='tr_Mobile'>
-                                <td><h3>Author</h3></td>
-                                <td><span>{item.author}</span></td>
-                            </tr>
-                            <tr className='tr_Mobile'>
-                                <td><h3>Content</h3></td>
-                                <td><span>{item.content}</span></td>
-                            </tr>
-                            <tr className='btnTR_Mobile'>
-                                <td className='btnTR_Mobile_td'>
-                                    <button onClick={() => editItem(item)}>Edit</button>
-                                    <button onClick={() => deleteItem(item)}>Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
+                                    <button onClick={() => deleteItem(item.id)}>Delete</button>
+                                </div>
+                                :
+                                ""
+                            }
+                        </div>
                     )
                 })}
-                <tfoot>
-                    <tr><td><button onClick={() => addItem()}>Add blog</button></td></tr>
-                </tfoot>
-            </table>
+                <div className='blog-tfooter'>
+                    <button onClick={() => addItem()}>Add blog</button>
+                </div>
+            </div>
             <div className='modal' style={{display: modal ? "flex" : "none"}}>
                 <div className='box'>
                     <form>
-                        <div>
+                        <div className='box__Item'>
                             <label htmlFor='title'>Title</label>
                             <input type='text' name='title' ref={title}/>
                         </div>
-                        <div>
-                            <label htmlFor='author'>Author</label>
-                            <input type='text' name='title' ref={author}/>
-                        </div>
-                        <div>
+                        <div className='box__content'>
                             <label htmlFor='content'>Content</label>
-                            <textarea name='content' rows={10} cols={3} ref={content}></textarea>
+                            {/* <textarea name='content' rows={10} cols={3} ref={content}></textarea> */}
+                            <RichTextBlog content={setContents} value={content}/>
                         </div>
                     </form>
                     <div className='btn-form'>
@@ -176,7 +216,10 @@ const Bloger = () => {
                     </div>
                 </div>
             </div>
-            <BtnBlogs numberPage={resetPage}/>
+            
+            {data.length === 0 ? "" :
+                <BtnBlogs numberPage={resetPage}/>
+            }
             <ToastContainer/>
         </div>
     );

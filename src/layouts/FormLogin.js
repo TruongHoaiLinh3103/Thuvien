@@ -1,140 +1,41 @@
 "use client";
 
-import React,  { useState } from 'react';
-import logo from "../../public/ic-logo.png";
-import google from "../../public/ic-google.png";
-import facebook from "../../public/ic-facebook.png";
-import direita from "../../public/ic-background-direita.svg";
-import Image from 'next/image';
-import "../styles/formlogin.scss";
+import React, { useState } from 'react';
+import Profile from './Profile';
+import Login from './Login';
+import Regis from './Regis';
+import ChangePass from './ChangePass';
 
 const FormLogin = () => {
-    const [logout, setLogout] = useState(false);
-    const checkLog = () => {
-        setLogout(!logout);
+    const [numberPage, setNumberPage] = useState(0);
+    const printfLogin = () => {
+        setNumberPage(1)
     }
+    const printfLogout = () => {
+        setNumberPage(0)
+    }
+    const printfChangePass = () => {
+        setNumberPage(2)
+    }
+    const stores = sessionStorage.getItem("accessToken");
     return (
         <>
-            {!logout ?
-            (<div className='Login maxWidth1400px'>
-                <div className='User'>
-                    <section className="esquerda">
-                        <Image src={logo} alt="Imagem logo" className="imagem__logo" />
-                        <h3 className="titulo__login">Login</h3>
-                        <span className="subtitulo">Visit LisohAnikey&apos;s platform</span>
-                        <form>
-                            <section className="caixa__input">
-                                <label>Email</label>
-                                <input type="text" placeholder="Email" />
-                            </section>
-                            <section className="caixa__input">
-                                <label>Password</label>
-                                <input type="password" placeholder="Password" />
-                            </section>
-                        </form>
-                        <section className="controle__salvamento">
-                            <span className="esqueceu__senha">
-                                Forgot password?
-                            </span>
-                        </section>
-                        <section className="controle__acesso">
-                            <button type="submit">Login</button>
-                            <button className="botao__registrar" onClick={() => checkLog()}>
-                                <span className="botao__registrar--texto">Register</span>
-                            </button>
-                        </section>
-                        <section className="separador">
-                            <span></span>
-                            <span>You can log in to social networks</span>
-                            <span></span>
-                        </section>
-                        <section className="controle__login_social">
-                            <a href="*">
-                                <Image src={google} alt="Logo Google" />
-                                Login com Google
-                            </a>
-                            <a href="*">
-                                <Image src={facebook} alt="Logo Facebook" />
-                                Login com Facebook
-                            </a>
-                        </section>
-                    </section>
-                    <section className="direita">
-                        <div className="background__imagem">
-                            <div className="detalhe__vidro">
-                                <div className="detalhe__vidro--interno">
-                                    <span>This is a website developed by Anikey, and is an extremely large archive</span>
-                                </div>
-                            </div>
-                            <Image src={direita} alt="Imagem fundo" />
-                        </div>
-                    </section>
-                </div>
-            </div>)
+            {!stores ?
+                <>
+                    {numberPage === 0 ?
+                        <Login template={printfLogin}/>
+                        :
+                        <>
+                            {numberPage === 1 ?
+                                <Regis templateOne={printfLogout} templateTwo={printfChangePass}/>
+                                :
+                                <ChangePass templateOne={printfLogin} templateTwo={printfLogout}/>
+                            }
+                        </>
+                    }
+                </>
             :
-            (<div className='Login maxWidth1400px'>
-                <div className='User'>
-                    <section className="esquerda">
-                        <Image src={logo} alt="Imagem logo" className="imagem__logo" />
-                        <h3 className="titulo__login">Register</h3>
-                        <span className="subtitulo">Visit LisohAnikey&apos;s platform</span>
-                        <form>
-                            <section className="caixa__input">
-                                <label>User name</label>
-                                <input type="text" placeholder="User name" />
-                            </section>
-                            <section className="caixa__input">
-                                <label>Email</label>
-                                <input type="text" placeholder="Email" />
-                            </section>
-                            <section className="caixa__input">
-                                <label>Password</label>
-                                <input type="password" placeholder="Password" />
-                            </section>
-                            <section className="caixa__input">
-                                <label>Confirm password</label>
-                                <input type="password" placeholder="Confirm password" />
-                            </section>
-                        </form>
-                        <section className="controle__salvamento">
-                            <span className="esqueceu__senha">
-                                Change the password?
-                            </span>
-                        </section>
-                        <section className="controle__acesso">
-                            <button type="submit">Register</button>
-                            <button className="botao__registrar" onClick={() => checkLog()}>
-                                <span className="botao__registrar--texto">Login</span>
-                            </button>
-                        </section>
-                        <section className="separador">
-                            <span></span>
-                            <span>You can log in to social networks</span>
-                            <span></span>
-                        </section>
-                        <section className="controle__login_social">
-                            <a href="*">
-                                <Image src={google} alt="Logo Google" />
-                                Login com Google
-                            </a>
-                            <a href="*">
-                                <Image src={facebook} alt="Logo Facebook" />
-                                Login com Facebook
-                            </a>
-                        </section>
-                    </section>
-                    <section className="direita">
-                        <div className="background__imagem">
-                            <div className="detalhe__vidro">
-                                <div className="detalhe__vidro--interno">
-                                    <span>This is a website specializing in providing household appliances and feng shui items</span>
-                                </div>
-                            </div>
-                            <Image src={direita} alt="Imagem fundo" />
-                        </div>
-                    </section>
-                </div>
-            </div>)
+                <Profile/>
             }
         </>
     );

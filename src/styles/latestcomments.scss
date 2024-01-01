@@ -1,0 +1,17 @@
+@import "./variable.scss";
+
+.LatestComments-cmt-box{
+    @include ProductID--box(800px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}
+.LatestComments h2 {
+    @extend %title;
+}
+
+.LatestComments h2::after {
+    @extend %titleAffter
+}
