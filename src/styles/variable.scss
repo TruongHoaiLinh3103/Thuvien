@@ -18,7 +18,7 @@ $pd: 10px;
 $ctColor: white;
 
 @mixin button($bgColor: red){
-    width: 120px;
+    width: 30px;
     border: 1px solid black;
     padding: 5px;
     background-color: $bgColor;
@@ -29,9 +29,10 @@ $ctColor: white;
 @mixin buttonDetail($bgColor: red, $text: white, $bd: yellow){
     width: 100px;
     border: 3px $bd double;
-    padding: 10px;
+    padding: 5px;
     background-color: $bgColor;
     color: $text;
+    font-weight: bold;
     cursor: pointer;
 }
 

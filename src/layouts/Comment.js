@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import "../styles/comment.scss";
 import { printfID } from '@/utils/ViewURL';
 import BntPage from '@/components/BntPage';
@@ -150,8 +150,8 @@ const Comment = (props) => {
                                             <span><FontAwesomeIcon icon={faComment} /> {item.unchat}</span>
                                             {sessionStorage.user === item.user &&
                                                 <>
-                                                    <span style={{color:"blue"}} onClick={() => openUpdateCMT(item)}>edit</span>
-                                                    <span style={{color:"red"}} onClick={() => deleteComment(item.id)}>delete</span>
+                                                    <span style={{color:"blue"}} onClick={() => openUpdateCMT(item)}><FontAwesomeIcon icon={faPencil} /></span>
+                                                    <span style={{color:"red"}} onClick={() => deleteComment(item.id)}><FontAwesomeIcon icon={faTrash} /></span>
                                                 </>
                                             }
                                         </div>

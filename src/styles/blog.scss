@@ -3,16 +3,21 @@
     width: 90%;
     max-width: 1200px;
     margin: 0px auto;
-    h2{
+    .blog-title{
         @extend %title;
     }
-    h2::after{
+    .blog-title::after{
         @extend %titleAffter
     }
     .blog-table{
+        .blog-add-btn{
+            button{
+                @include buttonDetail(rgb(13, 150, 13), white, white);
+            }
+        }
         .blog-thead{
             display: grid;
-            grid-template-columns: 20% 20% 40% 20%;
+            grid-template-columns: 20% 20% 60%;
             border: 1px solid black;
             border-bottom: none;
             h3{
@@ -22,40 +27,61 @@
         }
         .blog-tbody{
             display: grid;
-            grid-template-columns: 20% 20% 40% 20%;
+            grid-template-columns: 20% 20% 60%;
             .blog-item{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
                 border-top: 1px solid black;
                 border-left: 1px solid black;
                 padding: 10px;
+                box-sizing: border-box;
+                user-select: none;
+                h4{
+                    margin: 0px;
+                }
+                &:nth-child(1){
+                    h4{
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .blog-custom{
+                        display: flex;
+                        align-items: center;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        padding: 10px;
+                        button{
+                            &:nth-child(1){
+                                @include button(rgb(173, 173, 239));
+                            }
+                            &:nth-child(2){
+                                @include button(rgb(247, 149, 149));
+                                margin-left: 10px;
+                            }
+                            &:nth-child(3){
+                                @include button(rgb(149, 247, 156));
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+                &:nth-child(2){
+                    text-align: center;
+                }
                 &:nth-child(3){
-                    display: -webkit-box;
-                    -webkit-line-clamp: 3;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
-                }
-                &:nth-last-child(1){
+                    div{
+                        display: -webkit-box;
+                        -webkit-line-clamp: 5;
+                        -webkit-box-orient: vertical;
+                        opacity: 0.5;
+                        overflow: hidden;
+                    }
                     border-right: 1px solid black;
-                }
-                button{
-                    &:nth-child(1){
-                        @include button(rgb(173, 173, 239));
-                    }
-                    &:nth-child(2){
-                        @include button(rgb(247, 149, 149));
-                        margin-top: 10px;
-                    }
                 }
             }
         }
-        .blog-tfooter{
+        .blog-span_line{
             border-top: 1px solid black;
-            button{
-                @include buttonDetail(white, black, black);
-            }
         }
     }
     .modal{
@@ -72,8 +98,8 @@
         align-items: center;
         justify-content: center;
         .box{
-            width: 80%;
-            height: 80%;
+            width: 95%;
+            height: 95%;
             background-color: white;
             border-radius: 20px;
             display: flex;
@@ -84,8 +110,8 @@
             border: 3px solid black;
             box-sizing: border-box;
             form{
-                width: 90%;
-                height: 80%;
+                width: 96%;
+                height: 90%;
                 .box__Item{
                     display: flex;
                     flex-direction: column;
@@ -107,9 +133,27 @@
     justify-content: space-between;
     align-items: center;
     button:nth-child(1){
-        @include button(rgb(179, 179, 243));
+        @include buttonDetail(rgb(179, 179, 243), black, black);
     }
     button:nth-child(2){
-        @include button(rgb(254, 253, 254));
+        @include buttonDetail(rgb(254, 253, 254), black, black);
     }
+}
+.box__content-detail{
+    .content-detail-temp{
+        height: 480px;
+        overflow: auto;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+}
+@media only screen and (max-width: 62.5em){
+    
+}
+@media only screen and (max-width : 46.25em){
+    
+}
+@media only screen and (max-width : 30em){
+
 }

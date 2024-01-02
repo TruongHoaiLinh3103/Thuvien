@@ -2,21 +2,27 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import "../styles/blog.scss";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import BtnBlogs from '@/components/BtnBlogs';
 import "../styles/home.scss";
+import DOMPurify from 'dompurify';
 import dynamic from 'next/dynamic';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
 const RichTextBlog = dynamic(() => import("./RichTextBlog"),{ssr: true});
 
 const Bloger = () => {
     const [data, setData] = useState([]);
     const [isLooding, setLooding] = useState(true);
     const [modal, setModal] = useState(false);
+    const [see, setSee] = useState(false);
     const [nameBtn, setNameBtn] = useState("");
     const [id, setId] = useState();
-    const [content, setContent] = useState('')
+    const [content, setContent] = useState('');
+    const [seeContentDetail, setSeeContentDetail] = useState("");
+    const [seeTitle, setSeeTitle] = useState("");
+    const [seeAuth ,setSeeAuth] = useState("")
     const title = useRef("");
     const editItem = (item) => {
         setModal(true)
@@ -36,6 +42,12 @@ const Bloger = () => {
             setModal(true)
             setNameBtn("Submit")
         }
+    }
+    const seeContent = (item) => {
+        setSee(true)
+        setSeeTitle(item.title);
+        setSeeContentDetail(item.content);
+        setSeeAuth(item.author)
     }
     const submit = () => {
         if(title.current.value === '') {
@@ -105,8 +117,11 @@ const Bloger = () => {
     }
     const close = () => {
         setModal(false);
+        setSee(false)
         title.current.value = "";
         setContent("")
+        setSeeContentDetail("");
+        setSeeTitle("")
     }
     const resetPage = async (Children) => {
         if(data.length > 0){
@@ -136,6 +151,10 @@ const Bloger = () => {
     const setContents = (Children) => {
         setContent(Children)
     }
+    const detailContent = (contents) => {
+        const htmlSanatized = DOMPurify.sanitize(contents);
+        return htmlSanatized;
+    }
     useEffect(() => {
         const fecher = async () => {
             const res = await axios.get("http://localhost:4000/blog?sortBy=desc");
@@ -163,8 +182,11 @@ const Bloger = () => {
     )}
     return (
         <div className="blog">
-            <h2><b>NO</b>TE</h2>
+            <h2 className='blog-title'><b>NO</b>TE</h2>
             <div className='blog-table'>
+                <div className='blog-add-btn'>
+                    <button onClick={() => addItem()}><FontAwesomeIcon icon={faPlus} /></button>
+                </div>
                 <div className='blog-thead'>
                     <h3>Title</h3>
                     <h3>Author</h3>
@@ -172,30 +194,31 @@ const Bloger = () => {
                 </div>
                 {data.map((item) => {
                     return(
-                        <div className='blog-tbody' key={item.id}>
-                            <div className='blog-item'>
-                                {item.title}
+                        <div className='blog-tbody' key={item.id} onClick={() => seeContent(item)}>
+                            <div className='blog-item' style={{position:"relative"}}>
+                                <h4>{item.title}</h4>
+                                {sessionStorage.user === item.author ?
+                                    <div className='blog-custom'>
+                                        <button onClick={() => editItem(item)}><FontAwesomeIcon icon={faPencil} /></button>
+                                        <button onClick={() => deleteItem(item.id)}><FontAwesomeIcon icon={faTrash} /></button>
+                                        <button onClick={() => seeContent(item)}><FontAwesomeIcon icon={faEye} /></button>
+                                    </div>
+                                    :
+                                    ""
+                                }
                             </div>
                             <div className='blog-item'>
-                                {item.author}
+                                <h4>{item.author}</h4>
                             </div>
                             <div className='blog-item'>
-                                {item.content}
+                                <div
+                                    dangerouslySetInnerHTML={{__html: detailContent(item.content)}}
+                                ></div>
                             </div>
-                            {sessionStorage.user === item.author ?
-                                <div className='blog-item'>
-                                    <button onClick={() => editItem(item)}>Edit</button>
-                                    <button onClick={() => deleteItem(item.id)}>Delete</button>
-                                </div>
-                                :
-                                ""
-                            }
                         </div>
                     )
                 })}
-                <div className='blog-tfooter'>
-                    <button onClick={() => addItem()}>Add blog</button>
-                </div>
+                <div className='blog-span_line'></div>
             </div>
             <div className='modal' style={{display: modal ? "flex" : "none"}}>
                 <div className='box'>
@@ -206,7 +229,6 @@ const Bloger = () => {
                         </div>
                         <div className='box__content'>
                             <label htmlFor='content'>Content</label>
-                            {/* <textarea name='content' rows={10} cols={3} ref={content}></textarea> */}
                             <RichTextBlog content={setContents} value={content}/>
                         </div>
                     </form>
@@ -216,11 +238,33 @@ const Bloger = () => {
                     </div>
                 </div>
             </div>
+            <div className='modal' style={{display: see ? "flex" : "none"}}>
+                <div className='box'>
+                    <form>
+                        <div className='box__Item'>
+                            <label htmlFor='title'>Title</label>
+                            <input type='text' name='title' defaultValue={seeTitle} disabled/>
+                        </div>
+                        <div className='box__Item' style={{marginTop: "10px"}}>
+                            <label htmlFor='auth'>Author</label>
+                            <input type='text' name='auth' defaultValue={seeAuth} disabled/>
+                        </div>
+                        <div className='box__content'>
+                            <label htmlFor='content'>Content</label>
+                            <div className='box__content-detail'>
+                                <div className='content-detail-temp' dangerouslySetInnerHTML={{__html: detailContent(seeContentDetail)}}></div>
+                            </div>
+                        </div>
+                    </form>
+                    <div className='btn-form'>
+                        <button onClick={() => close()}>Close</button>
+                    </div>
+                </div>
+            </div>
             
             {data.length === 0 ? "" :
                 <BtnBlogs numberPage={resetPage}/>
             }
-            <ToastContainer/>
         </div>
     );
 };

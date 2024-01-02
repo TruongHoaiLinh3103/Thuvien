@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import "../styles/profile.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding } from '@fortawesome/free-regular-svg-icons';
-import { faBell, faComments, faLocationDot, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faComments, faLocationDot, faRightFromBracket, faPencil, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
@@ -17,7 +17,7 @@ const Profile = () => {
     const [bio, setBio] = useState("")
     const [company, setCompany] = useState("");
     const [location, setLocatin] = useState("");
-    const [avatar, setAvatar] = useState("https://i.pinimg.com/originals/e1/2e/a0/e12ea08b2fd037c957a19aede3e5d3a8.jpg");
+    const [avatar, setAvatar] = useState(sessionStorage.avatar);
     const [pronouns, setPronouns] = useState("")
     const router = useRouter();
     const cancel = () => {
@@ -39,7 +39,7 @@ const Profile = () => {
     }
     const openEditProfile = () => {
         setSeeMore(true);
-        setAvatar(profileDetail.img)
+        setAvatar(profileDetail.img ? profileDetail.img : avatar)
         setBio(profileDetail.bio);
         setCompany(profileDetail.company);
         setLocatin(profileDetail.location);
@@ -63,12 +63,23 @@ const Profile = () => {
             location: location,
             user: sessionStorage.user
         }
-        axios.post("http://localhost:4000/account", data)
+        axios.post("http://localhost:4000/account", data).then((res) => {
+            if(res.data.error){
+                alert(res.data.error)
+            }else{
+                const data = {img: avatar, user: sessionStorage.user}
+                axios.patch("http://localhost:4000/comment/avatar", data, {
+                    headers: {
+                        accessToken: sessionStorage.getItem("accessToken")
+                    }
+                })
+            }
+        })
         setSeeMore(false)
     }
     const openEditAvatar = () => {
         setCancelImg(false)
-        setAvatar(profileDetail.img)
+        setAvatar(profileDetail.img ? profileDetail.img : avatar)
     }
     const editAvatar = () => {
         const data = {
@@ -79,7 +90,18 @@ const Profile = () => {
             location: profileDetail.location ? profileDetail.location : "",
             user: sessionStorage.user
         }
-        axios.post("http://localhost:4000/account", data)
+        axios.post("http://localhost:4000/account", data).then((res) => {
+            if(res.data.error){
+                alert(res.data.error)
+            }else{
+                const data = {img: avatar, user: sessionStorage.user}
+                axios.patch("http://localhost:4000/comment/avatar", data, {
+                    headers: {
+                        accessToken: sessionStorage.getItem("accessToken")
+                    }
+                })
+            }
+        })
         setCancelImg(true)
     }
     useEffect(() => {
@@ -87,9 +109,6 @@ const Profile = () => {
             if(res && res.data){
                 setProfileDetail(res.data);
                 sessionStorage.setItem("avatar", res.data.img)
-            }
-            else{
-                setAvatar("https://i.pinimg.com/originals/e1/2e/a0/e12ea08b2fd037c957a19aede3e5d3a8.jpg")
             }
         })
     })
@@ -102,7 +121,7 @@ const Profile = () => {
                         {profileDetail.img ?
                         <img src={profileDetail.img} alt='avatar' onClick={() => openEditAvatar()}/>
                         :
-                        <img src="https://i.pinimg.com/originals/e1/2e/a0/e12ea08b2fd037c957a19aede3e5d3a8.jpg" alt='avatar' onClick={() => openEditAvatar()}/>
+                        <img src={sessionStorage.avatar} alt='avatar' onClick={() => openEditAvatar()}/>
                         }
                         <h3>{profileDetail.user}</h3>
                         {profileDetail.bio &&
@@ -114,7 +133,7 @@ const Profile = () => {
                     </>
                 :
                     <>
-                        <img src="https://i.pinimg.com/originals/e1/2e/a0/e12ea08b2fd037c957a19aede3e5d3a8.jpg" alt='avatar' onClick={() => {setCancelImg(false)}}/>
+                        <img src={sessionStorage.avatar} alt='avatar' onClick={() => {setCancelImg(false)}}/>
                         <h3>{sessionStorage.user}</h3>
                     </>
                 }
@@ -124,13 +143,13 @@ const Profile = () => {
                         <input type="file" name="avatar" accept='image/png, image/jpeg, image/jpg, image/jfif' onChange={(e) => onChangeAVT(e)}/>
                         <img src={avatar} alt='avatar' />
                         <div className='Profile_Deltai-modal_btn'>
-                            <input type="button" value="Submit" onClick={() => editAvatar()}/>
-                            <input type='button' value="Cancel" onClick={() => {setCancelImg(true)}}/>
+                            <input type="button" value="📤" onClick={() => editAvatar()}/>
+                            <input type='button' value="❌" onClick={() => {setCancelImg(true)}}/>
                         </div>
                     </form>
                 </div>
                 {!seeMore ? 
-                    <button className='Profile_Deltai-btn' onClick={() => openEditProfile()}>Edit profile</button>
+                    <button className='Profile_Deltai-btn' onClick={() => openEditProfile()}><FontAwesomeIcon icon={faPencil} /></button>
                 :
                     <form className='Profile_Deltai-form' encType="multipart/form-data">
                         <div className='Profile_Deltai-form_item'>
