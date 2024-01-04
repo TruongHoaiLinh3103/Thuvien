@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Profile from './Profile';
 import Login from './Login';
 import Regis from './Regis';
@@ -8,6 +8,7 @@ import ChangePass from './ChangePass';
 
 const FormLogin = () => {
     const [numberPage, setNumberPage] = useState(0);
+    const [stores, setStores] = useState('')
     const printfLogin = () => {
         setNumberPage(1)
     }
@@ -17,10 +18,17 @@ const FormLogin = () => {
     const printfChangePass = () => {
         setNumberPage(2)
     }
-    const stores = sessionStorage.getItem("accessToken");
+    useEffect(() => {
+        if(sessionStorage.accessToken){
+            setStores(sessionStorage.accessToken)
+        }
+        else{
+            setStores('')
+        }
+    })
     return (
         <>
-            {!stores ?
+            {stores === '' ?
                 <>
                     {numberPage === 0 ?
                         <Login template={printfLogin}/>
