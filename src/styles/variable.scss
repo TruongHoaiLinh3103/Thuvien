@@ -78,13 +78,17 @@ $ctColor: white;
     margin-right: 20px;
     object-fit: cover;
 }
-
+%mainAndNavbar{
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
 
 //Card
 @mixin card($mxWidth: 200px){
     background-color: #fff;
     border-radius: 5px;
-    margin: 10px auto;
+    margin: 5px;
+    box-sizing: border-box;
     padding: 1rem;
     -webkit-box-shadow: 4px 4px 5px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 4px 4px 5px -5px rgba(0, 0, 0, 0.75);
@@ -120,7 +124,7 @@ $ctColor: white;
     margin: 0.5rem 0;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 %ratingCard{
@@ -128,27 +132,28 @@ $ctColor: white;
 }
 %priceCard{
     display: flex;
-    gap: 10px;
     margin: 0.5rem 0;
 }
 %priceFirst{
     font-weight: 400;
     text-decoration: line-through;
     color: #d0d2d6;
+    margin: 5px;
 }
 %priceLast{
     font-weight: 600;
     color: #747d89;
+    margin: 5px;
 }
 %btnCard{
     border: 1px solid #7ac402;
     border-radius: 30px;
     color: #7ac402;
-    padding: 0.5rem 1rem;
-    margin-bottom: 0.8rem;
+    padding: 5px 10px;
     cursor: pointer;
     text-align: center;
     transition: 0.3s all ease;
+    box-sizing: border-box;
 }
 %btnHvCard{
     background-color: #7ac402;

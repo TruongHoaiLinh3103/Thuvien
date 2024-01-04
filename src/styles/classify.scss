@@ -5,14 +5,14 @@
     align-items: center;
     button{
         &:nth-child(1){
-            @include button(rgb(248, 180, 180));
+            @include buttonDetail(rgb(248, 180, 180), rgb(0, 0, 0), black);
             margin-left: 10px;
         }
         &:nth-child(2){
-            @include button(rgb(252, 252, 156));
+            @include buttonDetail(rgb(252, 252, 156), rgb(0, 0, 0), black);
         }
         &:nth-child(3){
-            @include button(rgb(153, 153, 255));
+            @include buttonDetail(rgb(153, 153, 255), rgb(0, 0, 0), black);
             margin-right: 10px;
         }
         +button{

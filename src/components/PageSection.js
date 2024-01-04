@@ -8,7 +8,6 @@ import ViewProduct from '@/utils/ViewProduct';
 import "../styles/pagesection.scss";
 import BtnListProduct from './BtnListProduct';
 import SeeMoreProduct from './SeeMoreProduct';
-import { resultSearch } from '@/utils/ViewURL';
 import BtnHome from './BtnHome';
 
 const PageSection = (props) => {
@@ -42,48 +41,54 @@ const PageSection = (props) => {
     const handlePrice = (price, discount = false) => {
         if (discount) {
             price = price * 0.9;
-            // price *= 0.9;
         }
         return price.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
         });
     }
+
     const productPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=35&q=${resultSearch(paragraph)}`).then((res) => {
-            setProduct(res.data)
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=36&q=${paragraph}`).then((res) => {
+            if(res.data.length >= 1){
+                setProduct(res.data);
+            }
+            else{
+                setResultS(true);
+            }
         })
     }
     const homePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=30`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=36`).then((res) => {
             setHome(res.data)
         })
     }
     const cookingPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=35`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=36`).then((res) => {
             setCooking(res.data)
         })
     }
     const comicPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Children}&_limit=35`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Children}&_limit=36`).then((res) => {
             setComic(res.data)
         })
     }
     const gamePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Children}&_limit=35`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Children}&_limit=36`).then((res) => {
             setGame(res.data)
         })
     }
     const websitePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Children}&_limit=35`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Children}&_limit=36`).then((res) => {
             setWebsite(res.data)
         })
     }
     const calligraphyPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Children}&_limit=35`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Children}&_limit=36`).then((res) => {
             setCalligraphy(res.data)
         })
     }
+    
     const newReq = (Children) => {
         axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_sort=id&_order=${Children}`).then((res) => {
             setCooking(res.data)
@@ -142,32 +147,13 @@ const PageSection = (props) => {
         setStatus(true);
     }
     useEffect(() => {
-        axios.get("https://zfakeapi.vercel.app/product?menu=cooking&_page=1&_limit=35").then((res) => {
-            setCooking(res.data)
-        })
-        axios.get("https://zfakeapi.vercel.app/product?menu=comic&_page=1&_limit=35").then((res) => {
-            setComic(res.data)
-        })
-        axios.get("https://zfakeapi.vercel.app/product?menu=website&_page=1&_limit=35").then((res) => {
-            setWebsite(res.data)
-        })
-        axios.get("https://zfakeapi.vercel.app/product?menu=game&_page=1&_limit=35").then((res) => {
-            setGame(res.data)
-        })
-        axios.get("https://zfakeapi.vercel.app/product?menu=calligraphy&_page=1&_limit=35").then((res) => {
-            setCalligraphy(res.data)
-        })
-        axios.get(`https://zfakeapi.vercel.app/product?_page=1&_limit=35&q=${resultSearch(paragraph)}`).then((res) => {
-            if(res.data.length >= 1){
-                setProduct(res.data);
-            }
-            else{
-                setResultS(true);
-            }
-        })
-        axios.get("https://zfakeapi.vercel.app/product?_page=1&_limit=30").then((res) => {
-            setHome(res.data);
-        })
+        comicPage();
+        calligraphyPage();
+        websitePage();
+        gamePage();
+        cookingPage();
+        productPage();
+        homePage();
     }, [])
     return (
         <div className='PageSection'>
@@ -196,13 +182,15 @@ const PageSection = (props) => {
                             })}
                         </div>
                     </section>
-                    <BtnHome numberPage={homePage}/>
+                    {home.length === 0 ? "" :
+                        <BtnHome numberPage={homePage}/>
+                    }
                 </>
             }
-            {pathname === `/product/${props.name}` && 
+            {pathname === `/product/${paragraph}` && 
                 <>
                     <div style={{display: !resultS ? "block" : "none"}}>
-                        <p style={{margin: "0px 10px",fontSize: "20px"}}>Keyword | <b>{resultSearch(paragraph)}</b></p>
+                        <p style={{margin: "0px 10px",fontSize: "20px"}}>Keyword | <b>{decodeURI(paragraph)}</b></p>
                         <section className='PageSection-section'>
                             <div className='PageSection-section_data'>
                                 {product.map((item, index) => {
@@ -226,7 +214,9 @@ const PageSection = (props) => {
                                 })}
                             </div>
                         </section>
-                        <BtnListProduct numberPage={productPage} namePage={resultSearch(paragraph)}/>
+                        {product.length === 0 ? "" :
+                            <BtnListProduct numberPage={productPage} namePage={paragraph}/>
+                        }
                     </div>
                     <div style={{display: resultS ? "flex" : "none", alignItems: "center", justifyContent: 'center'}}>
                         <p style={{fontSize: "20px", margin: "10px"}}><b>404</b> | Không tìm thấy kết quả tìm kiếm</p>
@@ -261,8 +251,12 @@ const PageSection = (props) => {
                     </section>
                     {status ? 
                         <SeeMoreProduct resetIndex={resetIndexSeeMore}/>
-                    : 
-                        <BtnListProduct page={"cooking"} numberPage={cookingPage}/>
+                    :
+                        <>
+                            {cooking.length === 0  ? "" :
+                                <BtnListProduct page={"cooking"} numberPage={cookingPage}/>
+                            }
+                        </>
                     }
                 </>
             }
@@ -292,7 +286,15 @@ const PageSection = (props) => {
                             })}
                         </div>
                     </section>
-                    {status ? <SeeMoreProduct resetIndex={resetIndexSeeMore}/> : <BtnListProduct page={"comic"} numberPage={comicPage}/>}
+                    {status ? 
+                        <SeeMoreProduct resetIndex={resetIndexSeeMore}/>
+                    :
+                        <>
+                            {comic.length === 0  ? "" :
+                                <BtnListProduct page={"comic"} numberPage={comicPage}/>
+                            }
+                        </>
+                    }
                 </>
             }
             {pathname === "/product/website" && 
@@ -321,7 +323,15 @@ const PageSection = (props) => {
                             })}
                         </div>
                     </section>
-                    {status ? <SeeMoreProduct resetIndex={resetIndexSeeMore}/> : <BtnListProduct page={"website"} numberPage={websitePage}/>}
+                    {status ? 
+                        <SeeMoreProduct resetIndex={resetIndexSeeMore}/>
+                    :
+                        <>
+                            {website.length === 0  ? "" :
+                                <BtnListProduct page={"website"} numberPage={websitePage}/>
+                            }
+                        </>
+                    }
                 </>
             }
             {pathname === "/product/game" && 
@@ -350,7 +360,15 @@ const PageSection = (props) => {
                             })}
                         </div>
                     </section>
-                    {status ? <SeeMoreProduct resetIndex={resetIndexSeeMore}/> : <BtnListProduct page={"game"} numberPage={gamePage}/>}
+                    {status ? 
+                        <SeeMoreProduct resetIndex={resetIndexSeeMore}/>
+                    :
+                        <>
+                            {game.length === 0  ? "" :
+                                <BtnListProduct page={"game"} numberPage={gamePage}/>
+                            }
+                        </>
+                    }
                 </>
             }
             {pathname === "/product/calligraphy" && 
@@ -379,7 +397,15 @@ const PageSection = (props) => {
                             })}
                         </div>
                     </section>
-                    {status ? <SeeMoreProduct resetIndex={resetIndexSeeMore}/> : <BtnListProduct page={"calligraphy"} numberPage={calligraphyPage}/>}
+                    {status ? 
+                        <SeeMoreProduct resetIndex={resetIndexSeeMore}/>
+                    :
+                        <>
+                            {calligraphy.length === 0  ? "" :
+                                <BtnListProduct page={"calligraphy"} numberPage={calligraphyPage}/>
+                            }
+                        </>
+                    }
                 </>
             }
         </div>

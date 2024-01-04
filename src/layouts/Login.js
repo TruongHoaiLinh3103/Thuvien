@@ -34,7 +34,13 @@ const Login = (props) => {
                     else{
                         sessionStorage.setItem("accessToken", res.data)
                         sessionStorage.setItem("user", userLogin.current.value)
-                        sessionStorage.setItem("avatar", "https://i.pinimg.com/originals/e1/2e/a0/e12ea08b2fd037c957a19aede3e5d3a8.jpg")
+                        axios.get(`http://localhost:4000/account/${sessionStorage.user}`).then((res) => {
+                            if(res && res.data){
+                                sessionStorage.setItem("avatar", res.data.img)
+                            }else{
+                                sessionStorage.setItem("avatar", "https://i.pinimg.com/originals/e1/2e/a0/e12ea08b2fd037c957a19aede3e5d3a8.jpg")
+                            }
+                        })
                         router.push("/");
                         alert("Logged in successfully")
                     }

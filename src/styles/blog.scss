@@ -38,6 +38,7 @@
                     margin: 0px;
                 }
                 &:nth-child(1){
+                    min-height: 150px;
                     h4{
                         white-space: nowrap;
                         overflow: hidden;
@@ -50,23 +51,24 @@
                         bottom: 0;
                         left: 0;
                         padding: 10px;
+                        flex-direction: column;
                         button{
                             &:nth-child(1){
                                 @include button(rgb(173, 173, 239));
                             }
                             &:nth-child(2){
                                 @include button(rgb(247, 149, 149));
-                                margin-left: 10px;
-                            }
-                            &:nth-child(3){
-                                @include button(rgb(149, 247, 156));
-                                margin-left: 10px;
+                                margin: 10px 0px 0px 0px;
                             }
                         }
                     }
                 }
                 &:nth-child(2){
-                    text-align: center;
+                    h4{
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
                 }
                 &:nth-child(3){
                     div{
@@ -79,9 +81,6 @@
                     border-right: 1px solid black;
                 }
             }
-        }
-        .blog-span_line{
-            border-top: 1px solid black;
         }
     }
     .modal{
@@ -99,7 +98,7 @@
         justify-content: center;
         .box{
             width: 95%;
-            height: 95%;
+            height: 600px;
             background-color: white;
             border-radius: 20px;
             display: flex;
@@ -127,6 +126,13 @@
         }
     }
 }
+.blog-span_line{
+    border-top: 1px solid black;
+    h3{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: 600;
+    }
+}
 .btn-form{
     width: 90%;
     display: flex;
@@ -141,19 +147,10 @@
 }
 .box__content-detail{
     .content-detail-temp{
-        height: 480px;
+        height: 400px;
         overflow: auto;
         &::-webkit-scrollbar{
             display: none;
         }
     }
-}
-@media only screen and (max-width: 62.5em){
-    
-}
-@media only screen and (max-width : 46.25em){
-    
-}
-@media only screen and (max-width : 30em){
-
 }

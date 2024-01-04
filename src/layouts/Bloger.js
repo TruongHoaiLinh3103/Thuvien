@@ -9,7 +9,6 @@ import DOMPurify from 'dompurify';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faEye } from '@fortawesome/free-regular-svg-icons';
 const RichTextBlog = dynamic(() => import("./RichTextBlog"),{ssr: true});
 
 const Bloger = () => {
@@ -70,7 +69,7 @@ const Bloger = () => {
                     alert("Title is too long!")
                 }else{
                     const fecher = async () => {
-                        const res = await axios.get("http://localhost:4000/blog?sortBy=desc");
+                        const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&sortBy=desc`);
                         if(res && res.data && res.data.data && res.data.data.data){
                             setData(res.data.data.data);
                             setLooding(false);
@@ -78,6 +77,8 @@ const Bloger = () => {
                     }
                     fecher();
                     setModal(false);
+                    title.current.value = '';
+                    setContent("")
                 }
             })
         }
@@ -103,7 +104,7 @@ const Bloger = () => {
                     alert("Title is too long!")
                 }else{
                     const fecher = async () => {
-                        const res = await axios.get("http://localhost:4000/blog?sortBy=desc");
+                        const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&sortBy=desc`);
                         if(res && res.data && res.data.data && res.data.data.data){
                             setData(res.data.data.data);
                             setLooding(false);
@@ -125,7 +126,7 @@ const Bloger = () => {
     }
     const resetPage = async (Children) => {
         if(data.length > 0){
-            const res = await axios.get(`http://localhost:4000/blog?page=${Children}&limit=4&sortBy=desc`)
+            const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${Children}&limit=4&sortBy=desc`)
             if(res && res.data && res.data.data && res.data.data.data){
                 setData(res.data.data.data);
             }
@@ -139,7 +140,7 @@ const Bloger = () => {
         })
         .then((res) => {
             const fecher = async () => {
-                const res = await axios.get("http://localhost:4000/blog?sortBy=desc");
+                const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&sortBy=desc`);
                 if(res && res.data && res.data.data && res.data.data.data){
                     setData(res.data.data.data);
                     setLooding(false);
@@ -157,7 +158,7 @@ const Bloger = () => {
     }
     useEffect(() => {
         const fecher = async () => {
-            const res = await axios.get("http://localhost:4000/blog?sortBy=desc");
+            const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&sortBy=desc`);
             if(res && res.data && res.data.data && res.data.data.data){
                 setData(res.data.data.data);
                 setLooding(false);
@@ -192,33 +193,37 @@ const Bloger = () => {
                     <h3>Author</h3>
                     <h3>Content</h3>
                 </div>
-                {data.map((item) => {
-                    return(
-                        <div className='blog-tbody' key={item.id} onClick={() => seeContent(item)}>
-                            <div className='blog-item' style={{position:"relative"}}>
-                                <h4>{item.title}</h4>
-                                {sessionStorage.user === item.author ?
-                                    <div className='blog-custom'>
-                                        <button onClick={() => editItem(item)}><FontAwesomeIcon icon={faPencil} /></button>
-                                        <button onClick={() => deleteItem(item.id)}><FontAwesomeIcon icon={faTrash} /></button>
-                                        <button onClick={() => seeContent(item)}><FontAwesomeIcon icon={faEye} /></button>
+                {sessionStorage.user ? 
+                    <>
+                        {data.map((item) => {
+                            return(
+                                <div className='blog-tbody' key={item.id}>
+                                    <div className='blog-item' style={{position:"relative"}}>
+                                        <h4>{item.title}</h4>
+                                        <div className='blog-custom'>
+                                            <button onClick={() => editItem(item)}><FontAwesomeIcon icon={faPencil} /></button>
+                                            <button onClick={() => deleteItem(item.id)}><FontAwesomeIcon icon={faTrash} /></button>
+                                        </div>
                                     </div>
-                                    :
-                                    ""
-                                }
-                            </div>
-                            <div className='blog-item'>
-                                <h4>{item.author}</h4>
-                            </div>
-                            <div className='blog-item'>
-                                <div
-                                    dangerouslySetInnerHTML={{__html: detailContent(item.content)}}
-                                ></div>
-                            </div>
-                        </div>
-                    )
-                })}
-                <div className='blog-span_line'></div>
+                                    <div className='blog-item'>
+                                        <h4>{item.author}</h4>
+                                    </div>
+                                    <div className='blog-item'>
+                                        <div
+                                            dangerouslySetInnerHTML={{__html: detailContent(item.content)}}
+                                            onClick={() => seeContent(item)}
+                                        ></div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                        <div className='blog-span_line'></div>
+                    </>
+                    :
+                    <div className='blog-span_line'>
+                        <h3>Please log in to use the blog!</h3>
+                    </div>
+                }
             </div>
             <div className='modal' style={{display: modal ? "flex" : "none"}}>
                 <div className='box'>
@@ -261,8 +266,17 @@ const Bloger = () => {
                     </div>
                 </div>
             </div>
-            
-            {data.length === 0 ? "" :
+            {data.length === 0 ? 
+                <>
+                    {sessionStorage.user ?
+                        <div className='blog-span_line'>
+                            <h3>Not note!</h3>
+                        </div>
+                        : 
+                        ""
+                    }
+                </>
+             :
                 <BtnBlogs numberPage={resetPage}/>
             }
         </div>

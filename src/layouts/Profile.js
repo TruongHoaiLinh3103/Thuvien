@@ -93,13 +93,6 @@ const Profile = () => {
         axios.post("http://localhost:4000/account", data).then((res) => {
             if(res.data.error){
                 alert(res.data.error)
-            }else{
-                const data = {img: avatar, user: sessionStorage.user}
-                axios.patch("http://localhost:4000/comment/avatar", data, {
-                    headers: {
-                        accessToken: sessionStorage.getItem("accessToken")
-                    }
-                })
             }
         })
         setCancelImg(true)

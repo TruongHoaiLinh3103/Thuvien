@@ -110,7 +110,7 @@ const LatestComments = () => {
         return time;
     }
     useEffect(() => {
-        axios.get(`http://localhost:4000/comment?page=${numberPage}&limit=18&sortBy=desc&orderBy=id`).then((res) => {
+        axios.get(`http://localhost:4000/comment?page=${numberPage}&limit=36&sortBy=desc&orderBy=id`).then((res) => {
             if(res && res.data && res.data.data && res.data.data.data){
                 setComment(res.data.data.data)
             }

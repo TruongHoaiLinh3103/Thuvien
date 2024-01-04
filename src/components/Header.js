@@ -7,7 +7,6 @@ import ProductNav from '@/layouts/ProductNav';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faBlog, faPhone, faUser,faBars, faHeart, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { convertSearch } from '@/utils/ViewURL';
 
 const Header = () => {
     const router = useRouter();
@@ -17,7 +16,7 @@ const Header = () => {
         if(search.current.value === ""){
             search.current.focus();
         }else{
-            router.push(`/product/${convertSearch(search.current.value)}`);
+            router.push(`/product/${search.current.value}`);
         }
         
     }
@@ -25,7 +24,7 @@ const Header = () => {
         if(loop.current.value === ""){
             loop.current.focus();
         }else{
-            router.push(`/product/${convertSearch(loop.current.value)}`);
+            router.push(`/product/${loop.current.value}`);
         }
     }
     const nextSearchEnter = (e) => {
@@ -33,7 +32,7 @@ const Header = () => {
             if(search.current.value === ""){
                 search.current.focus();
             }else{
-                router.push(`/product/${convertSearch(search.current.value)}`);
+                router.push(`/product/${search.current.value}`);
             }
         }
     }
@@ -42,7 +41,7 @@ const Header = () => {
             if(loop.current.value === ""){
                 loop.current.focus();
             }else{
-                router.push(`/product/${convertSearch(loop.current.value)}`);
+                router.push(`/product/${loop.current.value}`);
             }
         }
     }
