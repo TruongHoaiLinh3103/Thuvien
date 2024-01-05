@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from 'react';
 import "../styles/latestcomments.scss";
 import axios from 'axios';
@@ -6,7 +8,6 @@ import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
 import { faPaperPlane, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import "../styles/productid.scss";
 import "../styles/comment.scss";
-import { date } from 'yup';
 
 const LatestComments = () => {
     const [comment, setComment] = useState([]);
@@ -102,15 +103,20 @@ const LatestComments = () => {
         if(name === "Vô mục"){
             return name;
         }else{
-            const result = str.trim() + "...";
-            return result;
+            if(name.length <= str.length){
+                return name;
+            }
+            else{
+                const result = str.trim() + "...";
+                return result;
+            }
         }
     }
     const itemProductTime = (time) => {
         return time;
     }
     useEffect(() => {
-        axios.get(`http://localhost:4000/comment?page=${numberPage}&limit=36&sortBy=desc&orderBy=id`).then((res) => {
+        axios.get(`http://localhost:4000/comment?page=${numberPage}&limit=24&sortBy=desc&orderBy=id`).then((res) => {
             if(res && res.data && res.data.data && res.data.data.data){
                 setComment(res.data.data.data)
             }

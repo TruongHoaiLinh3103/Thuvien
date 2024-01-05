@@ -24,15 +24,7 @@
     @include card(240px);
     margin: 5px auto;
   }
-  
-  .Product .slider .card .like {
-    @extend %like;
-  }
-  
-  .Product .slider .card .like:hover {
-    @extend %likeHover;
-  }
-  
+
   .Product .slider .card img {
     @include imgCard();
   }
@@ -57,11 +49,22 @@
     @extend %priceLast;
   }
   
-  .slider .card a.button {
-    @extend %btnCard;
-  }
-  
-  .slider .card a.button:hover {
-    @extend %btnHvCard;
+  .slider .card .data-card_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a.button:nth-child(1){
+      @include btnCard(rgb(241, 60, 60));
+      &:hover{
+        @include btnHvCard(white, rgb(241, 60, 60));
+      }
+    }
+    a.button:nth-child(2){
+      margin-left: 10px;
+      @include btnCard();
+      &:hover{
+        @include btnHvCard();
+      }
+    }
   }
   

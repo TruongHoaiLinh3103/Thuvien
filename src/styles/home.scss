@@ -116,14 +116,14 @@
     }
   }
 
-  .Home-section{
+  .layout-section{
     @extend %mainAndNavbar;
   }
   @media only screen and (max-width: 62.5em){
     
   }
   @media only screen and (max-width : 46.25em){
-    .Home-section{
+    .layout-section{
       display: grid;
       grid-template-columns: 100%;
     }

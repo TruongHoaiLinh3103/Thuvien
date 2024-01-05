@@ -46,7 +46,7 @@ textarea.content_Textarea{
     justify-content: flex-end;
     margin-top: 10px;
     button{
-        @include button(rgb(124, 124, 230));
+        @include buttonDetail(rgb(124, 124, 230));
     }
 }
 @media only screen and (max-width : 46.1875em){

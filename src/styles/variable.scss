@@ -99,20 +99,7 @@ $ctColor: white;
     flex-direction: column;
     align-items: center;
 }
-%like{
-    background-image: url("https://raw.githubusercontent.com/Cassianosch/programador.cs-reels/develop/slider-produtos-simples/assets/images/ic-heart.png");
-    height: 20px;
-    width: 20px;
-    background-size: 20px;
-    display: flex;
-    place-self: flex-end;
-    margin-bottom: 0.3rem;
-    transition: 0.3s all ease;
-    cursor: pointer;
-}
-%likeHover{
-    background-image: url("https://raw.githubusercontent.com/Cassianosch/programador.cs-reels/develop/slider-produtos-simples/assets/images/ic-heart-red.png");
-}
+
 @mixin imgCard($hg: 240px){
     width: 100%;
     height: $hg;
@@ -145,17 +132,17 @@ $ctColor: white;
     color: #747d89;
     margin: 5px;
 }
-%btnCard{
-    border: 1px solid #7ac402;
+@mixin btnCard($cl: #7ac402){
+    border: 1px solid $cl;
     border-radius: 30px;
-    color: #7ac402;
+    color: $cl;
     padding: 5px 10px;
     cursor: pointer;
     text-align: center;
     transition: 0.3s all ease;
     box-sizing: border-box;
 }
-%btnHvCard{
-    background-color: #7ac402;
-    color: white;
+@mixin btnHvCard($cl: white, $bg: #7ac402){
+    background-color: $bg;
+    color: $cl;
 }

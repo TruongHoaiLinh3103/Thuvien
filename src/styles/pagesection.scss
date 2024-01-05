@@ -25,16 +25,7 @@
 .PageSection-section_data-card {
     @include card(169px);
   }
-  
-  .PageSection-section_data-card 
-  .data-card_like {
-    @extend %like;
-  }
-  
-  .PageSection-section_data .data-card_like:hover {
-    @extend %likeHover;
-  }
-  
+
   .PageSection-section_data img {
     @include imgCard(160px);
   }
@@ -59,22 +50,21 @@
     @extend %priceLast;
   }
   
-.PageSection-section_data a.button {
-    @extend %btnCard;
+.PageSection-section_data .data-card_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a.button:nth-child(1){
+    @include btnCard(rgb(241, 60, 60));
+    &:hover{
+      @include btnHvCard(white, rgb(241, 60, 60));
+    }
   }
-  
-.PageSection-section_data a.button:hover {
-    @extend %btnHvCard;
+  a.button:nth-child(2){
+    margin-left: 10px;
+    @include btnCard();
+    &:hover{
+      @include btnHvCard();
+    }
   }
-  
-@media only screen and (max-width: 62.5em){
-  .PageSection-section{
-    grid-template-columns: 100%;
-  }
-}
-@media only screen and (max-width : 46.25em){
-  
-}
-@media only screen and (max-width : 30em){
-
 }

@@ -1,9 +1,13 @@
+"use client";
+
 import React from 'react';
 import img from "../../public/cart-empty.png";
 import "../styles/wishlist.scss";
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const WishList = () => {
+    const router = useRouter()
     return (
         <div className='WishList'>
             <h2><b>BẠN ĐẶC</b> BIỆT THÍCH</h2>
@@ -15,7 +19,7 @@ const WishList = () => {
                     <p>0 R$</p>
                 </div>
                 <div className='WishList-Total_btn'>
-                    <button>Xem thêm sản phẩm</button>
+                    <button onClick={() => router.push("/")}>Xem thêm sản phẩm</button>
                 </div>
             </div>
         </div>

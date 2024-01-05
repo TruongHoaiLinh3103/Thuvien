@@ -41,11 +41,10 @@ function Home() {
         <SliderBanner/>
         <ProductMenu/>
         <Product data ={data}/>
-        <div className="Home-section">
+        <div className="layout-section">
           <PageSection/>
           <div style={{margin: "10px 0px"}}>
-            <LatestComments/>
-            
+            <LatestComments/> 
           </div>
         </div>
     </main>

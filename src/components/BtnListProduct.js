@@ -72,12 +72,12 @@ const BtnListProduct = (props) => {
     useEffect(() => {
         if(props.page){
             axios.get(`https://zfakeapi.vercel.app/product?menu=${props.page}`).then((res) => {
-                const number = res.data.length/36;
+                const number = res.data.length/24;
                 setMax(Math.ceil(number));
             });
         }else{
             axios.get(`https://zfakeapi.vercel.app/product?q=${props.namePage}`).then((res) => {
-                const number = res.data.length/36;
+                const number = res.data.length/24;
                 setMax(Math.ceil(number));
             });
         }

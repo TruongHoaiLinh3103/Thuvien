@@ -5,23 +5,25 @@ import "../styles/classify.scss";
 
 
 const Classify = (props) => {
+    const [newID] = useState('_sort=id&_order=desc');
+    const [ratingStart] = useState('_sort=rating&_order=desc');
     const max = "R$ ⬆ đến ⬇";
     const min = "R$ ⬇ đến ⬆";
     const [title, setTitle] = useState(max);
     const totalMain = () => {
         if(title === max){
             setTitle(min);
-            props.totalPage("desc")
+            props.totalPage("_sort=price&_order=desc")
         }else{
             setTitle(max);
-            props.totalPage("asc")
+            props.totalPage("_sort=price&_order=asc")
         }
     }
     const News = () => {
-        props.new("desc")
+        props.new(newID);
     }
     const Rating = () => {
-        props.rating("desc")
+        props.rating(ratingStart);
     }
     return (
         <div className='Classify'>

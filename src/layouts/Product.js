@@ -7,6 +7,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ViewProduct from '@/utils/ViewProduct';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Product = (props) => {
     const handleRating = (rating) => {
@@ -103,7 +105,6 @@ const Product = (props) => {
                 {data.map((item) => {
                     return(
                         <div className="card" key={item.id}>
-                            {/* <div className="like"></div> */}
                             <img className="product"
                                 src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                             <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -114,7 +115,10 @@ const Product = (props) => {
                                 <h5>{handlePrice(item.price)}</h5>
                                 <h5>{handlePrice(item.price, true)}</h5>
                             </div>
-                            <a className="button" onClick={() => addWishlist(item)}>Add to wishlist</a>
+                            <div className='data-card_btn'>
+                                <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>
+                                <a className="button"><FontAwesomeIcon icon={faBook} /></a>
+                            </div>
                         </div>
                     )
                 })}

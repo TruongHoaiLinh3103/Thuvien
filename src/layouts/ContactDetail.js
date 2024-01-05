@@ -2,11 +2,8 @@
 
 import React, { useRef } from 'react';
 import "../styles/contactdetail.scss";
-// import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope, faMapLocation } from '@fortawesome/free-solid-svg-icons';
-
-// const Edit = dynamic(() => import("./Edit"),{ssr: false});
 
 const ContactDetail = () => {
     const Name = useRef(null);
