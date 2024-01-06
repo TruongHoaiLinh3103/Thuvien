@@ -12,7 +12,7 @@ const BtnHome = (props) => {
     const [three, setThree] = useState(3)
     const [four, setFour] = useState(4);
     const [max, setMax] = useState(0);
-    const [active, setActive] = useState(1);
+    const [active, setActive] = useState(props.active ? props.active : 1);
     const next = () => {
         setOne(one+1);
         setTwo(two+1);

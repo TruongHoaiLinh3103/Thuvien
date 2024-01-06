@@ -23,6 +23,7 @@ const PageSection = (props) => {
     const [resultS, setResultS] = useState(false);
     const [checkReq, setCheckReq] = useState(false);
     const [home, setHome] = useState([]);
+    const active = localStorage.paginate;
     const paragraph = props.name;
 
     const handleRating = (rating) => {
@@ -50,6 +51,7 @@ const PageSection = (props) => {
     }
 
     const productPage = (Children) => {
+        localStorage.setItem("paginate", Children)
         axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=24&q=${paragraph}&${temp}`).then((res) => {
             if(res.data.length >= 1){
                 setProduct(res.data);
@@ -60,31 +62,37 @@ const PageSection = (props) => {
         })
     }
     const homePage = (Children) => {
+        localStorage.setItem("paginate", Children)
         axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=24&${temp}`).then((res) => {
             setHome(res.data)
         })
     }
     const cookingPage = (Children) => {
+        localStorage.setItem("paginate", Children)
         axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=24&${temp}`).then((res) => {
             setCooking(res.data)
         })
     }
     const comicPage = (Children) => {
+        localStorage.setItem("paginate", Children)
         axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Children}&_limit=24&${temp}`).then((res) => {
             setComic(res.data)
         })
     }
     const gamePage = (Children) => {
+        localStorage.setItem("paginate", Children)
         axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Children}&_limit=24&${temp}`).then((res) => {
             setGame(res.data)
         })
     }
     const websitePage = (Children) => {
+        localStorage.setItem("paginate", Children)
         axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Children}&_limit=24&${temp}`).then((res) => {
             setWebsite(res.data)
         })
     }
     const calligraphyPage = (Children) => {
+        localStorage.setItem("paginate", Children)
         axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Children}&_limit=24&${temp}`).then((res) => {
             setCalligraphy(res.data)
         })
@@ -126,13 +134,39 @@ const PageSection = (props) => {
         })
     }
     useEffect(() => {
-        comicPage();
-        calligraphyPage();
-        websitePage();
-        gamePage();
-        cookingPage();
-        productPage();
-        homePage();
+        //Search
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${active ? active : 1}&_limit=24&q=${paragraph}&${temp}`).then((res) => {
+            if(res.data.length >= 1){
+                setProduct(res.data);
+            }
+            else{
+                setResultS(true);
+            }
+        })
+        //Home
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+            setHome(res.data)
+        })
+        //Cooking
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+            setCooking(res.data)
+        })
+        //Comic
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+            setComic(res.data)
+        })
+        //Game
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+            setGame(res.data)
+        })
+        //Web
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+            setWebsite(res.data)
+        })
+        //Calli
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+            setCalligraphy(res.data)
+        })
     }, [])
     return (
         <div className='PageSection'>
@@ -164,7 +198,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {home.length === 0 ? "" :
-                        <BtnHome numberPage={homePage}/>
+                        <BtnHome numberPage={homePage} active={parseInt(active)}/>
                     }
                 </>
             }
@@ -197,7 +231,7 @@ const PageSection = (props) => {
                             </div>
                         </section>
                         {product.length === 0 ? "" :
-                            <BtnListProduct numberPage={productPage} namePage={paragraph}/>
+                            <BtnListProduct numberPage={productPage} namePage={paragraph} active={parseInt(active)} />
                         }
                     </div>
                     <div style={{display: resultS ? "flex" : "none", alignItems: "center", justifyContent: 'center'}}>
@@ -233,7 +267,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {cooking.length === 0  ? "" :
-                        <BtnListProduct page={"cooking"} numberPage={cookingPage} check={checkReq} filter={temp}/>
+                        <BtnListProduct page={"cooking"} numberPage={cookingPage} check={checkReq} filter={temp} active={parseInt(active)} />
                     }
                 </>
             }
@@ -265,7 +299,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {comic.length === 0  ? "" :
-                        <BtnListProduct page={"comic"} numberPage={comicPage} check={checkReq} filter={temp}/>
+                        <BtnListProduct page={"comic"} numberPage={comicPage} check={checkReq} filter={temp} active={parseInt(active)} />
                     }
                 </>
             }
@@ -297,7 +331,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {website.length === 0  ? "" :
-                        <BtnListProduct page={"website"} numberPage={websitePage} check={checkReq} filter={temp}/>
+                        <BtnListProduct page={"website"} numberPage={websitePage} check={checkReq} filter={temp} active={parseInt(active)} />
                     }
                 </>
             }
@@ -329,7 +363,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {game.length === 0  ? "" :
-                        <BtnListProduct page={"game"} numberPage={gamePage}/>
+                        <BtnListProduct page={"game"} numberPage={gamePage} active={parseInt(active)} />
                     }
                 </>
             }
@@ -361,7 +395,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {calligraphy.length === 0  ? "" :
-                        <BtnListProduct page={"calligraphy"} numberPage={calligraphyPage}/>
+                        <BtnListProduct page={"calligraphy"} numberPage={calligraphyPage} active={parseInt(active)} />
                     }
                 </>
             }
