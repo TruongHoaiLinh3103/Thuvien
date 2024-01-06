@@ -19,8 +19,9 @@ const PageSection = (props) => {
     const [game, setGame] = useState([]);
     const [calligraphy, setCalligraphy] = useState([]);
     const [product, setProduct] = useState([]);
-    const [temp, setTemp] = useState('_sort=id&_order=asc')
+    const [temp, setTemp] = useState('&_sort=id&_order=desc')
     const [resultS, setResultS] = useState(false);
+    const [checkReq, setCheckReq] = useState(false);
     const [home, setHome] = useState([]);
     const paragraph = props.name;
 
@@ -49,7 +50,7 @@ const PageSection = (props) => {
     }
 
     const productPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=24&q=${paragraph}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=24&q=${paragraph}${temp}`).then((res) => {
             if(res.data.length >= 1){
                 setProduct(res.data);
             }
@@ -59,43 +60,46 @@ const PageSection = (props) => {
         })
     }
     const homePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=24`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=24${temp}`).then((res) => {
             setHome(res.data)
         })
     }
-    const cookingPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=24&${temp}`).then((res) => {
+    const cookingPage = (Children, temp) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=24${temp}`).then((res) => {
             setCooking(res.data)
         })
     }
-    const comicPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Children}&_limit=24&${temp}`).then((res) => {
+    const comicPage = (Children, temp) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Children}&_limit=24${temp}`).then((res) => {
             setComic(res.data)
         })
     }
-    const gamePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Children}&_limit=24&${temp}`).then((res) => {
+    const gamePage = (Children, temp) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Children}&_limit=24${temp}`).then((res) => {
             setGame(res.data)
         })
     }
-    const websitePage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Children}&_limit=24&${temp}`).then((res) => {
+    const websitePage = (Children, temp) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Children}&_limit=24${temp}`).then((res) => {
             setWebsite(res.data)
         })
     }
-    const calligraphyPage = (Children) => {
-        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Children}&_limit=24&${temp}`).then((res) => {
+    const calligraphyPage = (Children, temp) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Children}&_limit=24${temp}`).then((res) => {
             setCalligraphy(res.data)
         })
     } 
     const newReq = (Children) => {
-        setTemp(Children)
+        setTemp(Children);
+        setCheckReq(true);
     }
     const ratingReq = (Children) => {
-        setTemp(Children)
+        setTemp(Children);
+        setCheckReq(true);
     }
     const total = (Children) => {
-        setTemp(Children)
+        setTemp(Children);
+        setCheckReq(true);
     }
     const addWishlist = (item) => {
         const data = {
@@ -134,7 +138,7 @@ const PageSection = (props) => {
         <div className='PageSection'>
             {pathname === `/` && 
                 <>
-                    <h2 className='PageSection_title'><b>ALL</b> PRODUCTS</h2>
+                    <h2 className='PageSection_title'><b>LAT</b>EST</h2>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
                             {home.map((item) => {
@@ -229,7 +233,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {cooking.length === 0  ? "" :
-                        <BtnListProduct page={"cooking"} numberPage={cookingPage}/>
+                        <BtnListProduct page={"cooking"} numberPage={cookingPage} check={checkReq} filter={temp}/>
                     }
                 </>
             }
@@ -261,7 +265,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {comic.length === 0  ? "" :
-                        <BtnListProduct page={"comic"} numberPage={comicPage}/>
+                        <BtnListProduct page={"comic"} numberPage={comicPage} check={checkReq} filter={temp}/>
                     }
                 </>
             }
@@ -293,7 +297,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {website.length === 0  ? "" :
-                        <BtnListProduct page={"website"} numberPage={websitePage}/>
+                        <BtnListProduct page={"website"} numberPage={websitePage} check={checkReq} filter={temp}/>
                     }
                 </>
             }

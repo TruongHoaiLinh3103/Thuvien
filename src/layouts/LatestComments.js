@@ -124,7 +124,7 @@ const LatestComments = () => {
     })
     return (
         <div className='LatestComments'>
-            <h2><b>LATEST</b> COMMENTS</h2>
+            <h2><b>COMM</b>ENTS</h2>
             <div className='ProductID-cmt-add'>
                 <input type='text' placeholder='Thêm bình luận...' ref={cmt} onKeyDown={(e) => addCommentEnter(e)}/>
                 <FontAwesomeIcon icon={faPaperPlane} onClick={() => addComment()}/>

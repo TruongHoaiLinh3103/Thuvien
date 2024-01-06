@@ -100,7 +100,7 @@ const Product = (props) => {
     const data = props.data;
     return (
         <div className='Product maxWidth1400px'>
-            <h2><b>LATEST </b>PRODUCT</h2>
+            <h2><b>APPRE</b>CIATE</h2>
             <Slider {...settings} className="slider js-slider">
                 {data.map((item) => {
                     return(

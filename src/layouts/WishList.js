@@ -10,16 +10,16 @@ const WishList = () => {
     const router = useRouter()
     return (
         <div className='WishList'>
-            <h2><b>BẠN ĐẶC</b> BIỆT THÍCH</h2>
-            <p>Không có sản phẩm nào được thích</p>
+            <h2><b>YOU ESPEC</b>IALLY LIKE</h2>
+            <p>There are no products liked!</p>
             <Image src={img} alt=''/>
             <div className='WishList-Total'>
                 <div className='WishList-Total_d'>
-                    <h4>Tổng điểm: </h4>
+                    <h4>Total: </h4>
                     <p>0 R$</p>
                 </div>
                 <div className='WishList-Total_btn'>
-                    <button onClick={() => router.push("/")}>Xem thêm sản phẩm</button>
+                    <button onClick={() => router.push("/")}>See more products</button>
                 </div>
             </div>
         </div>

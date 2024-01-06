@@ -6,17 +6,34 @@
     button{
         &:nth-child(1){
             @include buttonDetail(rgb(248, 180, 180), rgb(0, 0, 0), black);
-            margin-left: 10px;
+            position: relative;
         }
         &:nth-child(2){
             @include buttonDetail(rgb(252, 252, 156), rgb(0, 0, 0), black);
+            margin: 0px 10px;
         }
         &:nth-child(3){
             @include buttonDetail(rgb(153, 153, 255), rgb(0, 0, 0), black);
-            margin-right: 10px;
         }
-        +button{
-            margin-left: 10px;
+    }
+}
+.Classify-tag{
+    position: absolute;
+    bottom: 52px;
+    background-color: black;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    li{
+        list-style: none;
+        padding: 10px;
+        width: 100px;
+        box-sizing: border-box;
+        color: white;
+        cursor: pointer;
+        +li{
+            border-top: 1px solid white;
         }
     }
 }

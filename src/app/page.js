@@ -15,7 +15,7 @@ function Home() {
   const [isLoading, setLoading] = useState(true)
   useEffect(() => {
     const fecher = async () => {
-      const res = await axios.get('https://zfakeapi.vercel.app/product?_page=1&_limit=10&_sort=id&_order=desc');
+      const res = await axios.get('https://zfakeapi.vercel.app/product?_page=1&_limit=24&_sort=rating&_order=desc');
       setData(res.data);
       setLoading(false);
     }
