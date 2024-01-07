@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 import SliderBanner from './SliderBanner';
 import { printfID } from '@/utils/ViewURL';
 import Comment from './Comment';
-import { deletePaginate } from '@/utils/ResetPaginate';
 
 const ProductID = (props) => {
     const [data, setData] = useState({});
@@ -50,9 +49,9 @@ const ProductID = (props) => {
             {!Data && 
                 <div className='ProductID'>
                     <div className='ProductID-title'>
-                        <FontAwesomeIcon icon={faHouse} onClick={() => {router.push("/");deletePaginate()}}/>
+                        <FontAwesomeIcon icon={faHouse} onClick={() => router.push("/")}/>
                         <span>/</span>
-                        <h3 style={{cursor: "pointer", userSelect:"none"}} onClick={() => {router.push(`/product/${data.menu}`);deletePaginate()}}>{data.menu}</h3>
+                        <h3 style={{cursor: "pointer", userSelect:"none"}} onClick={() => router.push(`/product/${data.menu}`)}>{data.menu}</h3>
                         <span>/</span>
                         <h3 className='ttProductID'>{data.name}</h3>
                     </div>

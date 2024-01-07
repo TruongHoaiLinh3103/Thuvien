@@ -1,12 +1,8 @@
-"use client";
-
 import React from 'react';
 import "../styles/footer.scss";
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils, faBook, faFile, faGamepad, faFont, faPhone, faEnvelope, faMapLocation, faFaceSmile, faHouse, faMusic, faHeart, faUser, faBlog} from '@fortawesome/free-solid-svg-icons';
-import { deletePaginate } from '@/utils/ResetPaginate';
-
 const Footer = () => {
     return (
         <div className='Footer maxWidth1400px'>
@@ -24,7 +20,7 @@ const Footer = () => {
                 <h3>Page</h3>
                 <hr />
                 <ul>
-                    <li><FontAwesomeIcon icon={faHouse} /><Link href="/" onClick={() => deletePaginate()}>Home</Link></li>
+                    <li><FontAwesomeIcon icon={faHouse} /><Link href="/">Home</Link></li>
                     <li><FontAwesomeIcon icon={faMusic} /><Link href="/music">Music</Link></li>
                     <li><FontAwesomeIcon icon={faHeart} /><Link href="/wishlist">Wishlist</Link></li>
                     <li><FontAwesomeIcon icon={faUser} /><Link href="/user">Account</Link></li>
@@ -36,11 +32,11 @@ const Footer = () => {
                 <h3>Menu</h3>
                 <hr />
                 <ul>
-                    <li><FontAwesomeIcon icon={faUtensils} /><Link href="/product/cooking" onClick={() => deletePaginate()}>Cooking</Link></li>
-                    <li><FontAwesomeIcon icon={faFont} /><Link href="/product/calligraphy" onClick={() => deletePaginate()}>Calligraphy</Link></li>
-                    <li><FontAwesomeIcon icon={faFile} /><Link href="/product/website" onClick={() => deletePaginate()}>Website</Link></li>
-                    <li><FontAwesomeIcon icon={faGamepad} /><Link href="/product/game" onClick={() => deletePaginate()}>Game</Link></li>
-                    <li><FontAwesomeIcon icon={faBook} /><Link href="/product/comic" onClick={() => deletePaginate()}>Comic</Link></li>
+                    <li><FontAwesomeIcon icon={faUtensils} /><Link href="/product/cooking">Cooking</Link></li>
+                    <li><FontAwesomeIcon icon={faFont} /><Link href="/product/calligraphy">Calligraphy</Link></li>
+                    <li><FontAwesomeIcon icon={faFile} /><Link href="/product/website">Website</Link></li>
+                    <li><FontAwesomeIcon icon={faGamepad} /><Link href="/product/game">Game</Link></li>
+                    <li><FontAwesomeIcon icon={faBook} /><Link href="/product/comic">Comic</Link></li>
                 </ul>
             </div>
             <div className='Footer-item'>
