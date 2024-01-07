@@ -23,7 +23,7 @@ const PageSection = (props) => {
     const [resultS, setResultS] = useState(false);
     const [checkReq, setCheckReq] = useState(false);
     const [home, setHome] = useState([]);
-    const active = localStorage.paginate;
+    const [active, setActive] = useState(!localStorage.paginate ? 1 : localStorage.paginate)
     const paragraph = props.name;
 
     const handleRating = (rating) => {
@@ -135,7 +135,7 @@ const PageSection = (props) => {
     }
     useEffect(() => {
         //Search
-        axios.get(`https://zfakeapi.vercel.app/product?_page=${active ? active : 1}&_limit=24&q=${paragraph}&${temp}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${active}&_limit=24&q=${paragraph}&${temp}`).then((res) => {
             if(res.data.length >= 1){
                 setProduct(res.data);
             }
@@ -144,29 +144,33 @@ const PageSection = (props) => {
             }
         })
         //Home
-        axios.get(`https://zfakeapi.vercel.app/product?_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?_page=${active}&_limit=24&${temp}`).then((res) => {
             setHome(res.data)
         })
         //Cooking
-        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${active}&_limit=24&${temp}`).then((res) => {
             setCooking(res.data)
         })
         //Comic
-        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${active}&_limit=24&${temp}`).then((res) => {
             setComic(res.data)
         })
         //Game
-        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${active}&_limit=24&${temp}`).then((res) => {
             setGame(res.data)
         })
         //Web
-        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${active}&_limit=24&${temp}`).then((res) => {
             setWebsite(res.data)
         })
         //Calli
-        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${active ? active : 1}&_limit=24&${temp}`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${active}&_limit=24&${temp}`).then((res) => {
             setCalligraphy(res.data)
         })
+        if(localStorage.paginate){
+            setActive(localStorage.paginate);
+            localStorage.removeItem('paginate');
+        }
     }, [])
     return (
         <div className='PageSection'>
