@@ -23,13 +23,13 @@ const PageSection = (props) => {
     const [resultS, setResultS] = useState(false);
     const [checkReq, setCheckReq] = useState(false);
     const [home, setHome] = useState([]);
-    const [Search] = useState(localStorage.paginateSearch ? localStorage.paginateSearch : 1);
-    const [Home] = useState(localStorage.paginateHome ? localStorage.paginateHome : 1);
-    const [Cooking] = useState(localStorage.paginateCooking ? localStorage.paginateCooking : 1);
-    const [Comic] = useState(localStorage.paginateComic ? localStorage.paginateComic : 1);
-    const [Game] = useState(localStorage.paginateGame ? localStorage.paginateGame : 1);
-    const [Calligraphy] = useState(localStorage.paginateCalligraphy ? localStorage.paginateCalligraphy : 1);
-    const [Website] = useState(localStorage.paginateWebsite ? localStorage.paginateWebsite : 1);
+    const [Search] = useState(typeof window !== 'undefined' && localStorage.paginateSearch ? localStorage.paginateSearch : 1);
+    const [Home] = useState(typeof window !== 'undefined' && localStorage.paginateHome ? localStorage.paginateHome : 1);
+    const [Cooking] = useState(typeof window !== 'undefined' && localStorage.paginateCooking ? localStorage.paginateCooking : 1);
+    const [Comic] = useState(typeof window !== 'undefined' && localStorage.paginateComic ? localStorage.paginateComic : 1);
+    const [Game] = useState(typeof window !== 'undefined' && localStorage.paginateGame ? localStorage.paginateGame : 1);
+    const [Calligraphy] = useState(typeof window !== 'undefined' && localStorage.paginateCalligraphy ? localStorage.paginateCalligraphy : 1);
+    const [Website] = useState(typeof window !== 'undefined' && localStorage.paginateWebsite ? localStorage.paginateWebsite : 1);
     const paragraph = props.name;
 
     const handleRating = (rating) => {
