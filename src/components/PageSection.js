@@ -25,11 +25,11 @@ const PageSection = (props) => {
     const [home, setHome] = useState([]);
     const [Search] = useState(typeof window !== 'undefined' && localStorage.paginateSearch ? localStorage.paginateSearch : 1);
     const [Home] = useState(typeof window !== 'undefined' && localStorage.paginateHome ? localStorage.paginateHome : 1);
-    const [Cooking] = useState(typeof window !== 'undefined' && localStorage.paginateCooking ? localStorage.paginateCooking : 1);
-    const [Comic] = useState(typeof window !== 'undefined' && localStorage.paginateComic ? localStorage.paginateComic : 1);
-    const [Game] = useState(typeof window !== 'undefined' && localStorage.paginateGame ? localStorage.paginateGame : 1);
-    const [Calligraphy] = useState(typeof window !== 'undefined' && localStorage.paginateCalligraphy ? localStorage.paginateCalligraphy : 1);
-    const [Website] = useState(typeof window !== 'undefined' && localStorage.paginateWebsite ? localStorage.paginateWebsite : 1);
+    const [Cooking, setCookingPage] = useState(typeof window !== 'undefined' && localStorage.paginateCooking ? localStorage.paginateCooking : 1);
+    const [Comic, setComicPage] = useState(typeof window !== 'undefined' && localStorage.paginateComic ? localStorage.paginateComic : 1);
+    const [Game, setGamePage] = useState(typeof window !== 'undefined' && localStorage.paginateGame ? localStorage.paginateGame : 1);
+    const [Calligraphy, setCalligraphyPage] = useState(typeof window !== 'undefined' && localStorage.paginateCalligraphy ? localStorage.paginateCalligraphy : 1);
+    const [Website, setWebsitePage] = useState(typeof window !== 'undefined' && localStorage.paginateWebsite ? localStorage.paginateWebsite : 1);
     const paragraph = props.name;
 
     const handleRating = (rating) => {
@@ -106,14 +106,74 @@ const PageSection = (props) => {
     const newReq = (Children) => {
         setTemp(Children);
         setCheckReq(true);
+        setCookingPage(Cooking);
+        setComicPage(Comic);
+        setGamePage(Game);
+        setCalligraphyPage(Calligraphy);
+        setWebsitePage(Website);
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Comic}&_limit=24&${Children}`).then((res) => {
+            setComic(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Game}&_limit=24&${Children}`).then((res) => {
+            setGame(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Calligraphy}&_limit=24&${Children}`).then((res) => {
+            setCalligraphy(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Website}&_limit=24&${Children}`).then((res) => {
+            setWebsite(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Cooking}&_limit=24&${Children}`).then((res) => {
+            setCooking(res.data)
+        })
     }
     const ratingReq = (Children) => {
         setTemp(Children);
         setCheckReq(true);
+        setCookingPage(Cooking);
+        setComicPage(Comic);
+        setGamePage(Game);
+        setCalligraphyPage(Calligraphy);
+        setWebsitePage(Website);
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Comic}&_limit=24&${Children}`).then((res) => {
+            setComic(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Game}&_limit=24&${Children}`).then((res) => {
+            setGame(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Calligraphy}&_limit=24&${Children}`).then((res) => {
+            setCalligraphy(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Website}&_limit=24&${Children}`).then((res) => {
+            setWebsite(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Cooking}&_limit=24&${Children}`).then((res) => {
+            setCooking(res.data)
+        })
     }
     const total = (Children) => {
         setTemp(Children);
         setCheckReq(true);
+        setCookingPage(Cooking);
+        setComicPage(Comic);
+        setGamePage(Game);
+        setCalligraphyPage(Calligraphy);
+        setWebsitePage(Website);
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Comic}&_limit=24&${Children}`).then((res) => {
+            setComic(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Game}&_limit=24&${Children}`).then((res) => {
+            setGame(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=calligraphy&_page=${Calligraphy}&_limit=24&${Children}`).then((res) => {
+            setCalligraphy(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Website}&_limit=24&${Children}`).then((res) => {
+            setWebsite(res.data)
+        })
+        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Cooking}&_limit=24&${Children}`).then((res) => {
+            setCooking(res.data)
+        })
     }
     const addWishlist = (item) => {
         const data = {
