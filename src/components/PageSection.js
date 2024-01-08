@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Classify from './Classify';
 import { usePathname } from 'next/navigation';
 import axios from 'axios';
@@ -59,11 +59,16 @@ const PageSection = (props) => {
     const productPage = (Children) => {
         localStorage.setItem("paginateSearch", Children)
         axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=24&q=${paragraph}&${temp}`).then((res) => {
-            if(res.data.length >= 1){
+            if(res.data.length > 0){
                 setProduct(res.data);
-            }
-            else{
-                setResultS(true);
+            }else{
+                axios.get(`https://zfakeapi.vercel.app/product?_page=1&_limit=24&q=${paragraph}&${temp}`).then((res) => {
+                    if(res.data.length > 0){
+                        setProduct(res.data);
+                    }else{
+                        setResultS(true);
+                    }       
+                })
             }
         })
     }
@@ -106,13 +111,14 @@ const PageSection = (props) => {
     const newReq = (Children) => {
         setTemp(Children);
         setCheckReq(true);
-        setCookingPage(Cooking);
-        setComicPage(Comic);
-        setGamePage(Game);
-        setCalligraphyPage(Calligraphy);
-        setWebsitePage(Website);
         axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Comic}&_limit=24&${Children}`).then((res) => {
-            setComic(res.data)
+            if(res.data.length > 0){
+                setComic(res.data)
+            }else{
+                axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=1&_limit=24&${Children}`).then((res) => {
+                    setComic(res.data)
+                })
+            }
         })
         axios.get(`https://zfakeapi.vercel.app/product?menu=game&_page=${Game}&_limit=24&${Children}`).then((res) => {
             setGame(res.data)
@@ -121,20 +127,27 @@ const PageSection = (props) => {
             setCalligraphy(res.data)
         })
         axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=${Website}&_limit=24&${Children}`).then((res) => {
-            setWebsite(res.data)
+            if(res.data.length > 0){
+                setWebsite(res.data)
+            }else{
+                axios.get(`https://zfakeapi.vercel.app/product?menu=website&_page=1&_limit=24&${Children}`).then((res) => {
+                    setWebsite(res.data)
+                })
+            }
         })
         axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Cooking}&_limit=24&${Children}`).then((res) => {
-            setCooking(res.data)
+            if(res.data.length > 0){
+                setCooking(res.data)
+            }else{
+                axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=1&_limit=24&${Children}`).then((res) => {
+                    setCooking(res.data)
+                })
+            }
         })
     }
     const ratingReq = (Children) => {
         setTemp(Children);
         setCheckReq(true);
-        setCookingPage(Cooking);
-        setComicPage(Comic);
-        setGamePage(Game);
-        setCalligraphyPage(Calligraphy);
-        setWebsitePage(Website);
         axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Comic}&_limit=24&${Children}`).then((res) => {
             setComic(res.data)
         })
@@ -154,11 +167,6 @@ const PageSection = (props) => {
     const total = (Children) => {
         setTemp(Children);
         setCheckReq(true);
-        setCookingPage(Cooking);
-        setComicPage(Comic);
-        setGamePage(Game);
-        setCalligraphyPage(Calligraphy);
-        setWebsitePage(Website);
         axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Comic}&_limit=24&${Children}`).then((res) => {
             setComic(res.data)
         })
@@ -202,11 +210,16 @@ const PageSection = (props) => {
     useEffect(() => {
         //Search
         axios.get(`https://zfakeapi.vercel.app/product?_page=${Search}&_limit=24&q=${paragraph}&${temp}`).then((res) => {
-            if(res.data.length >= 1){
+            if(res.data.length > 0){
                 setProduct(res.data);
-            }
-            else{
-                setResultS(true);
+            }else{
+                axios.get(`https://zfakeapi.vercel.app/product?_page=1&_limit=24&q=${paragraph}&${temp}`).then((res) => {
+                    if(res.data.length > 0){
+                        setProduct(res.data);
+                    }else{
+                        setResultS(true);
+                    }       
+                })
             }
         })
         //Home
@@ -234,6 +247,13 @@ const PageSection = (props) => {
             setCalligraphy(res.data);
         })
     }, [])
+    useLayoutEffect(() => {
+        setCookingPage(typeof window !== 'undefined' && localStorage.paginateCooking ? localStorage.paginateCooking : 1);
+        setComicPage(typeof window !== 'undefined' && localStorage.paginateComic ? localStorage.paginateComic : 1);
+        setCalligraphyPage(typeof window !== 'undefined' && localStorage.paginateCalligraphy ? localStorage.paginateCalligraphy : 1);
+        setGamePage(typeof window !== 'undefined' && localStorage.paginateGame ? localStorage.paginateGame : 1);
+        setWebsitePage(typeof window !== 'undefined' && localStorage.paginateWebsite ? localStorage.paginateWebsite : 1)
+    })
     return (
         <div className='PageSection'>
             {pathname === `/` && 
