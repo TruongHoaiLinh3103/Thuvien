@@ -1,11 +1,19 @@
 @import "./variable.scss";
 
+.WishList-Navbar{
+    @include ProductID--box(960px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}
 .WishList{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0px 20px
+    padding: 0px 10px
 }
 .WishList h2{
     @extend %title;
@@ -27,6 +35,68 @@
     width: 300px;
     height: 200px;
     object-fit: cover;
+}
+.WishList-layout{
+    @extend %mainAndNavbar;
+}
+.WishList-Body{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.WishList-Item{
+    width: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 10px;
+    .WishList-Item_img{
+        height: 150px;
+        width: 105.5px;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .WishList-Item_Describe{
+        @include card(164.5px);
+        h4{
+            @extend %titleCard;
+        }
+        .Item_Describe-rating{
+            @extend %ratingCard;
+        }
+        .Item_Describe-price{
+            @extend %priceCard;
+        }
+        .Item_Describe-price h5:first-child{
+            @extend %priceFirst;
+        }
+        .Item_Describe-price h5:last-child{
+            @extend %priceLast;
+        }
+        .Item_Describe-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a.button:nth-child(1){
+                @include btnCard(rgb(241, 60, 60));
+                &:hover{
+                    @include btnHvCard(white, rgb(241, 60, 60));
+                }
+            }
+            a.button:nth-child(2){
+                margin-left: 10px;
+                @include btnCard();
+                &:hover{
+                    @include btnHvCard();
+                }
+            }
+        }
+    }
 }
 .WishList-Total{
     width: 100%;

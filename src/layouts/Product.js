@@ -9,8 +9,10 @@ import ViewProduct from '@/utils/ViewProduct';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
 
 const Product = (props) => {
+    const router = useRouter();
     const handleRating = (rating) => {
         let htmlToReturn = "";
         const maximumRatingStars = 5;
@@ -27,15 +29,13 @@ const Product = (props) => {
     }
     const addWishlist = (item) => {
         const data = {
-            imgOne: item.imgOne,
-            imgTwo: item.imgTwo,
-            imgThree: item.imgThree,
+            img: item.imgOne,
             menu: item.menu,
             name: item.name,
             rating: item.rating,
             price: item.price,
-            text: item.text,
-            user: sessionStorage.user
+            user: sessionStorage.user,
+            productId: item.id
         }
         axios.post("http://localhost:4000/wishlist", data, {
             headers: {
@@ -43,16 +43,15 @@ const Product = (props) => {
             }
         }).then((res) => {
             if(res.data.error){
-                alert("User not logged in!")
+                alert(res.data.error)
             }else{
-                location.reload();
+                router.push("/wishlist");
             }
         })
     }
     const handlePrice = (price, discount = false) => {
         if (discount) {
-            price = price * 0.9;
-            // price *= 0.9;
+            price *= 0.9;
         }
         return price.toLocaleString("pt-BR", {
             style: "currency",

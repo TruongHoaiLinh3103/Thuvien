@@ -37,6 +37,29 @@ const ProductID = (props) => {
             currency: "BRL",
         });
     }
+
+    const addWishlist = (item) => {
+        const data = {
+            img: item.imgOne,
+            menu: item.menu,
+            name: item.name,
+            rating: item.rating,
+            price: item.price,
+            user: sessionStorage.user,
+            productId: item.id
+        }
+        axios.post("http://localhost:4000/wishlist", data, {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken")
+            }
+        }).then((res) => {
+            if(res.data.error){
+                alert(res.data.error)
+            }else{
+                router.push("/wishlist");
+            }
+        })
+    }
     useEffect(() => {
         const id = printfID(props.id);
         axios.get(`https://zfakeapi.vercel.app/product/${id}`).then((res) => {
@@ -80,7 +103,7 @@ const ProductID = (props) => {
                                 <h5>{handlePrice(data.price, true)}</h5>
                             </div>
                             <div className='ProductID-detail_name-btn'>
-                                <button><FontAwesomeIcon icon={faHeart} /></button>
+                                <button onClick={() => addWishlist(data)}><FontAwesomeIcon icon={faHeart} /></button>
                                 <button><FontAwesomeIcon icon={faBookOpen} /></button>
                             </div>
                             <div className='ProductID-des-box'>

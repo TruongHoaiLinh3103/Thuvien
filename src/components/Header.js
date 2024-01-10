@@ -50,7 +50,7 @@ const Header = () => {
             <div className='Nav_top'>
                 <h3 title='Home' onClick={() => {router.push("/")}}>LisohAnikey</h3>
                 <div className='Nav_top_search'>
-                    <input type='text' placeholder='What do you want to search?' className='search-ip' ref={loop} onKeyDown={(e) => nextLoopEnter(e)}/>
+                    <input type='text' placeholder='Search?' className='search-ip' ref={loop} onKeyDown={(e) => nextLoopEnter(e)}/>
                     <span onClick={() => nextLoop()} className='search-span'><FontAwesomeIcon icon={faMagnifyingGlass} /></span>
                 </div>
                 <nav className='Nav-navbar'>
@@ -60,7 +60,7 @@ const Header = () => {
                 </nav>
             </div>
             <div className='Nav_center'>
-                <input type='text' placeholder='What do you want to search?' className='search-ip' ref={search} onKeyDown={(e) => nextSearchEnter(e)}/>
+                <input type='text' placeholder='Search?' className='search-ip' ref={search} onKeyDown={(e) => nextSearchEnter(e)}/>
                 <span onClick={() => nextSearch()} className='search-span'><FontAwesomeIcon icon={faMagnifyingGlass} /></span>
             </div>
             <div className='Nav_down'>

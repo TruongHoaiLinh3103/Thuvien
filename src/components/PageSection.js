@@ -2,7 +2,7 @@
 
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Classify from './Classify';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 import ViewProduct from '@/utils/ViewProduct';
 import "../styles/pagesection.scss";
@@ -13,6 +13,7 @@ import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const PageSection = (props) => {
     const pathname = usePathname();
+    const router = useRouter();
     const [cooking, setCooking] = useState([]);
     const [comic, setComic] = useState([]);
     const [website, setWebsite] = useState([]);
@@ -185,15 +186,13 @@ const PageSection = (props) => {
     }
     const addWishlist = (item) => {
         const data = {
-            imgOne: item.imgOne,
-            imgTwo: item.imgTwo,
-            imgThree: item.imgThree,
+            img: item.imgOne,
             menu: item.menu,
             name: item.name,
             rating: item.rating,
             price: item.price,
-            text: item.text,
-            user: sessionStorage.user
+            user: sessionStorage.user,
+            productId: item.id
         }
         axios.post("http://localhost:4000/wishlist", data, {
             headers: {
@@ -201,9 +200,9 @@ const PageSection = (props) => {
             }
         }).then((res) => {
             if(res.data.error){
-                alert("User not logged in!")
+                alert(res.data.error)
             }else{
-                location.reload();
+                router.push("/wishlist");
             }
         })
     }
