@@ -1,28 +1,31 @@
 @import "./variable.scss";
 
 .WishList-Navbar{
-    @include ProductID--box(960px);
+    @include ProductID--box(590px);
     overflow-y: scroll;
     overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     &::-webkit-scrollbar{
         display: none;
     }
 }
-.WishList{
+.WishList, .HistoryAccess{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 0px 10px
 }
-.WishList h2{
+.WishList h2, .HistoryAccess h2{
     @extend %title;
     text-transform: uppercase;
 }
-.WishList h2::after{
+.WishList h2::after, .HistoryAccess h2::after{
     @extend %titleAffter;
 }
-.WishList p{
+.WishList p, .HistoryAccess p{
     font-size: 24px;
     color: rgb(31, 31, 31);
     font-weight: 400;
@@ -31,7 +34,7 @@
     margin: 0px 10px;
     user-select: none;
 }
-.WishList img{
+.WishList img, .HistoryAccess img{
     width: 300px;
     height: 200px;
     object-fit: cover;
@@ -39,20 +42,20 @@
 .WishList-layout{
     @extend %mainAndNavbar;
 }
-.WishList-Body{
+.WishList-Body, .HistoryAccess-Body{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
-.WishList-Item{
+.WishList-Item, .HistoryAccess-Item{
     width: 280px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
     margin: 10px;
-    .WishList-Item_img{
+    .WishList-Item_img, .HistoryAccess-Item_img{
         height: 150px;
         width: 105.5px;
         img{
@@ -61,7 +64,7 @@
             object-fit: cover;
         }
     }
-    .WishList-Item_Describe{
+    .WishList-Item_Describe, .HistoryAccess-Item_Describe{
         @include card(164.5px);
         h4{
             @extend %titleCard;

@@ -4,6 +4,7 @@ import PageSection from '@/components/PageSection';
 import LatestComments from '@/layouts/LatestComments';
 import "@/styles/home.scss";
 import WishList from '@/layouts/WishList';
+import HistoryAccess from '@/components/HistoryAccess';
 
 const page = () => {
     return (
@@ -13,6 +14,7 @@ const page = () => {
                 <PageSection/>
                 <div style={{margin: "10px 0px"}}>
                     <LatestComments/>
+                    <HistoryAccess/>
                     <WishList/>
                 </div>
             </div>

@@ -108,8 +108,8 @@ const WishList = (props) => {
                                     {wishlist.map((item) => {
                                         return(
                                             <div key={item.id} className='WishList-Item'>
-                                                <div>
-                                                    <img className='WishList-Item_img' src={item.img} alt='Foto do produtos'/>
+                                                <div className='WishList-Item_img'>
+                                                    <img src={item.img} alt='Foto do produtos'/>
                                                 </div>
                                                 <div className='WishList-Item_Describe'>
                                                     <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
@@ -164,8 +164,8 @@ const WishList = (props) => {
                                         {wishlist.map((item) => {
                                             return(
                                                 <div key={item.id} className='WishList-Item'>
-                                                    <div>
-                                                        <img className='WishList-Item_img' src={item.img} alt='Foto do produtos'/>
+                                                    <div className='WishList-Item_img'>
+                                                        <img src={item.img} alt='Foto do produtos'/>
                                                     </div>
                                                     <div className='WishList-Item_Describe'>
                                                         <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
@@ -212,8 +212,8 @@ const WishList = (props) => {
                                         {wishlist.map((item) => {
                                             return(
                                                 <div key={item.id} className='WishList-Item'>
-                                                    <div>
-                                                        <img className='WishList-Item_img' src={item.img} alt='Foto do produtos'/>
+                                                    <div className='WishList-Item_img'>
+                                                        <img src={item.img} alt='Foto do produtos'/>
                                                     </div>
                                                     <div className='WishList-Item_Describe'>
                                                         <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
@@ -260,8 +260,8 @@ const WishList = (props) => {
                                         {wishlist.map((item) => {
                                             return(
                                                 <div key={item.id} className='WishList-Item'>
-                                                    <div>
-                                                        <img className='WishList-Item_img' src={item.img} alt='Foto do produtos'/>
+                                                    <div className='WishList-Item_img'>
+                                                        <img src={item.img} alt='Foto do produtos'/>
                                                     </div>
                                                     <div className='WishList-Item_Describe'>
                                                         <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
@@ -308,8 +308,8 @@ const WishList = (props) => {
                                         {wishlist.map((item) => {
                                             return(
                                                 <div key={item.id} className='WishList-Item'>
-                                                    <div>
-                                                        <img className='WishList-Item_img' src={item.img} alt='Foto do produtos'/>
+                                                    <div className='WishList-Item_img'>
+                                                        <img src={item.img} alt='Foto do produtos'/>
                                                     </div>
                                                     <div className='WishList-Item_Describe'>
                                                         <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
@@ -356,8 +356,8 @@ const WishList = (props) => {
                                         {wishlist.map((item) => {
                                             return(
                                                 <div key={item.id} className='WishList-Item'>
-                                                    <div>
-                                                        <img className='WishList-Item_img' src={item.img} alt='Foto do produtos'/>
+                                                    <div className='WishList-Item_img'>
+                                                        <img src={item.img} alt='Foto do produtos'/>
                                                     </div>
                                                     <div className='WishList-Item_Describe'>
                                                         <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
@@ -404,8 +404,8 @@ const WishList = (props) => {
                                         {wishlist.map((item) => {
                                             return(
                                                 <div key={item.id} className='WishList-Item'>
-                                                    <div>
-                                                        <img className='WishList-Item_img' src={item.img} alt='Foto do produtos'/>
+                                                    <div className='WishList-Item_img'>
+                                                        <img src={item.img} alt='Foto do produtos'/>
                                                     </div>
                                                     <div className='WishList-Item_Describe'>
                                                         <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
@@ -452,8 +452,8 @@ const WishList = (props) => {
                                         {wishlist.map((item) => {
                                             return(
                                                 <div key={item.id} className='WishList-Item'>
-                                                    <div>
-                                                        <img className='WishList-Item_img' src={item.img} alt='Foto do produtos'/>
+                                                    <div className='WishList-Item_img'>
+                                                        <img src={item.img} alt='Foto do produtos'/>
                                                     </div>
                                                     <div className='WishList-Item_Describe'>
                                                         <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>

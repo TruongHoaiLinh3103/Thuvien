@@ -8,7 +8,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import ViewProduct from '@/utils/ViewProduct';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 
 const Product = (props) => {
@@ -24,7 +24,6 @@ const Product = (props) => {
         for (let j = 0; j < maximumRatingStars - rating; j++) {
             htmlToReturn += " ✩";
         }
-        
         return htmlToReturn;
     }
     const addWishlist = (item) => {
@@ -57,6 +56,24 @@ const Product = (props) => {
             style: "currency",
             currency: "BRL",
         });
+    }
+    const addHistory = (item) => {
+        if(sessionStorage.user){
+            const data = {
+                img: item.imgOne,
+                menu: item.menu,
+                name: item.name,
+                rating: item.rating,
+                price: item.price,
+                user: sessionStorage.user,
+                productId: item.id
+            }
+            axios.post("http://localhost:4000/history", data, {
+                headers: {
+                    accessToken: sessionStorage.getItem("accessToken")
+                }
+            })
+        }
     }
     var settings = {
         dots: false,
@@ -106,7 +123,9 @@ const Product = (props) => {
                         <div className="card" key={item.id}>
                             <img className="product"
                                 src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
-                            <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
+                            <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
+                                onClick={() => addHistory(item)}
+                            ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                             <div className="rating">
                                 {handleRating(item.rating)}
                             </div>
@@ -115,7 +134,9 @@ const Product = (props) => {
                                 <h5>{handlePrice(item.price, true)}</h5>
                             </div>
                             <div className='data-card_btn'>
-                                <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>
+                                <a className="button" onClick={() => addWishlist(item)}>
+                                    Add to wishlist
+                                </a>
                                 <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                             </div>
                         </div>

@@ -10,6 +10,7 @@ import "../styles/home.scss";
 import PageSection from "@/components/PageSection";
 import LatestComments from "@/layouts/LatestComments";
 import WishList from "@/layouts/WishList";
+import HistoryAccess from "@/components/HistoryAccess";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -46,6 +47,7 @@ function Home() {
           <PageSection/>
           <div style={{margin: "10px 0px"}}>
             <LatestComments/>
+            <HistoryAccess/>
             <WishList/>
           </div>
         </div>

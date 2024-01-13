@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
-import { faPaperPlane, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart, faPaperPlane, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import "../styles/comment.scss";
 import { printfID } from '@/utils/ViewURL';
 import BntPage from '@/components/BntPage';
@@ -12,6 +11,7 @@ const Comment = (props) => {
     const [editComment, setEditComment] = useState(0);
     const [cmtEdit, setCmtEdit] = useState("");
     const [numberPage, setNumberPage] = useState(1);
+    const [likeComment, setLikedComment] = useState([]);
     const cmt = useRef("");
     const resetPage = (childData) => {
         const id = printfID(props.id);
@@ -47,7 +47,7 @@ const Comment = (props) => {
             setComment(comment.filter(item => item.id !== id))
         })
     }
-    const addComment = (name) => {
+    const addComment = (item) => {
         if(cmt.current.value === ""){
             cmt.current.focus();
         }
@@ -58,7 +58,8 @@ const Comment = (props) => {
                 user: sessionStorage.user,
                 comment: cmt.current.value,
                 productId: productid,
-                productName: name
+                productName: item.name,
+                menu: item.menu
             }
             axios.post("http://localhost:4000/comment", data, 
             {
@@ -76,7 +77,7 @@ const Comment = (props) => {
             })
         }
     }
-    const addCommentEnter = (e, name) => {
+    const addCommentEnter = (e, item) => {
         if(e.which === 13){
             if(cmt.current.value === ""){
                 cmt.current.focus();
@@ -88,7 +89,8 @@ const Comment = (props) => {
                     user: sessionStorage.user,
                     comment: cmt.current.value,
                     productId: productid,
-                    productName: name
+                    productName: item.name,
+                    menu: item.menu
                 }
                 axios.post("http://localhost:4000/comment", data, 
                 {
@@ -107,6 +109,31 @@ const Comment = (props) => {
             }
         }
     }
+    const likeAComment = (commentId) => {
+        axios.post(
+            "http://localhost:4000/likes",{ commentId: commentId }, {
+                headers: {
+                    accessToken: sessionStorage.getItem("accessToken")
+                }
+            }
+        ).then((res) => {
+            setLikedComment(
+                likeComment.map((cmt) => {
+                    if (cmt.id === commentId) {
+                        if (res.data.liked) {
+                            return { ...cmt, Likes: [...cmt.Likes, 0] };
+                        } else {
+                            const likesArray = cmt.Likes;
+                            likesArray.pop();
+                            return { ...cmt, Likes: likesArray };
+                        }
+                    } else {
+                        return cmt;
+                    }
+                })
+            );
+        });
+    };
     useEffect(() => {
         const id = printfID(props.id);
         axios.get(`http://localhost:4000/comment?keyword=${id}&page=${numberPage}&limit=9&sortBy=desc&orderBy=id`).then((res) => {
@@ -122,8 +149,8 @@ const Comment = (props) => {
                     <h3>Bình luận</h3>
                 </nav>
                 <div className='ProductID-cmt-add'>
-                    <input type='text' placeholder='Thêm bình luận...' ref={cmt} onKeyDown={(e) => addCommentEnter(e, props.data.name)}/>
-                    <FontAwesomeIcon icon={faPaperPlane} onClick={() => addComment(props.data.name)}/>
+                    <input type='text' placeholder='Thêm bình luận...' ref={cmt} onKeyDown={(e) => addCommentEnter(e, props.data)}/>
+                    <FontAwesomeIcon icon={faPaperPlane} onClick={() => addComment(props.data)}/>
                 </div>
                 <div className='ProductID-cmt-box'>
                     {comment.map((item) => {
@@ -133,7 +160,7 @@ const Comment = (props) => {
                                     <img src={item.img} alt='Avatar' className="avatarAndAuth-img"/>
                                     <div className='Auth'>
                                         <h3>{item.user}</h3>
-                                        <p style={{margin: "0px"}}>{item.updatedAt}</p>
+                                        <div style={{margin: "0px"}}>{item.updatedAt}</div>
                                     </div>
                                 </div>
                                 <div className='cmtAndLike'>
@@ -146,12 +173,12 @@ const Comment = (props) => {
                                     }
                                     <div className='LikeAndDislike'>
                                         <div>
-                                            <span><FontAwesomeIcon icon={faHeart} /> {item.like}</span>
-                                            <span><FontAwesomeIcon icon={faComment} /> {item.unchat}</span>
+                                            <span onClick={() => likeAComment(item.id)}><FontAwesomeIcon icon={faHeart} /> {item.Likes.length}</span>
+                                            <span><FontAwesomeIcon icon={faComment} /> trả lời</span>
                                             {sessionStorage.user === item.user &&
                                                 <>
-                                                    <span style={{color:"blue"}} onClick={() => openUpdateCMT(item)}><FontAwesomeIcon icon={faPencil} /></span>
-                                                    <span style={{color:"red"}} onClick={() => deleteComment(item.id)}><FontAwesomeIcon icon={faTrash} /></span>
+                                                    <span onClick={() => openUpdateCMT(item)}><FontAwesomeIcon icon={faPencil} /> sửa</span>
+                                                    <span onClick={() => deleteComment(item.id)}><FontAwesomeIcon icon={faTrash} /> xóa</span>
                                                 </>
                                             }
                                         </div>

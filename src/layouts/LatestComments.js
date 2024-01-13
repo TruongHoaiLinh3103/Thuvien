@@ -4,16 +4,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import "../styles/latestcomments.scss";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
-import { faPaperPlane, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart, faPaperPlane, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import "../styles/productid.scss";
 import "../styles/comment.scss";
+import ViewProduct from '@/utils/ViewProduct';
 
 const LatestComments = () => {
     const [comment, setComment] = useState([]);
     const [editComment, setEditComment] = useState(0);
     const [cmtEdit, setCmtEdit] = useState("");
     const [numberPage] = useState(1);
+    const [likeComment, setLikedComment] = useState([]);
     const cmt = useRef("");
     const openUpdateCMT = (item) => {
         setEditComment(item.id);
@@ -50,7 +51,8 @@ const LatestComments = () => {
                 user: sessionStorage.user,
                 comment: cmt.current.value,
                 productId: 0,
-                productName: "Vô mục"
+                productName: "Vô mục",
+                menu: "Không có thành phân"
             }
             axios.post("http://localhost:4000/comment", data, 
             {
@@ -79,7 +81,8 @@ const LatestComments = () => {
                     user: sessionStorage.user,
                     comment: cmt.current.value,
                     productId: 0,
-                    productName: "Vô mục"
+                    productName: "Vô mục",
+                    menu: "Không có thành phân"
                 }
                 axios.post("http://localhost:4000/comment", data, 
                 {
@@ -115,6 +118,31 @@ const LatestComments = () => {
     const itemProductTime = (time) => {
         return time;
     }
+    const likeAComment = (commentId) => {
+        axios.post(
+            "http://localhost:4000/likes",{ commentId: commentId }, {
+                headers: {
+                    accessToken: sessionStorage.getItem("accessToken")
+                }
+            }
+        ).then((res) => {
+            setLikedComment(
+                likeComment.map((cmt) => {
+                    if (cmt.id === commentId) {
+                        if (res.data.liked) {
+                            return { ...cmt, Likes: [...cmt.Likes, 0] };
+                        } else {
+                            const likesArray = cmt.Likes;
+                            likesArray.pop();
+                            return { ...cmt, Likes: likesArray };
+                        }
+                    } else {
+                        return cmt;
+                    }
+                })
+            );
+        });
+    };
     useEffect(() => {
         axios.get(`http://localhost:4000/comment?page=${numberPage}&limit=24&sortBy=desc&orderBy=id`).then((res) => {
             if(res && res.data && res.data.data && res.data.data.data){
@@ -137,8 +165,19 @@ const LatestComments = () => {
                                 <img src={item.img} alt='Avatar' className="avatarAndAuth-img"/>
                                 <div className='Auth'>
                                     <h3>{item.user}</h3>
-                                    <p style={{margin: "5px 0px"}}>{itemProductName(item.productName)}</p>
-                                    <p style={{margin: "0px"}}>{itemProductTime(item.updatedAt)}</p>
+                                    <div style={{margin: "5px 0px"}}>
+                                        {itemProductName(item.productName) === "Vô mục" ?
+                                            itemProductName(item.productName)
+                                                :
+                                            <ViewProduct 
+                                                name={item.productName} 
+                                                id={item.productId} 
+                                                menu={item.menu} 
+                                                printname={itemProductName(item.productName)}  
+                                            />
+                                        }
+                                    </div>
+                                    <div style={{margin: "0px"}}>{itemProductTime(item.updatedAt)}</div>
                                 </div>
                             </div>
                             <div className='cmtAndLike'>
@@ -151,12 +190,12 @@ const LatestComments = () => {
                                 }
                                 <div className='LikeAndDislike'>
                                     <div>
-                                        <span><FontAwesomeIcon icon={faHeart} /> {item.like}</span>
-                                        <span><FontAwesomeIcon icon={faComment} /> {item.unchat}</span>
+                                        <span onClick={() => likeAComment(item.id)}><FontAwesomeIcon icon={faHeart} /> {item.Likes.length}</span>
+                                        <span><FontAwesomeIcon icon={faComment} /> trả lời</span>
                                         {sessionStorage.user === item.user &&
                                             <>
-                                                <span style={{color:"blue"}} onClick={() => openUpdateCMT(item)}><FontAwesomeIcon icon={faPencil} /></span>
-                                                <span style={{color:"red"}} onClick={() => deleteComment(item.id)}><FontAwesomeIcon icon={faTrash} /></span>
+                                                <span onClick={() => openUpdateCMT(item)}><FontAwesomeIcon icon={faPencil} /> sửa</span>
+                                                <span onClick={() => deleteComment(item.id)}><FontAwesomeIcon icon={faTrash} /> xóa</span>
                                             </>
                                         }
                                     </div>

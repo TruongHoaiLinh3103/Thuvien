@@ -1,17 +1,13 @@
 @import "./variable.scss";
 
-.LatestComments-cmt-box{
+.HistoryAccess-Navbar{
     @include ProductID--box(590px);
     overflow-y: scroll;
     overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     &::-webkit-scrollbar{
         display: none;
     }
-}
-.LatestComments h2 {
-    @extend %title;
-}
-
-.LatestComments h2::after {
-    @extend %titleAffter
 }

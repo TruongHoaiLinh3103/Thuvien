@@ -9,7 +9,7 @@ const RichTextBlog = (props) => {
                 onEditorChange={(newContent, editor) => {
                     props.content(newContent);
                 }}
-                apiKey='7tuarpj1zb4r4kxc8x2ayzox2igxvcrli20jwh97plm9pjk9'
+                apiKey='zg8eiqo19madha4ey1tws3c0yvvtvl5mx316mxwrfjl348j4'
                 init={{
                     height: 460,
                     plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
