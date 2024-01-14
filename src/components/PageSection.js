@@ -201,28 +201,12 @@ const PageSection = (props) => {
         }).then((res) => {
             if(res.data.error){
                 alert(res.data.error)
+                router.push("/user")
             }else{
+                alert(res.data);
                 router.push("/wishlist");
             }
         })
-    }
-    const addHistory = (item) => {
-        if(sessionStorage.user){
-            const data = {
-                img: item.imgOne,
-                menu: item.menu,
-                name: item.name,
-                rating: item.rating,
-                price: item.price,
-                user: sessionStorage.user,
-                productId: item.id
-            }
-            axios.post("http://localhost:4000/history", data, {
-                headers: {
-                    accessToken: sessionStorage.getItem("accessToken")
-                }
-            })
-        }
     }
     useEffect(() => {
         //Search
@@ -283,8 +267,7 @@ const PageSection = (props) => {
                                     <div className='PageSection-section_data-card' key={item.id}>
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
-                                        <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                            onClick={() => addHistory(item)}
+                                        <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
@@ -319,7 +302,7 @@ const PageSection = (props) => {
                                             <img className="data-card_product"
                                                 src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                                onClick={() => addHistory(item)}
+
                                             ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                             <div className="data-card_rating">
                                                 {handleRating(item.rating)}
@@ -357,7 +340,6 @@ const PageSection = (props) => {
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                            onClick={() => addHistory(item)}
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
@@ -391,7 +373,6 @@ const PageSection = (props) => {
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                            onClick={() => addHistory(item)}
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
@@ -425,7 +406,6 @@ const PageSection = (props) => {
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                            onClick={() => addHistory(item)}
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
@@ -459,7 +439,6 @@ const PageSection = (props) => {
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                            onClick={() => addHistory(item)}
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
@@ -493,7 +472,6 @@ const PageSection = (props) => {
                                         <img className="data-card_product"
                                             src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                            onClick={() => addHistory(item)}
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}

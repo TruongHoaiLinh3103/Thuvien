@@ -5,7 +5,7 @@ import { faBook, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import img from "../../public/history.jpg";
+import img from "../../public/cart-empty.png";
 import "../styles/wishlist.scss";
 import "../styles/history.scss";
 import axios from 'axios';

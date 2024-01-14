@@ -9,6 +9,7 @@ import DOMPurify from 'dompurify';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
 const RichTextBlog = dynamic(() => import("./RichTextBlog"),{ssr: true});
 
 const Bloger = () => {
@@ -23,6 +24,7 @@ const Bloger = () => {
     const [seeTitle, setSeeTitle] = useState("");
     const [seeAuth ,setSeeAuth] = useState("")
     const title = useRef("");
+    const router = useRouter();
     const editItem = (item) => {
         setModal(true)
         setNameBtn("Change")
@@ -36,7 +38,8 @@ const Bloger = () => {
     }
     const addItem = () => {
         if(!sessionStorage.user){
-            alert("User not logged in!")
+            alert("User not logged in!");
+            router.push("/user");
         }else{
             setModal(true)
             setNameBtn("Submit")

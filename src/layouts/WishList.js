@@ -39,17 +39,8 @@ const WishList = (props) => {
             currency: "BRL",
         });
     }
-    const addWishlist = (item) => {
-        const data = {
-            img: item.img,
-            menu: item.menu,
-            name: item.name,
-            rating: item.rating,
-            price: item.price,
-            user: sessionStorage.user,
-            productId: item.productId
-        }
-        axios.post("http://localhost:4000/wishlist", data, {
+    const deleteWishlist = (id) => {
+        axios.delete(`http://localhost:4000/wishlist/${id}`,{
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
@@ -121,7 +112,7 @@ const WishList = (props) => {
                                                         <h5>{handlePrice(item.price, true)}</h5>
                                                     </div>
                                                     <div className='Item_Describe-btn'>
-                                                        <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faXmark} /></a>
+                                                        <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                         <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                     </div>
                                                 </div>
@@ -177,7 +168,7 @@ const WishList = (props) => {
                                                             <h5>{handlePrice(item.price, true)}</h5>
                                                         </div>
                                                         <div className='Item_Describe-btn'>
-                                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faXmark} /></a>
+                                                            <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                         </div>
                                                     </div>
@@ -225,7 +216,7 @@ const WishList = (props) => {
                                                             <h5>{handlePrice(item.price, true)}</h5>
                                                         </div>
                                                         <div className='Item_Describe-btn'>
-                                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faXmark} /></a>
+                                                            <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                         </div>
                                                     </div>
@@ -273,7 +264,7 @@ const WishList = (props) => {
                                                             <h5>{handlePrice(item.price, true)}</h5>
                                                         </div>
                                                         <div className='Item_Describe-btn'>
-                                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faXmark} /></a>
+                                                            <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                         </div>
                                                     </div>
@@ -321,7 +312,7 @@ const WishList = (props) => {
                                                             <h5>{handlePrice(item.price, true)}</h5>
                                                         </div>
                                                         <div className='Item_Describe-btn'>
-                                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faXmark} /></a>
+                                                            <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                         </div>
                                                     </div>
@@ -369,7 +360,7 @@ const WishList = (props) => {
                                                             <h5>{handlePrice(item.price, true)}</h5>
                                                         </div>
                                                         <div className='Item_Describe-btn'>
-                                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faXmark} /></a>
+                                                            <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                         </div>
                                                     </div>
@@ -417,7 +408,7 @@ const WishList = (props) => {
                                                             <h5>{handlePrice(item.price, true)}</h5>
                                                         </div>
                                                         <div className='Item_Describe-btn'>
-                                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faXmark} /></a>
+                                                            <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                         </div>
                                                     </div>
@@ -465,7 +456,7 @@ const WishList = (props) => {
                                                             <h5>{handlePrice(item.price, true)}</h5>
                                                         </div>
                                                         <div className='Item_Describe-btn'>
-                                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faXmark} /></a>
+                                                            <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                         </div>
                                                     </div>

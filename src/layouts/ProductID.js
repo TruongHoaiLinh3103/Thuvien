@@ -56,6 +56,7 @@ const ProductID = (props) => {
             if(res.data.error){
                 alert(res.data.error)
             }else{
+                alert(res.data);
                 router.push("/wishlist");
             }
         })
@@ -63,7 +64,23 @@ const ProductID = (props) => {
     useEffect(() => {
         const id = printfID(props.id);
         axios.get(`https://zfakeapi.vercel.app/product/${id}`).then((res) => {
-            setData(res.data)
+            setData(res.data);
+            if(sessionStorage.user){
+                const data = {
+                    img: res.data.imgOne,
+                    menu: res.data.menu,
+                    name: res.data.name,
+                    rating: res.data.rating,
+                    price: res.data.price,
+                    user: sessionStorage.user,
+                    productId: res.data.id
+                }
+                axios.post("http://localhost:4000/history", data, {
+                    headers: {
+                        accessToken: sessionStorage.getItem("accessToken")
+                    }
+                })
+            }
         });
     },[])
     const Data = Object.keys(data).length === 0

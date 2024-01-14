@@ -5,6 +5,7 @@ import { faComment, faHeart, faPaperPlane, faPencil, faTrash } from '@fortawesom
 import "../styles/comment.scss";
 import { printfID } from '@/utils/ViewURL';
 import BntPage from '@/components/BntPage';
+import { useRouter } from 'next/navigation';
 
 const Comment = (props) => {
     const [comment, setComment] = useState([]);
@@ -13,6 +14,7 @@ const Comment = (props) => {
     const [numberPage, setNumberPage] = useState(1);
     const [likeComment, setLikedComment] = useState([]);
     const cmt = useRef("");
+    const router = useRouter();
     const resetPage = (childData) => {
         const id = printfID(props.id);
         setNumberPage(childData)
@@ -110,29 +112,35 @@ const Comment = (props) => {
         }
     }
     const likeAComment = (commentId) => {
-        axios.post(
-            "http://localhost:4000/likes",{ commentId: commentId }, {
-                headers: {
-                    accessToken: sessionStorage.getItem("accessToken")
-                }
-            }
-        ).then((res) => {
-            setLikedComment(
-                likeComment.map((cmt) => {
-                    if (cmt.id === commentId) {
-                        if (res.data.liked) {
-                            return { ...cmt, Likes: [...cmt.Likes, 0] };
-                        } else {
-                            const likesArray = cmt.Likes;
-                            likesArray.pop();
-                            return { ...cmt, Likes: likesArray };
-                        }
-                    } else {
-                        return cmt;
+        if(sessionStorage.user){
+            axios.post(
+                "http://localhost:4000/likes",{ commentId: commentId }, {
+                    headers: {
+                        accessToken: sessionStorage.getItem("accessToken")
                     }
-                })
-            );
-        });
+                }
+            ).then((res) => {
+                setLikedComment(
+                    likeComment.map((cmt) => {
+                        if (cmt.id === commentId) {
+                            if (res.data.liked) {
+                                return { ...cmt, Likes: [...cmt.Likes, 0] };
+                            } else {
+                                const likesArray = cmt.Likes;
+                                likesArray.pop();
+                                return { ...cmt, Likes: likesArray };
+                            }
+                        } else {
+                            return cmt;
+                        }
+                    })
+                );
+            });
+        }
+        else{
+            alert("User not logged in!");
+            router.push("/user")
+        }
     };
     useEffect(() => {
         const id = printfID(props.id);

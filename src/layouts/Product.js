@@ -42,8 +42,10 @@ const Product = (props) => {
             }
         }).then((res) => {
             if(res.data.error){
-                alert(res.data.error)
+                alert(res.data.error);
+                router.push("/user")
             }else{
+                alert(res.data);
                 router.push("/wishlist");
             }
         })
@@ -56,24 +58,6 @@ const Product = (props) => {
             style: "currency",
             currency: "BRL",
         });
-    }
-    const addHistory = (item) => {
-        if(sessionStorage.user){
-            const data = {
-                img: item.imgOne,
-                menu: item.menu,
-                name: item.name,
-                rating: item.rating,
-                price: item.price,
-                user: sessionStorage.user,
-                productId: item.id
-            }
-            axios.post("http://localhost:4000/history", data, {
-                headers: {
-                    accessToken: sessionStorage.getItem("accessToken")
-                }
-            })
-        }
     }
     var settings = {
         dots: false,
@@ -124,7 +108,6 @@ const Product = (props) => {
                             <img className="product"
                                 src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
                             <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
-                                onClick={() => addHistory(item)}
                             ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                             <div className="rating">
                                 {handleRating(item.rating)}

@@ -8,6 +8,7 @@ import { faComment, faHeart, faPaperPlane, faPencil, faTrash } from '@fortawesom
 import "../styles/productid.scss";
 import "../styles/comment.scss";
 import ViewProduct from '@/utils/ViewProduct';
+import { useRouter } from 'next/navigation';
 
 const LatestComments = () => {
     const [comment, setComment] = useState([]);
@@ -16,6 +17,7 @@ const LatestComments = () => {
     const [numberPage] = useState(1);
     const [likeComment, setLikedComment] = useState([]);
     const cmt = useRef("");
+    const router = useRouter();
     const openUpdateCMT = (item) => {
         setEditComment(item.id);
         setCmtEdit(item.comment);
@@ -119,29 +121,34 @@ const LatestComments = () => {
         return time;
     }
     const likeAComment = (commentId) => {
-        axios.post(
-            "http://localhost:4000/likes",{ commentId: commentId }, {
-                headers: {
-                    accessToken: sessionStorage.getItem("accessToken")
-                }
-            }
-        ).then((res) => {
-            setLikedComment(
-                likeComment.map((cmt) => {
-                    if (cmt.id === commentId) {
-                        if (res.data.liked) {
-                            return { ...cmt, Likes: [...cmt.Likes, 0] };
-                        } else {
-                            const likesArray = cmt.Likes;
-                            likesArray.pop();
-                            return { ...cmt, Likes: likesArray };
-                        }
-                    } else {
-                        return cmt;
+        if(sessionStorage.user){
+            axios.post(
+                "http://localhost:4000/likes",{ commentId: commentId }, {
+                    headers: {
+                        accessToken: sessionStorage.getItem("accessToken")
                     }
-                })
-            );
-        });
+                }
+            ).then((res) => {
+                setLikedComment(
+                    likeComment.map((cmt) => {
+                        if (cmt.id === commentId) {
+                            if (res.data.liked) {
+                                return { ...cmt, Likes: [...cmt.Likes, 0] };
+                            } else {
+                                const likesArray = cmt.Likes;
+                                likesArray.pop();
+                                return { ...cmt, Likes: likesArray };
+                            }
+                        } else {
+                            return cmt;
+                        }
+                    })
+                );
+            });
+        }else{
+            alert("User not logged in!");
+            router.push("/user")
+        }
     };
     useEffect(() => {
         axios.get(`http://localhost:4000/comment?page=${numberPage}&limit=24&sortBy=desc&orderBy=id`).then((res) => {
