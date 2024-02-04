@@ -7,9 +7,6 @@ const ProductMenu = () => {
         <div className='ProductMenu maxWidth1400px'>
             <span>Menu</span>
             <Link className="links__gerais" href="/product/cooking">Cooking</Link>
-            <Link className="links__gerais" href="/product/calligraphy">Calligraphy</Link>
-            <Link className="links__gerais" href="/product/website">Website</Link>
-            <Link className="links__gerais" href="/product/game">Game</Link>
             <Link className="links__gerais" href="/product/comic">Comic</Link>
         </div>
     );

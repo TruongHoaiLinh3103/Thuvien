@@ -4,9 +4,11 @@ import React, { useEffect, useState } from 'react';
 import "../styles/profile.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding } from '@fortawesome/free-regular-svg-icons';
-import { faBell, faComments, faLocationDot, faRightFromBracket, faPencil, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faLocationDot, faRightFromBracket, faPencil, faCheck, faBlog } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Bloger from './Bloger';
+import Notification from './Notification';
 
 const Profile = () => {
     const [seeMore, setSeeMore] = useState(false);
@@ -184,18 +186,18 @@ const Profile = () => {
             </div>
             <div className='Profile_Page'>
                 <ul>
-                    <li onClick={() => openCMT()} title='Comments'><FontAwesomeIcon icon={faComments} /> <span className='Profile_page-span'>Comments</span></li>
+                    <li onClick={() => openCMT()} title='Comments'><FontAwesomeIcon icon={faBlog} /> <span className='Profile_page-span'>Note</span></li>
                     <li onClick={() => openNotifi()} title='Notification'><FontAwesomeIcon icon={faBell} /> <span className='Profile_page-span'>Notification</span></li>
                     <li onClick={() => logOutAccount()} title='Log out'><FontAwesomeIcon icon={faRightFromBracket} /> <span className='Profile_page-span'>Log out</span></li>
                 </ul>
                 {commentsItem &&
                     <div>
-                        xin chào
+                        <Bloger/>
                     </div>
                 }
                 {notification &&
                     <div>
-                        Trương Hoài Linh
+                        <Notification/>
                     </div>
                 }
             </div>

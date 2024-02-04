@@ -46,7 +46,7 @@ const Login = (props) => {
                     }
                 })
             }else{
-                alert("Something is wrong here!")
+                alert("Something is wrong here, please try again!")
             }
         }
     }

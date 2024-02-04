@@ -6,7 +6,7 @@ import Link from 'next/link';
 import ProductNav from '@/layouts/ProductNav';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faBlog, faPhone, faUser,faBars, faHeart, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faPhone, faUser,faBars, faHeart, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     const router = useRouter();
@@ -67,7 +67,6 @@ const Header = () => {
                 <nav className='Nav-navbar'>
                     <ul className='Nav-navbar-list'>
                         <li title='Home'><Link href="/"><FontAwesomeIcon icon={faHouse} /></Link></li>
-                        <li title='Blog'><Link href="/blogs"><FontAwesomeIcon icon={faBlog} /></Link></li>
                         <li title='Product' className='product-nav'><FontAwesomeIcon icon={faBars} />
                             <div className='product-box'>
                                 <ProductNav/>

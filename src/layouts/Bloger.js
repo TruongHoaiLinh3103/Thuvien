@@ -22,7 +22,8 @@ const Bloger = () => {
     const [content, setContent] = useState('');
     const [seeContentDetail, setSeeContentDetail] = useState("");
     const [seeTitle, setSeeTitle] = useState("");
-    const [seeAuth ,setSeeAuth] = useState("")
+    const [seeAuth ,setSeeAuth] = useState("");
+    const [numberPage, setNumberPage] = useState(0);
     const title = useRef("");
     const router = useRouter();
     const editItem = (item) => {
@@ -128,6 +129,7 @@ const Bloger = () => {
         setSeeTitle("")
     }
     const resetPage = async (Children) => {
+        setNumberPage(Children)
         if(data.length > 0){
             const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${Children}&limit=4&sortBy=desc`)
             if(res && res.data && res.data.data && res.data.data.data){
@@ -142,14 +144,19 @@ const Bloger = () => {
             }
         })
         .then((res) => {
-            const fecher = async () => {
-                const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&sortBy=desc`);
-                if(res && res.data && res.data.data && res.data.data.data){
+            axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${numberPage}&limit=4&sortBy=desc`).then((res) => {
+                if(res.data.data.data.length > 0){
                     setData(res.data.data.data);
                     setLooding(false);
+                }else{
+                    axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${numberPage-1}&limit=4&sortBy=desc`).then((res) => {
+                        if(res && res.data && res.data.data && res.data.data.data){
+                            setData(res.data.data.data);
+                            setLooding(false);
+                        }
+                    })
                 }
-            }
-            fecher();
+            })
         })
     }
     const setContents = (Children) => {

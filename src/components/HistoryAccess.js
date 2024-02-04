@@ -53,7 +53,7 @@ const HistoryAccess = () => {
         else{
             setStores('')
         }
-        axios.get(`http://localhost:4000/history?keyword=${sessionStorage.user}&sortBy=desc`).then((res) => {
+        axios.get(`http://localhost:4000/history?keyword=${sessionStorage.user}&orderBy=updatedAt&sortBy=desc`).then((res) => {
             if(res && res.data && res.data.data && res.data.data.data){
                 setTodo(res.data.data.data)
             }

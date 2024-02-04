@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/slider.scss";
 import ic1 from "../../public/ic-1.jpg";
+import ic2 from "../../public/ic-2.jpg";
 import ic3 from "../../public/ic-3.jpg";
 import ic4 from "../../public/ic-4.jpg";
 import ic5 from "../../public/ic-5.jpg";
@@ -74,19 +75,22 @@ const SliderBanner = (props) => {
             {pathname === "/" && 
             <Slider {...settings} className="SliderCarousel">
                 <div>
-                    <Image src={ic1} alt='website'/>
+                    <Image src={ic1} alt='banner'/>
                 </div>
                 <div>
-                    <Image src={ic3} alt='calligraphy'/>
+                    <Image src={ic2} alt='banner'/>
                 </div>
                 <div>
-                    <Image src={ic4} alt='game'/>
+                    <Image src={ic3} alt='banner'/>
                 </div>
                 <div>
-                    <Image src={ic5} alt='cooking'/>
+                    <Image src={ic4} alt='banner'/>
                 </div>
                 <div>
-                    <Image src={ic6} alt='comic'/>
+                    <Image src={ic5} alt='banner'/>
+                </div>
+                <div>
+                    <Image src={ic6} alt='banner'/>
                 </div>
             </Slider>}
             {pathname === `/product/${data.menu}/${convertSlug(data.name)}-${data.id}.html` &&
@@ -101,7 +105,7 @@ const SliderBanner = (props) => {
                     <img src={data.imgThree} alt='Product'/>
                 </div>
             </Slider>}
-            {pathname === "/product/game" && banner[0] &&
+            {pathname === "/product/comic" && banner[0] &&
             <Slider {...settings} className="SliderCarousel">
                 <div>
                     <img src={banner[0].imgOne} alt='Banner'/>
@@ -122,7 +126,7 @@ const SliderBanner = (props) => {
                     <img src={banner[0].imgSix} alt='Banner'/>
                 </div>
             </Slider>}
-            {pathname === "/product/calligraphy" && banner[1] &&
+            {pathname === "/product/cooking" && banner[1] &&
             <Slider {...settings} className="SliderCarousel">
                 <div>
                     <img src={banner[1].imgOne} alt='Banner'/>
@@ -141,69 +145,6 @@ const SliderBanner = (props) => {
                 </div>
                 <div>
                     <img src={banner[1].imgSix} alt='Banner'/>
-                </div>
-            </Slider>}
-            {pathname === "/product/comic" && banner[2] &&
-            <Slider {...settings} className="SliderCarousel">
-                <div>
-                    <img src={banner[2].imgOne} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[2].imgTwo} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[2].imgThree} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[2].imgFour} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[2].imgFive} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[2].imgSix} alt='Banner'/>
-                </div>
-            </Slider>}
-            {pathname === "/product/cooking" && banner[3] &&
-            <Slider {...settings} className="SliderCarousel">
-                <div>
-                    <img src={banner[3].imgOne} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[3].imgTwo} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[3].imgThree} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[3].imgFour} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[3].imgFive} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[3].imgSix} alt='Banner'/>
-                </div>
-            </Slider>}
-            {pathname === "/product/website" && banner[4] &&
-            <Slider {...settings} className="SliderCarousel">
-                <div>
-                    <img src={banner[4].imgOne} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[4].imgTwo} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[4].imgThree} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[4].imgFour} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[4].imgFive} alt='Banner'/>
-                </div>
-                <div>
-                    <img src={banner[4].imgSix} alt='Banner'/>
                 </div>
             </Slider>}
         </div>
