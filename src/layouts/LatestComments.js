@@ -175,11 +175,6 @@ const LatestComments = () => {
                     }
                 }
             ).then((res) => {
-                axios.get("http://localhost:4000/comment?page=1&limit=24&sortBy=desc&orderBy=id").then((res) => {
-                    if(res && res.data && res.data.data && res.data.data.data){
-                        setComment(res.data.data.data)
-                    }
-                });
                 axios.post("http://localhost:4000/notification", notification, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
@@ -189,7 +184,7 @@ const LatestComments = () => {
                         console.log(res.data.error)
                     }
                 })
-            });
+            })
         }else{
             alert("User not logged in!");
             router.push("/user")

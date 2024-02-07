@@ -67,11 +67,11 @@ const Login = (props) => {
                             <input type="password" placeholder="Password" ref={passwordLogin}/>
                         </section>
                     </form>
-                    <section className="controle__salvamento">
+                    {/* <section className="controle__salvamento">
                         <span className="esqueceu__senha">
                             Forgot password?
                         </span>
-                    </section>
+                    </section> */}
                     <section className="controle__acesso">
                         <button type="submit" onClick={() => login()}>Login</button>
                         <button className="botao__registrar" onClick={() => props.template()}>

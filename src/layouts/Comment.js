@@ -182,11 +182,7 @@ const Comment = (props) => {
                     }
                 }
             ).then((res) => {
-                axios.get(`http://localhost:4000/comment?keyword=${productid}&page=1&limit=9`).then((res) => {
-                    if(res && res.data && res.data.data && res.data.data.data){
-                        setComment(res.data.data.data)
-                    }
-                });
+                // location.replace()
                 axios.post("http://localhost:4000/notification", notification, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")

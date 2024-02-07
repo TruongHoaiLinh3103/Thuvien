@@ -104,6 +104,39 @@
         right: 19.7%;
     }
 }
+.Nav_top_searchToLoop, .Nav_top_searchToSearch{
+    position: absolute;
+    bottom: -300px;
+    height: 300px;
+    overflow-y: auto;
+    width: 60%;
+    background-color: #fff0;
+    z-index: 21;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    .Nav_top_searchToLoop-item{
+        display: flex;
+        align-items: center;
+        background-color: white;
+        padding: 10px;
+        + .Nav_top_searchToLoop-item{
+            border-top: 1px solid black;
+        }
+        img{
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+        span{
+            margin-left: 10px;
+        }
+    }
+}
+.Nav_top_searchToSearch{
+    width: 80%;
+    bottom: -290px;
+}
 .search-ip{
     height: 30px;
     border-radius: 30px;
