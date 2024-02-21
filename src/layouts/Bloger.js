@@ -149,12 +149,21 @@ const Bloger = () => {
                     setData(res.data.data.data);
                     setLooding(false);
                 }else{
-                    axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${numberPage-1}&limit=4&sortBy=desc`).then((res) => {
-                        if(res && res.data && res.data.data && res.data.data.data){
-                            setData(res.data.data.data);
-                            setLooding(false);
-                        }
-                    })
+                    if(numberPage > 1){
+                        axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${numberPage-1}&limit=4&sortBy=desc`).then((res) => {
+                            if(res && res.data && res.data.data && res.data.data.data){
+                                setData(res.data.data.data);
+                                setLooding(false);
+                            }
+                        })
+                    }else{
+                        axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${numberPage}&limit=4&sortBy=desc`).then((res) => {
+                            if(res && res.data && res.data.data && res.data.data.data){
+                                setData(res.data.data.data);
+                                setLooding(false);
+                            }
+                        })
+                    }
                 }
             })
         })

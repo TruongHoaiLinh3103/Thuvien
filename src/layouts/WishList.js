@@ -54,11 +54,19 @@ const WishList = (props) => {
                     if(res.data.data.data.length > 0){
                         setWishList(res.data.data.data)
                     }else{
-                        axios.get(`http://localhost:4000/wishlist?keyword=${sessionStorage.user}&page=${numberPage-1}&limit=24&sortBy=desc`).then((res) => {
-                            if(res && res.data && res.data.data && res.data.data.data){
-                                setWishList(res.data.data.data)
-                            }
-                        })
+                        if(numberPage > 1){
+                            axios.get(`http://localhost:4000/wishlist?keyword=${sessionStorage.user}&page=${numberPage-1}&limit=24&sortBy=desc`).then((res) => {
+                                if(res && res.data && res.data.data && res.data.data.data){
+                                    setWishList(res.data.data.data)
+                                }
+                            })
+                        }else{
+                            axios.get(`http://localhost:4000/wishlist?keyword=${sessionStorage.user}&page=${numberPage}&limit=24&sortBy=desc`).then((res) => {
+                                if(res && res.data && res.data.data && res.data.data.data){
+                                    setWishList(res.data.data.data)
+                                }
+                            })
+                        }
                     }
                 })
             }

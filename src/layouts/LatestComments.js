@@ -19,6 +19,7 @@ const LatestComments = () => {
     const [unComment, setUnComment] = useState("")
     const router = useRouter();
     const [unChatMap, setUnChatMap] = useState([]);
+    const [likeComment, setLikedComment] = useState([]);
     const openUpdateCMT = (item) => {
         setEditComment(item.id);
         setCmtEdit(item.comment);
@@ -159,14 +160,6 @@ const LatestComments = () => {
     }
 
     const likeAComment = (item) => {
-        const notification = {
-            user: sessionStorage.user === item.user ? "Bạn" : sessionStorage.user,
-            img: sessionStorage.avatar,
-            name: item.productName,
-            notification: "đã thích bình luận của bạn tại",
-            CommentId: item.id,
-            auth: item.user
-        }
         if(sessionStorage.user){
             axios.post(
                 "http://localhost:4000/likes",{ commentId: item.id }, {
@@ -175,15 +168,21 @@ const LatestComments = () => {
                     }
                 }
             ).then((res) => {
-                axios.post("http://localhost:4000/notification", notification, {
-                    headers: {
-                        accessToken: sessionStorage.getItem("accessToken")
-                    }
-                }).then((res) => {
-                    if(res.data.error){
-                        console.log(res.data.error)
-                    }
-                })
+                setLikedComment(
+                    likeComment.map((cmt) => {
+                        if (cmt.id === item.id) {
+                            if (res.data.liked) {
+                                return { ...cmt, Likes: [...cmt.Likes, 0] };
+                            } else {
+                                const likesArray = cmt.Likes;
+                                likesArray.pop();
+                                return { ...cmt, Likes: likesArray };
+                            }
+                        } else {
+                            return cmt;
+                        }
+                    })
+                )
             })
         }else{
             alert("User not logged in!");

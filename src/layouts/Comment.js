@@ -16,7 +16,8 @@ const Comment = (props) => {
     const [unComment, setUnComment] = useState("");
     const [numberPage, setNumberPage] = useState(0);
     const router = useRouter();
-    const [unChatMap, setUnChatMap] = useState([])
+    const [unChatMap, setUnChatMap] = useState([]);
+    const [likeComment, setLikedComment] = useState([]);
     const resetPage = (childData) => {
         setNumberPage(childData)
         const id = printfID(props.id);
@@ -71,22 +72,36 @@ const Comment = (props) => {
                 if(res.data.data.data.length > 0){
                     setComment(res.data.data.data)
                 }else{
-                    axios.get(`http://localhost:4000/comment?keyword=${productid}&page=${numberPage-1}&limit=9`).then((res) => {
-                        if(res && res.data && res.data.data && res.data.data.data){
-                            setComment(res.data.data.data)
-                        }
-                    })
+                    if(numberPage > 1){
+                        axios.get(`http://localhost:4000/comment?keyword=${productid}&page=${numberPage-1}&limit=9`).then((res) => {
+                            if(res && res.data && res.data.data && res.data.data.data){
+                                setComment(res.data.data.data)
+                            }
+                        })
+                    }else{
+                        axios.get(`http://localhost:4000/comment?keyword=${productid}&page=${numberPage}&limit=9`).then((res) => {
+                            if(res && res.data && res.data.data && res.data.data.data){
+                                setComment(res.data.data.data)
+                            }
+                        })
+                    }
                 }
             });
         })
     }
     const deleteUnComment = (id) => {
+        const productid = printfID(props.id);
         axios.delete(`http://localhost:4000/unchat/${id}`,{
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
         }).then((res) => {
             setUnChatMap(unChatMap.filter(item => item.id !== id))
+            axios.get(`http://localhost:4000/comment?keyword=${productid}`).then((res) => {
+                if(res && res.data && res.data.data && res.data.data.data){
+                    setComment(res.data.data.data)
+                }
+            });
         })
     }
     const addComment = (item) => {
@@ -166,14 +181,6 @@ const Comment = (props) => {
     }
     const likeAComment = (item) => {
         const productid = printfID(props.id);
-        const notification = {
-            user: sessionStorage.user === item.user ? "Bạn" : sessionStorage.user,
-            img: sessionStorage.avatar,
-            name: item.productName,
-            notification: "đã thích bình luận của bạn tại",
-            CommentId: item.id,
-            auth: item.user
-        }
         if(sessionStorage.user){
             axios.post(
                 "http://localhost:4000/likes",{ commentId: item.id }, {
@@ -182,16 +189,26 @@ const Comment = (props) => {
                     }
                 }
             ).then((res) => {
-                // location.replace()
-                axios.post("http://localhost:4000/notification", notification, {
-                    headers: {
-                        accessToken: sessionStorage.getItem("accessToken")
+                setLikedComment(
+                    likeComment.map((cmt) => {
+                        if (cmt.id === item.id) {
+                            if (res.data.liked) {
+                                return { ...cmt, Likes: [...cmt.Likes, 0] };
+                            } else {
+                                const likesArray = cmt.Likes;
+                                likesArray.pop();
+                                return { ...cmt, Likes: likesArray };
+                            }
+                        } else {
+                            return cmt;
+                        }
+                    })
+                )
+                axios.get(`http://localhost:4000/comment?keyword=${productid}`).then((res) => {
+                    if(res && res.data && res.data.data && res.data.data.data){
+                        setComment(res.data.data.data)
                     }
-                }).then((res) => {
-                    if(res.data.error){
-                        console.log(res.data.error)
-                    }
-                })
+                });
             });
         }
         else{
@@ -229,6 +246,7 @@ const Comment = (props) => {
         });
     }
     const addUnComment = (item) => {
+        const productid = printfID(props.id);
         if(unComment !== ""){
             const data = {
                 img: sessionStorage.avatar,
@@ -272,11 +290,17 @@ const Comment = (props) => {
                             console.log(res.data.error)
                         }
                     })
+                    axios.get(`http://localhost:4000/comment?keyword=${productid}`).then((res) => {
+                        if(res && res.data && res.data.data && res.data.data.data){
+                            setComment(res.data.data.data)
+                        }
+                    });
                 }
             })
         }
     }
     const addUnCommentEnter = (e, item) => {
+        const productid = printfID(props.id);
         if(e.which === 13){
             if(unComment !== ""){
                 const data = {
@@ -321,6 +345,11 @@ const Comment = (props) => {
                                 console.log(res.data.error)
                             }
                         })
+                        axios.get(`http://localhost:4000/comment?keyword=${productid}`).then((res) => {
+                            if(res && res.data && res.data.data && res.data.data.data){
+                                setComment(res.data.data.data)
+                            }
+                        });
                     }
                 })
             }
