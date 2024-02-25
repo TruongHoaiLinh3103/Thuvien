@@ -9,7 +9,7 @@ const Notification = () => {
     const [checkNotification, setCheckNotification] = useState(false);
     useEffect(() => {
         if(sessionStorage.user){
-            axios.get(`http://localhost:4000/notification?keyword=${sessionStorage.user}`).then((res) => {
+            axios.get(`https://server-light-anikey.vercel.app/notification?keyword=${sessionStorage.user}`).then((res) => {
                 if(res && res.data && res.data.data && res.data.data.data){
                     if(res.data.data.data.length > 0){
                         setNotification(res.data.data.data);

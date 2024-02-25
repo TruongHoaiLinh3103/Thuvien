@@ -37,7 +37,7 @@ const ChangePass = (props) => {
                 }
                 const isValid = await changePassScheme.isValid(data);
                 if(isValid){
-                    axios.patch("http://localhost:4000/auth/changepassword", data).then((res) => {
+                    axios.patch("https://server-light-anikey.vercel.app/auth/changepassword", data).then((res) => {
                         if (res.data.error) {
                             alert(res.data.error);
                         }

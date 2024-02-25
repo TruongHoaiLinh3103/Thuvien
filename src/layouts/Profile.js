@@ -65,12 +65,12 @@ const Profile = () => {
             location: location,
             user: sessionStorage.user
         }
-        axios.post("http://localhost:4000/account", data).then((res) => {
+        axios.post("https://server-light-anikey.vercel.app/account", data).then((res) => {
             if(res.data.error){
                 alert(res.data.error)
             }else{
                 const data = {img: avatar, user: sessionStorage.user}
-                axios.patch("http://localhost:4000/comment/avatar", data, {
+                axios.patch("https://server-light-anikey.vercel.app/comment/avatar", data, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
                     }
@@ -92,7 +92,7 @@ const Profile = () => {
             location: profileDetail.location ? profileDetail.location : "",
             user: sessionStorage.user
         }
-        axios.post("http://localhost:4000/account", data).then((res) => {
+        axios.post("https://server-light-anikey.vercel.app/account", data).then((res) => {
             if(res.data.error){
                 alert(res.data.error)
             }
@@ -100,7 +100,7 @@ const Profile = () => {
         setCancelImg(true)
     }
     useEffect(() => {
-        axios.get(`http://localhost:4000/account/${sessionStorage.user}`).then((res) => {
+        axios.get(`https://server-light-anikey.vercel.app/account/${sessionStorage.user}`).then((res) => {
             if(res && res.data){
                 setProfileDetail(res.data);
                 sessionStorage.setItem("avatar", res.data.img)

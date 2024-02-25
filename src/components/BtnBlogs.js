@@ -70,7 +70,7 @@ const BtnBlogs = (props) => {
         props.numberPage(four);
     }
     useEffect(() => {
-        axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}`).then((res) => {
+        axios.get(`https://server-light-anikey.vercel.app/blog?keyword=${sessionStorage.user}`).then((res) => {
             if(res && res.data && res.data.data && res.data.data.totalPages){
                 const numberMax = res.data.data.totalPages
                 setMax(numberMax);

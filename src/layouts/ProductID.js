@@ -48,7 +48,7 @@ const ProductID = (props) => {
             user: sessionStorage.user,
             productId: item.id
         }
-        axios.post("http://localhost:4000/wishlist", data, {
+        axios.post("https://server-light-anikey.vercel.app/wishlist", data, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
@@ -75,7 +75,7 @@ const ProductID = (props) => {
                     user: sessionStorage.user,
                     productId: res.data.id
                 }
-                axios.post("http://localhost:4000/history", data, {
+                axios.post("https://server-light-anikey.vercel.app/history", data, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
                     }
