@@ -1,30 +1,21 @@
 "use client";
 
-import React, {useState} from 'react';
+import React from 'react';
 import "../styles/classify.scss";
 
 
 const Classify = (props) => {
-    const [ratingStart] = useState('_sort=rating&_order=desc');
-    const max = "R$ ⬆ to ⬇";
-    const min = "R$ ⬇ to ⬆";
-    const [title, setTitle] = useState(max);
-    const totalMain = () => {
-        if(title === max){
-            setTitle(min);
-            props.totalPage("_sort=price&_order=desc")
+    const Rating = (temp) => {
+        if(temp === true){
+            props.rating('_sort=rating&_order=desc');
         }else{
-            setTitle(max);
-            props.totalPage("_sort=price&_order=asc")
+            props.rating('_sort=rating&_order=asc');
         }
-    }
-    const Rating = () => {
-        props.rating(ratingStart);
     }
     return (
         <div className='Classify'>
-            <button onClick={() => Rating()}>Appreciate</button>
-            <button onClick={() => totalMain()}>{title}</button>
+            <button onClick={() => Rating(true)}>⬆ - ⬇</button>
+            <button onClick={() => Rating(false)}>⬇ - ⬆</button>
         </div>
     );
 };

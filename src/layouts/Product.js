@@ -36,7 +36,7 @@ const Product = (props) => {
             user: sessionStorage.user,
             productId: item.id
         }
-        axios.post("https://server-light-anikey.vercel.app/wishlist", data, {
+        axios.post("http://localhost:4000/wishlist", data, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
@@ -50,15 +50,15 @@ const Product = (props) => {
             }
         })
     }
-    const handlePrice = (price, discount = false) => {
-        if (discount) {
-            price *= 0.9;
-        }
-        return price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-        });
-    }
+    // const handlePrice = (price, discount = false) => {
+    //     if (discount) {
+    //         price *= 0.9;
+    //     }
+    //     return price.toLocaleString("pt-BR", {
+    //         style: "currency",
+    //         currency: "BRL",
+    //     });
+    // }
     var settings = {
         dots: false,
         infinite: true,
@@ -113,8 +113,8 @@ const Product = (props) => {
                                 {handleRating(item.rating)}
                             </div>
                             <div className="price">
-                                <h5>{handlePrice(item.price)}</h5>
-                                <h5>{handlePrice(item.price, true)}</h5>
+                                {/* <h5>{handlePrice(item.price)}</h5>
+                                <h5>{handlePrice(item.price, true)}</h5> */}
                             </div>
                             <div className='data-card_btn'>
                                 <a className="button" onClick={() => addWishlist(item)}>

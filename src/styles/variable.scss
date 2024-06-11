@@ -116,21 +116,7 @@ $ctColor: white;
 }
 %ratingCard{
     color: #ffc002;
-}
-%priceCard{
-    display: flex;
-    margin: 0.5rem 0;
-}
-%priceFirst{
-    font-weight: 400;
-    text-decoration: line-through;
-    color: #d0d2d6;
-    margin: 5px;
-}
-%priceLast{
-    font-weight: 600;
-    color: #747d89;
-    margin: 5px;
+    margin-bottom: 10px;
 }
 @mixin btnCard($cl: #7ac402){
     border: 1px solid $cl;

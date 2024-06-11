@@ -72,15 +72,6 @@
         .Item_Describe-rating{
             @extend %ratingCard;
         }
-        .Item_Describe-price{
-            @extend %priceCard;
-        }
-        .Item_Describe-price h5:first-child{
-            @extend %priceFirst;
-        }
-        .Item_Describe-price h5:last-child{
-            @extend %priceLast;
-        }
         .Item_Describe-btn{
             display: flex;
             justify-content: center;

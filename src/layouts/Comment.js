@@ -22,7 +22,7 @@ const Comment = (props) => {
         setNumberPage(childData)
         const id = printfID(props.id);
         if(comment.length > 0){
-            axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${id}&page=${childData}&limit=9&sortBy=desc&orderBy=id`).then((res) => {
+            axios.get(`http://localhost:4000/comment?keyword=${id}&page=${childData}&limit=9&sortBy=desc&orderBy=id`).then((res) => {
                 if(res && res.data && res.data.data && res.data.data.data){
                     setComment(res.data.data.data)
                 }
@@ -36,7 +36,7 @@ const Comment = (props) => {
     const updateComment = (e, id) => {
         if(e.which === 13){
             const data = {comment: cmtEdit}
-            axios.patch(`https://server-light-anikey.vercel.app/comment/${id}`, data, {
+            axios.patch(`http://localhost:4000/comment/${id}`, data, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
                 }
@@ -50,7 +50,7 @@ const Comment = (props) => {
     const updateUnComment = (e, id) => {
         if(e.which === 13){
             const data = {comment: cmtEdit}
-            axios.patch(`https://server-light-anikey.vercel.app/unchat/${id}`, data, {
+            axios.patch(`http://localhost:4000/unchat/${id}`, data, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
                 }
@@ -63,23 +63,23 @@ const Comment = (props) => {
     }
     const deleteComment = (id) => {
         let productid = printfID(props.id);
-        axios.delete(`https://server-light-anikey.vercel.app/comment/${id}`,{
+        axios.delete(`http://localhost:4000/comment/${id}`,{
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
         }).then((res) => {
-            axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${productid}&page=${numberPage}&limit=9`).then((res) => {
+            axios.get(`http://localhost:4000/comment?keyword=${productid}&page=${numberPage}&limit=9`).then((res) => {
                 if(res.data.data.data.length > 0){
                     setComment(res.data.data.data)
                 }else{
                     if(numberPage > 1){
-                        axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${productid}&page=${numberPage-1}&limit=9`).then((res) => {
+                        axios.get(`http://localhost:4000/comment?keyword=${productid}&page=${numberPage-1}&limit=9`).then((res) => {
                             if(res && res.data && res.data.data && res.data.data.data){
                                 setComment(res.data.data.data)
                             }
                         })
                     }else{
-                        axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${productid}&page=${numberPage}&limit=9`).then((res) => {
+                        axios.get(`http://localhost:4000/comment?keyword=${productid}&page=${numberPage}&limit=9`).then((res) => {
                             if(res && res.data && res.data.data && res.data.data.data){
                                 setComment(res.data.data.data)
                             }
@@ -91,13 +91,13 @@ const Comment = (props) => {
     }
     const deleteUnComment = (id) => {
         const productid = printfID(props.id);
-        axios.delete(`https://server-light-anikey.vercel.app/unchat/${id}`,{
+        axios.delete(`http://localhost:4000/unchat/${id}`,{
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
         }).then((res) => {
             setUnChatMap(unChatMap.filter(item => item.id !== id))
-            axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${productid}`).then((res) => {
+            axios.get(`http://localhost:4000/comment?keyword=${productid}`).then((res) => {
                 if(res && res.data && res.data.data && res.data.data.data){
                     setComment(res.data.data.data)
                 }
@@ -118,7 +118,7 @@ const Comment = (props) => {
                 productName: item.name,
                 menu: item.menu
             }
-            axios.post("https://server-light-anikey.vercel.app/comment", data, 
+            axios.post("http://localhost:4000/comment", data, 
             {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
@@ -128,7 +128,7 @@ const Comment = (props) => {
                 if(res.data.error){
                     alert("User not logged in!")
                 }else{
-                    axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${productid}&page=1&limit=9`).then((res) => {
+                    axios.get(`http://localhost:4000/comment?keyword=${productid}&page=1&limit=9`).then((res) => {
                         if(res && res.data && res.data.data && res.data.data.data){
                             setComment(res.data.data.data)
                         }
@@ -154,7 +154,7 @@ const Comment = (props) => {
                     productName: item.name,
                     menu: item.menu
                 }
-                axios.post("https://server-light-anikey.vercel.app/comment", data, 
+                axios.post("http://localhost:4000/comment", data, 
                 {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
@@ -164,7 +164,7 @@ const Comment = (props) => {
                     if(res.data.error){
                         alert("User not logged in!")
                     }else{
-                        axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${productid}&page=1&limit=9`).then((res) => {
+                        axios.get(`http://localhost:4000/comment?keyword=${productid}&page=1&limit=9`).then((res) => {
                             if(res && res.data && res.data.data && res.data.data.data){
                                 setComment(res.data.data.data)
                             }
@@ -183,7 +183,7 @@ const Comment = (props) => {
         const productid = printfID(props.id);
         if(sessionStorage.user){
             axios.post(
-                "https://server-light-anikey.vercel.app/likes",{ commentId: item.id }, {
+                "http://localhost:4000/likes",{ commentId: item.id }, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
                     }
@@ -204,7 +204,7 @@ const Comment = (props) => {
                         }
                     })
                 )
-                axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${productid}`).then((res) => {
+                axios.get(`http://localhost:4000/comment?keyword=${productid}`).then((res) => {
                     if(res && res.data && res.data.data && res.data.data.data){
                         setComment(res.data.data.data)
                     }
@@ -219,13 +219,13 @@ const Comment = (props) => {
     const likeAUnChatComment = (unchatId) => {
         if(sessionStorage.user){
             axios.post(
-                "https://server-light-anikey.vercel.app/likes",{ unchatId: unchatId }, {
+                "http://localhost:4000/likes",{ unchatId: unchatId }, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
                     }
                 }
             ).then((res) => {
-                axios.get(`https://server-light-anikey.vercel.app/unchat/${unchatId}`).then((res) => {
+                axios.get(`http://localhost:4000/unchat/${unchatId}`).then((res) => {
                     if(res && res.data){
                         setUnChatMap(res.data)
                     }
@@ -239,7 +239,7 @@ const Comment = (props) => {
     const unChat = (item) => {
         setNumber(item.id);
         setUnComment(`@${item.user}`);
-        axios.get(`https://server-light-anikey.vercel.app/unchat/${item.id}`).then((res) => {
+        axios.get(`http://localhost:4000/unchat/${item.id}`).then((res) => {
             if(res && res.data){
                 setUnChatMap(res.data)
             }
@@ -265,7 +265,7 @@ const Comment = (props) => {
                 CommentId: item.id,
                 auth: item.user
             }
-            axios.post("https://server-light-anikey.vercel.app/unchat", data, 
+            axios.post("http://localhost:4000/unchat", data, 
             {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
@@ -276,12 +276,12 @@ const Comment = (props) => {
                     alert("User not logged in!")
                 }else{
                     setUnComment("");
-                    axios.get(`https://server-light-anikey.vercel.app/unchat/${item.id}`).then((res) => {
+                    axios.get(`http://localhost:4000/unchat/${item.id}`).then((res) => {
                         if(res && res.data){
                             setUnChatMap(res.data)
                         }
                     });
-                    axios.post("https://server-light-anikey.vercel.app/notification", notification, {
+                    axios.post("http://localhost:4000/notification", notification, {
                         headers: {
                             accessToken: sessionStorage.getItem("accessToken")
                         }
@@ -290,7 +290,7 @@ const Comment = (props) => {
                             console.log(res.data.error)
                         }
                     })
-                    axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${productid}`).then((res) => {
+                    axios.get(`http://localhost:4000/comment?keyword=${productid}`).then((res) => {
                         if(res && res.data && res.data.data && res.data.data.data){
                             setComment(res.data.data.data)
                         }
@@ -320,7 +320,7 @@ const Comment = (props) => {
                     CommentId: item.id,
                     auth: item.user
                 }
-                axios.post("https://server-light-anikey.vercel.app/unchat", data, 
+                axios.post("http://localhost:4000/unchat", data, 
                 {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
@@ -331,12 +331,12 @@ const Comment = (props) => {
                         alert("User not logged in!")
                     }else{
                         setUnComment("");
-                        axios.get(`https://server-light-anikey.vercel.app/unchat/${item.id}`).then((res) => {
+                        axios.get(`http://localhost:4000/unchat/${item.id}`).then((res) => {
                             if(res && res.data){
                                 setUnChatMap(res.data)
                             }
                         });
-                        axios.post("https://server-light-anikey.vercel.app/notification", notification, {
+                        axios.post("http://localhost:4000/notification", notification, {
                             headers: {
                                 accessToken: sessionStorage.getItem("accessToken")
                             }
@@ -345,7 +345,7 @@ const Comment = (props) => {
                                 console.log(res.data.error)
                             }
                         })
-                        axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${productid}`).then((res) => {
+                        axios.get(`http://localhost:4000/comment?keyword=${productid}`).then((res) => {
                             if(res && res.data && res.data.data && res.data.data.data){
                                 setComment(res.data.data.data)
                             }
@@ -357,7 +357,7 @@ const Comment = (props) => {
     }
     useEffect(() => {
         const id = printfID(props.id);
-        axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${id}&page=1&limit=9`).then((res) => {
+        axios.get(`http://localhost:4000/comment?keyword=${id}&page=1&limit=9`).then((res) => {
             if(res && res.data && res.data.data && res.data.data.data){
                 setComment(res.data.data.data)
             }

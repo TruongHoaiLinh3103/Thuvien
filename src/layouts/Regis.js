@@ -39,7 +39,7 @@ const Regis = (props) => {
                 }
                 const isValid = await regisScheme.isValid(dataRegis);
                 if(isValid === true){
-                    axios.post("https://server-light-anikey.vercel.app/auth", dataRegis)
+                    axios.post("http://localhost:4000/auth", dataRegis)
                     .then((res) => {
                         if(res.data.error){
                             alert(res.data.error)
@@ -48,7 +48,7 @@ const Regis = (props) => {
                                 user: userRegis.current.value,
                                 password: passwordRegis.current.value,
                             }
-                            axios.post("https://server-light-anikey.vercel.app/auth/login", dataLogin).then((res) => {
+                            axios.post("http://localhost:4000/auth/login", dataLogin).then((res) => {
                                 if(res.data.error){  
                                     alert(res.data.error)
                                 }

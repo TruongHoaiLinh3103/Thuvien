@@ -32,17 +32,8 @@ const WishList = (props) => {
         
         return htmlToReturn;
     }
-    const handlePrice = (price, discount = false) => {
-        if (discount) {
-            price = price * 0.9;
-        }
-        return price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-        });
-    }
     const deleteWishlist = (id) => {
-        axios.delete(`https://server-light-anikey.vercel.app/wishlist/${id}`,{
+        axios.delete(`http://localhost:4000/wishlist/${id}`,{
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
@@ -50,18 +41,18 @@ const WishList = (props) => {
             if(res.data.error){
                 alert(res.data.error)
             }else{
-                axios.get(`https://server-light-anikey.vercel.app/wishlist?keyword=${sessionStorage.user}&page=${numberPage}&limit=24&sortBy=desc`).then((res) => {
+                axios.get(`http://localhost:4000/wishlist?keyword=${sessionStorage.user}&page=${numberPage}&limit=24&sortBy=desc`).then((res) => {
                     if(res.data.data.data.length > 0){
                         setWishList(res.data.data.data)
                     }else{
                         if(numberPage > 1){
-                            axios.get(`https://server-light-anikey.vercel.app/wishlist?keyword=${sessionStorage.user}&page=${numberPage-1}&limit=24&sortBy=desc`).then((res) => {
+                            axios.get(`http://localhost:4000/wishlist?keyword=${sessionStorage.user}&page=${numberPage-1}&limit=24&sortBy=desc`).then((res) => {
                                 if(res && res.data && res.data.data && res.data.data.data){
                                     setWishList(res.data.data.data)
                                 }
                             })
                         }else{
-                            axios.get(`https://server-light-anikey.vercel.app/wishlist?keyword=${sessionStorage.user}&page=${numberPage}&limit=24&sortBy=desc`).then((res) => {
+                            axios.get(`http://localhost:4000/wishlist?keyword=${sessionStorage.user}&page=${numberPage}&limit=24&sortBy=desc`).then((res) => {
                                 if(res && res.data && res.data.data && res.data.data.data){
                                     setWishList(res.data.data.data)
                                 }
@@ -72,18 +63,10 @@ const WishList = (props) => {
             }
         })
     }
-    const Redian = (array) => {
-        let price = 0;
-        array.map((item) => {
-            item.price *= 0.9;
-            price += item.price;
-        })
-        return price.toFixed(2);
-    }
     const resetPage = async (Children) => {
         setNumberPage(Children)
         if(wishlist.length > 0){
-            const res = await axios.get(`https://server-light-anikey.vercel.app/wishlist?keyword=${sessionStorage.user}&page=${Children}&limit=24&sortBy=desc`)
+            const res = await axios.get(`http://localhost:4000/wishlist?keyword=${sessionStorage.user}&page=${Children}&limit=24&sortBy=desc`)
             if(res && res.data && res.data.data && res.data.data.data){
                 setWishList(res.data.data.data);
             }
@@ -96,7 +79,7 @@ const WishList = (props) => {
         else{
             setStores('')
         }
-        axios.get(`https://server-light-anikey.vercel.app/wishlist?keyword=${sessionStorage.user}&page=1&limit=24&sortBy=desc`).then((res) => {
+        axios.get(`http://localhost:4000/wishlist?keyword=${sessionStorage.user}&page=1&limit=24&sortBy=desc`).then((res) => {
             if(res && res.data && res.data.data && res.data.data.data){
                 setWishList(res.data.data.data)
             }
@@ -132,10 +115,6 @@ const WishList = (props) => {
                                                     <div className="Item_Describe-rating">
                                                         {handleRating(item.rating)}
                                                     </div>
-                                                    <div className="Item_Describe-price">
-                                                        <h5>{handlePrice(item.price)}</h5>
-                                                        <h5>{handlePrice(item.price, true)}</h5>
-                                                    </div>
                                                     <div className='Item_Describe-btn'>
                                                         <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                         <a className="button"><FontAwesomeIcon icon={faBook} /></a>
@@ -148,15 +127,6 @@ const WishList = (props) => {
                             }
                         </>
                     }
-                    <div className='WishList-Total'>
-                        <div className='WishList-Total_d'>
-                            <h4>Total: </h4>
-                            <p>{Redian(wishlist)} R$</p>
-                        </div>
-                        <div className='WishList-Total_btn'>
-                            <button onClick={() => router.push("/")}>See more products</button>
-                        </div>
-                    </div>
                     {wishlist.length === 0 ? 
                         ""
                         :
@@ -192,10 +162,6 @@ const WishList = (props) => {
                                                         <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
                                                         <div className="Item_Describe-rating">
                                                             {handleRating(item.rating)}
-                                                        </div>
-                                                        <div className="Item_Describe-price">
-                                                            <h5>{handlePrice(item.price)}</h5>
-                                                            <h5>{handlePrice(item.price, true)}</h5>
                                                         </div>
                                                         <div className='Item_Describe-btn'>
                                                             <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
@@ -241,10 +207,6 @@ const WishList = (props) => {
                                                         <div className="Item_Describe-rating">
                                                             {handleRating(item.rating)}
                                                         </div>
-                                                        <div className="Item_Describe-price">
-                                                            <h5>{handlePrice(item.price)}</h5>
-                                                            <h5>{handlePrice(item.price, true)}</h5>
-                                                        </div>
                                                         <div className='Item_Describe-btn'>
                                                             <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
@@ -289,10 +251,6 @@ const WishList = (props) => {
                                                         <div className="Item_Describe-rating">
                                                             {handleRating(item.rating)}
                                                         </div>
-                                                        <div className="Item_Describe-price">
-                                                            <h5>{handlePrice(item.price)}</h5>
-                                                            <h5>{handlePrice(item.price, true)}</h5>
-                                                        </div>
                                                         <div className='Item_Describe-btn'>
                                                             <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
                                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
@@ -336,10 +294,6 @@ const WishList = (props) => {
                                                         <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
                                                         <div className="Item_Describe-rating">
                                                             {handleRating(item.rating)}
-                                                        </div>
-                                                        <div className="Item_Describe-price">
-                                                            <h5>{handlePrice(item.price)}</h5>
-                                                            <h5>{handlePrice(item.price, true)}</h5>
                                                         </div>
                                                         <div className='Item_Describe-btn'>
                                                             <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>

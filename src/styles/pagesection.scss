@@ -38,18 +38,6 @@
     @extend %ratingCard;
   }
   
-  .PageSection-section_data .data-card_price {
-    @extend %priceCard;
-  }
-  
-  .PageSection-section_data .data-card_price h5:first-child {
-    @extend %priceFirst;
-  }
-  
-.PageSection-section_data .data-card_price h5:last-child {
-    @extend %priceLast;
-  }
-  
 .PageSection-section_data .data-card_btn {
   display: flex;
   justify-content: center;

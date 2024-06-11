@@ -37,18 +37,6 @@
     @extend %ratingCard;
   }
   
-  .Product .slider .card .price {
-    @extend %priceCard;
-  }
-  
-  .Product .slider .card .price h5:first-child {
-    @extend %priceFirst;
-  }
-  
-  .slider .card .price h5:last-child {
-    @extend %priceLast;
-  }
-  
   .slider .card .data-card_btn{
     display: flex;
     justify-content: center;

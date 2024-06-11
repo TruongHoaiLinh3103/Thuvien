@@ -41,16 +41,6 @@ const PageSection = (props) => {
         
         return htmlToReturn;
     }
-    const handlePrice = (price, discount = false) => {
-        if (discount) {
-            price = price * 0.9;
-        }
-        return price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-        });
-    }
-
     const productPage = (Children) => {
         localStorage.setItem("paginateSearch", Children)
         axios.get(`https://zfakeapi.vercel.app/product?_page=${Children}&_limit=24&q=${paragraph}&${temp}`).then((res) => {
@@ -95,16 +85,6 @@ const PageSection = (props) => {
             setCooking(res.data)
         })
     }
-    const total = (Children) => {
-        setTemp(Children);
-        setCheckReq(true);
-        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Comic}&_limit=24&${Children}`).then((res) => {
-            setComic(res.data)
-        })
-        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Cooking}&_limit=24&${Children}`).then((res) => {
-            setCooking(res.data)
-        })
-    }
     const addWishlist = (item) => {
         const data = {
             img: item.imgOne,
@@ -115,7 +95,7 @@ const PageSection = (props) => {
             user: sessionStorage.user,
             productId: item.id
         }
-        axios.post("https://server-light-anikey.vercel.app/wishlist", data, {
+        axios.post("http://localhost:4000/wishlist", data, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
@@ -178,10 +158,6 @@ const PageSection = (props) => {
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
                                         </div>
-                                        <div className="data-card_price">
-                                            <h5>{handlePrice(item.price)}</h5>
-                                            <h5>{handlePrice(item.price, true)}</h5>
-                                        </div>
                                         <div className='data-card_btn'>
                                             <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>
                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
@@ -213,10 +189,6 @@ const PageSection = (props) => {
                                             <div className="data-card_rating">
                                                 {handleRating(item.rating)}
                                             </div>
-                                            <div className="data-card_price">
-                                                <h5>{handlePrice(item.price)}</h5>
-                                                <h5>{handlePrice(item.price, true)}</h5>
-                                            </div>
                                             <div className='data-card_btn'>
                                                 <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>
                                                 <a className="button"><FontAwesomeIcon icon={faBook} /></a>
@@ -237,7 +209,7 @@ const PageSection = (props) => {
             }
             {pathname === "/product/cooking" && 
                 <>
-                    <Classify rating={ratingReq} totalPage={total}/>
+                    <Classify rating={ratingReq}/>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
                             {cooking.map((item, index) => {
@@ -249,10 +221,6 @@ const PageSection = (props) => {
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
-                                        </div>
-                                        <div className="data-card_price">
-                                            <h5>{handlePrice(item.price)}</h5>
-                                            <h5>{handlePrice(item.price, true)}</h5>
                                         </div>
                                         <div className='data-card_btn'>
                                             <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>
@@ -270,7 +238,7 @@ const PageSection = (props) => {
             }
             {pathname === "/product/comic" && 
                 <>
-                    <Classify rating={ratingReq} totalPage={total}/>
+                    <Classify rating={ratingReq}/>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
                             {comic.map((item, index) => {
@@ -282,10 +250,6 @@ const PageSection = (props) => {
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
-                                        </div>
-                                        <div className="data-card_price">
-                                            <h5>{handlePrice(item.price)}</h5>
-                                            <h5>{handlePrice(item.price, true)}</h5>
                                         </div>
                                         <div className='data-card_btn'>
                                             <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>

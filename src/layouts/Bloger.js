@@ -63,7 +63,7 @@ const Bloger = () => {
                 author: sessionStorage.user,
                 content: content
             }
-            axios.post("https://server-light-anikey.vercel.app/blog", dataBlog, {
+            axios.post("http://localhost:4000/blog", dataBlog, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
                 }
@@ -73,7 +73,7 @@ const Bloger = () => {
                     alert("Title is too long!")
                 }else{
                     const fecher = async () => {
-                        const res = await axios.get(`https://server-light-anikey.vercel.app/blog?keyword=${sessionStorage.user}&sortBy=desc`);
+                        const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&sortBy=desc`);
                         if(res && res.data && res.data.data && res.data.data.data){
                             setData(res.data.data.data);
                             setLooding(false);
@@ -98,7 +98,7 @@ const Bloger = () => {
                 author: sessionStorage.user,
                 content: content
             }
-            axios.patch(`https://server-light-anikey.vercel.app/blog/${id}`, dataBlog, {
+            axios.patch(`http://localhost:4000/blog/${id}`, dataBlog, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
                 }
@@ -108,7 +108,7 @@ const Bloger = () => {
                     alert("Title is too long!")
                 }else{
                     const fecher = async () => {
-                        const res = await axios.get(`https://server-light-anikey.vercel.app/blog?keyword=${sessionStorage.user}&sortBy=desc`);
+                        const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&sortBy=desc`);
                         if(res && res.data && res.data.data && res.data.data.data){
                             setData(res.data.data.data);
                             setLooding(false);
@@ -131,33 +131,33 @@ const Bloger = () => {
     const resetPage = async (Children) => {
         setNumberPage(Children)
         if(data.length > 0){
-            const res = await axios.get(`https://server-light-anikey.vercel.app/blog?keyword=${sessionStorage.user}&page=${Children}&limit=4&sortBy=desc`)
+            const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${Children}&limit=4&sortBy=desc`)
             if(res && res.data && res.data.data && res.data.data.data){
                 setData(res.data.data.data);
             }
         }
     }
     const deleteItem = (id) => {
-        axios.delete(`https://server-light-anikey.vercel.app/blog/${id}`, {
+        axios.delete(`http://localhost:4000/blog/${id}`, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
         })
         .then((res) => {
-            axios.get(`https://server-light-anikey.vercel.app/blog?keyword=${sessionStorage.user}&page=${numberPage}&limit=4&sortBy=desc`).then((res) => {
+            axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${numberPage}&limit=4&sortBy=desc`).then((res) => {
                 if(res.data.data.data.length > 0){
                     setData(res.data.data.data);
                     setLooding(false);
                 }else{
                     if(numberPage > 1){
-                        axios.get(`https://server-light-anikey.vercel.app/blog?keyword=${sessionStorage.user}&page=${numberPage-1}&limit=4&sortBy=desc`).then((res) => {
+                        axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${numberPage-1}&limit=4&sortBy=desc`).then((res) => {
                             if(res && res.data && res.data.data && res.data.data.data){
                                 setData(res.data.data.data);
                                 setLooding(false);
                             }
                         })
                     }else{
-                        axios.get(`https://server-light-anikey.vercel.app/blog?keyword=${sessionStorage.user}&page=${numberPage}&limit=4&sortBy=desc`).then((res) => {
+                        axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&page=${numberPage}&limit=4&sortBy=desc`).then((res) => {
                             if(res && res.data && res.data.data && res.data.data.data){
                                 setData(res.data.data.data);
                                 setLooding(false);
@@ -177,7 +177,7 @@ const Bloger = () => {
     }
     useEffect(() => {
         const fecher = async () => {
-            const res = await axios.get(`https://server-light-anikey.vercel.app/blog?keyword=${sessionStorage.user}&sortBy=desc`);
+            const res = await axios.get(`http://localhost:4000/blog?keyword=${sessionStorage.user}&sortBy=desc`);
             if(res && res.data && res.data.data && res.data.data.data){
                 setData(res.data.data.data);
                 setLooding(false);

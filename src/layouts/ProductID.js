@@ -27,17 +27,6 @@ const ProductID = (props) => {
         
         return htmlToReturn;
     }
-    const handlePrice = (price, discount = false) => {
-        if (discount) {
-            price = price * 0.9;
-            // price *= 0.9;
-        }
-        return price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-        });
-    }
-
     const addWishlist = (item) => {
         const data = {
             img: item.imgOne,
@@ -48,7 +37,7 @@ const ProductID = (props) => {
             user: sessionStorage.user,
             productId: item.id
         }
-        axios.post("https://server-light-anikey.vercel.app/wishlist", data, {
+        axios.post("http://localhost:4000/wishlist", data, {
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
@@ -75,7 +64,7 @@ const ProductID = (props) => {
                     user: sessionStorage.user,
                     productId: res.data.id
                 }
-                axios.post("https://server-light-anikey.vercel.app/history", data, {
+                axios.post("http://localhost:4000/history", data, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
                     }
@@ -114,10 +103,6 @@ const ProductID = (props) => {
                             <h3>{data.name}</h3>
                             <div className="ProductID-detail_name_rating">
                                 {handleRating(data.rating)}
-                            </div>
-                            <div className="ProductID-detail_name_price">
-                                <h5>{handlePrice(data.price)}</h5>
-                                <h5>{handlePrice(data.price, true)}</h5>
                             </div>
                             <div className='ProductID-detail_name-btn'>
                                 <button onClick={() => addWishlist(data)}><FontAwesomeIcon icon={faHeart} /></button>

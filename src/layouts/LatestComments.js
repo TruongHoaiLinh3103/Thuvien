@@ -28,13 +28,13 @@ const LatestComments = () => {
     const updateComment = (e, id) => {
         if(e.which === 13){
             const data = {comment: cmtEdit}
-            axios.patch(`https://server-light-anikey.vercel.app/comment/${id}`, data, {
+            axios.patch(`http://localhost:4000/comment/${id}`, data, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
                 }
             }).then((res) => {
                 setEditComment(0);
-                axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${id}&sortBy=desc&orderBy=id`).then((res) => {
+                axios.get(`http://localhost:4000/comment?keyword=${id}&sortBy=desc&orderBy=id`).then((res) => {
                     if(res && res.data && res.data.data && res.data.data.data){
                         setComment(res.data.data.data)
                     }
@@ -46,7 +46,7 @@ const LatestComments = () => {
     const updateUnComment = (e, id) => {
         if(e.which === 13){
             const data = {comment: cmtEdit}
-            axios.patch(`https://server-light-anikey.vercel.app/unchat/${id}`, data, {
+            axios.patch(`http://localhost:4000/unchat/${id}`, data, {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
                 }
@@ -59,7 +59,7 @@ const LatestComments = () => {
     }
 
     const deleteComment = (id) => {
-        axios.delete(`https://server-light-anikey.vercel.app/comment/${id}`,{
+        axios.delete(`http://localhost:4000/comment/${id}`,{
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
@@ -69,7 +69,7 @@ const LatestComments = () => {
     }
 
     const deleteUnComment = (id) => {
-        axios.delete(`https://server-light-anikey.vercel.app/unchat/${id}`,{
+        axios.delete(`http://localhost:4000/unchat/${id}`,{
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
@@ -91,7 +91,7 @@ const LatestComments = () => {
                 productName: "Vô mục",
                 menu: "Không có thành phân"
             }
-            axios.post("https://server-light-anikey.vercel.app/comment", data, 
+            axios.post("http://localhost:4000/comment", data, 
             {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
@@ -122,7 +122,7 @@ const LatestComments = () => {
                     productName: "Vô mục",
                     menu: "Không có thành phân"
                 }
-                axios.post("https://server-light-anikey.vercel.app/comment", data, 
+                axios.post("http://localhost:4000/comment", data, 
                 {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
@@ -162,7 +162,7 @@ const LatestComments = () => {
     const likeAComment = (item) => {
         if(sessionStorage.user){
             axios.post(
-                "https://server-light-anikey.vercel.app/likes",{ commentId: item.id }, {
+                "http://localhost:4000/likes",{ commentId: item.id }, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
                     }
@@ -193,13 +193,13 @@ const LatestComments = () => {
     const likeAUnChatComment = (unchatId) => {
         if(sessionStorage.user){
             axios.post(
-                "https://server-light-anikey.vercel.app/likes",{ unchatId: unchatId }, {
+                "http://localhost:4000/likes",{ unchatId: unchatId }, {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
                     }
                 }
             ).then((res) => {
-                axios.get(`https://server-light-anikey.vercel.app/unchat/${unchatId}`).then((res) => {
+                axios.get(`http://localhost:4000/unchat/${unchatId}`).then((res) => {
                     if(res && res.data){
                         setUnChatMap(res.data)
                     }
@@ -214,7 +214,7 @@ const LatestComments = () => {
     const unChat = (item) => {
         setNumber(item.id);
         setUnComment(`@${item.user}`);
-        axios.get(`https://server-light-anikey.vercel.app/unchat/${item.id}`).then((res) => {
+        axios.get(`http://localhost:4000/unchat/${item.id}`).then((res) => {
             if(res && res.data){
                 setUnChatMap(res.data)
             }
@@ -240,7 +240,7 @@ const LatestComments = () => {
                 CommentId: item.id,
                 auth: item.user
             }
-            axios.post("https://server-light-anikey.vercel.app/unchat", data, 
+            axios.post("http://localhost:4000/unchat", data, 
             {
                 headers: {
                     accessToken: sessionStorage.getItem("accessToken")
@@ -251,12 +251,12 @@ const LatestComments = () => {
                     alert("User not logged in!")
                 }else{
                     setUnComment("");
-                    axios.get(`https://server-light-anikey.vercel.app/unchat/${item.id}`).then((res) => {
+                    axios.get(`http://localhost:4000/unchat/${item.id}`).then((res) => {
                         if(res && res.data){
                             setUnChatMap(res.data)
                         }
                     });
-                    axios.post("https://server-light-anikey.vercel.app/notification", notification, {
+                    axios.post("http://localhost:4000/notification", notification, {
                         headers: {
                             accessToken: sessionStorage.getItem("accessToken")
                         }
@@ -290,7 +290,7 @@ const LatestComments = () => {
                     CommentId: item.id,
                     auth: item.user
                 }
-                axios.post("https://server-light-anikey.vercel.app/unchat", data, 
+                axios.post("http://localhost:4000/unchat", data, 
                 {
                     headers: {
                         accessToken: sessionStorage.getItem("accessToken")
@@ -301,12 +301,12 @@ const LatestComments = () => {
                         alert("User not logged in!")
                     }else{
                         setUnComment("");
-                        axios.get(`https://server-light-anikey.vercel.app/unchat/${item.id}`).then((res) => {
+                        axios.get(`http://localhost:4000/unchat/${item.id}`).then((res) => {
                             if(res && res.data){
                                 setUnChatMap(res.data)
                             }
                         });
-                        axios.post("https://server-light-anikey.vercel.app/notification", notification, {
+                        axios.post("http://localhost:4000/notification", notification, {
                             headers: {
                                 accessToken: sessionStorage.getItem("accessToken")
                             }
@@ -321,7 +321,7 @@ const LatestComments = () => {
         }
     }
     useEffect(() => {
-        axios.get("https://server-light-anikey.vercel.app/comment?page=1&limit=24&sortBy=desc&orderBy=id").then((res) => {
+        axios.get("http://localhost:4000/comment?page=1&limit=24&sortBy=desc&orderBy=id").then((res) => {
             if(res && res.data && res.data.data && res.data.data.data){
                 setComment(res.data.data.data)
             }

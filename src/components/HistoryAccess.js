@@ -26,17 +26,8 @@ const HistoryAccess = () => {
         }
         return htmlToReturn;
     }
-    const handlePrice = (price, discount = false) => {
-        if (discount) {
-            price *= 0.9;
-        }
-        return price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-        });
-    }
     const deleteHistory = (id) => {
-        axios.delete(`https://server-light-anikey.vercel.app/history/${id}`,{
+        axios.delete(`http://localhost:4000/history/${id}`,{
             headers: {
                 accessToken: sessionStorage.getItem("accessToken")
             }
@@ -53,7 +44,7 @@ const HistoryAccess = () => {
         else{
             setStores('')
         }
-        axios.get(`https://server-light-anikey.vercel.app/history?keyword=${sessionStorage.user}&orderBy=updatedAt&sortBy=desc`).then((res) => {
+        axios.get(`http://localhost:4000/history?keyword=${sessionStorage.user}&orderBy=updatedAt&sortBy=desc`).then((res) => {
             if(res && res.data && res.data.data && res.data.data.data){
                 setTodo(res.data.data.data)
             }
@@ -87,10 +78,6 @@ const HistoryAccess = () => {
                                                 <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
                                                 <div className="Item_Describe-rating">
                                                     {handleRating(item.rating)}
-                                                </div>
-                                                <div className="Item_Describe-price">
-                                                    <h5>{handlePrice(item.price)}</h5>
-                                                    <h5>{handlePrice(item.price, true)}</h5>
                                                 </div>
                                                 <div className='Item_Describe-btn'>
                                                     <a className="button" onClick={() => deleteHistory(item.id)}><FontAwesomeIcon icon={faXmark} /></a>

@@ -27,14 +27,14 @@ const Login = (props) => {
             }
             const isValid = await loginScheme.isValid(dataLogin);
             if(isValid === true){
-                axios.post("https://server-light-anikey.vercel.app/auth/login", dataLogin).then((res) => {
+                axios.post("http://localhost:4000/auth/login", dataLogin).then((res) => {
                     if(res.data.error){  
                         alert(res.data.error)
                     }
                     else{
                         sessionStorage.setItem("accessToken", res.data)
                         sessionStorage.setItem("user", userLogin.current.value)
-                        axios.get(`https://server-light-anikey.vercel.app/account/${sessionStorage.user}`).then((res) => {
+                        axios.get(`http://localhost:4000/account/${sessionStorage.user}`).then((res) => {
                             if(res && res.data){
                                 sessionStorage.setItem("avatar", res.data.img)
                             }else{

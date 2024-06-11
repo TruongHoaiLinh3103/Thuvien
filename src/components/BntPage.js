@@ -75,7 +75,7 @@ const BntPage = (props) => {
     }
     useEffect(() => {
         const id = printfID(props.id);
-        axios.get(`https://server-light-anikey.vercel.app/comment?keyword=${id}`).then((res) => {
+        axios.get(`http://localhost:4000/comment?keyword=${id}`).then((res) => {
             if(res && res.data && res.data.data && res.data.data.totalPages){
                 const temp = res.data.data.totalPages
                 setMax(temp);
