@@ -10,33 +10,25 @@
 .PageSection_title::after{
   @extend %titleAffter
 }
-.PageSection-section{
-    display: grid;
-    grid-template-columns: 100%;
-}
 .PageSection-section_data{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  .PageSection-section_data-card {
+    @include card(auto);
+  }
 }
-.PageSection-section_data 
-.PageSection-section_data-card {
-    @include card(169px);
-  }
 
-  .PageSection-section_data img {
-    @include imgCard(160px);
-  }
-  
-  .PageSection-section_data .data-card_title {
-    @extend %titleCard;
-  }
-  
-  .PageSection-section_data .data-card_rating {
-    @extend %ratingCard;
-  }
+.PageSection-section_data img {
+  @include imgCard(300px);
+}
+
+.PageSection-section_data .data-card_title {
+  @extend %titleCard;
+}
+
+.PageSection-section_data .data-card_rating {
+  @extend %ratingCard;
+}
   
 .PageSection-section_data .data-card_btn {
   display: flex;
@@ -53,6 +45,25 @@
     @include btnCard();
     &:hover{
       @include btnHvCard();
+    }
+  }
+}
+@media only screen and (max-width: 78.75em){
+
+}
+@media only screen and (max-width: 62.5em){
+  .PageSection-section_data img {
+    @include imgCard(220px);
+  }
+}
+@media only screen and (max-width : 46.25em){
+    
+}
+@media only screen and (max-width : 30em){
+  .PageSection-section_data{
+    grid-template-columns: 50% 50%;
+    .PageSection-section_data-card {
+      @include card(auto);
     }
   }
 }

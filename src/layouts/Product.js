@@ -32,7 +32,6 @@ const Product = (props) => {
             menu: item.menu,
             name: item.name,
             rating: item.rating,
-            price: item.price,
             user: sessionStorage.user,
             productId: item.id
         }
@@ -112,10 +111,10 @@ const Product = (props) => {
                             <div className="rating">
                                 {handleRating(item.rating)}
                             </div>
-                            <div className="price">
-                                {/* <h5>{handlePrice(item.price)}</h5>
-                                <h5>{handlePrice(item.price, true)}</h5> */}
-                            </div>
+                            {/* <div className="price">
+                                <h5>{handlePrice(item.price)}</h5>
+                                <h5>{handlePrice(item.price, true)}</h5>
+                            </div> */}
                             <div className='data-card_btn'>
                                 <a className="button" onClick={() => addWishlist(item)}>
                                     Add to wishlist

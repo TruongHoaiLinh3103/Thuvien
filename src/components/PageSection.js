@@ -91,7 +91,6 @@ const PageSection = (props) => {
             menu: item.menu,
             name: item.name,
             rating: item.rating,
-            price: item.price,
             user: sessionStorage.user,
             productId: item.id
         }

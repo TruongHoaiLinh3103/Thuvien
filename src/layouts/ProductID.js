@@ -33,7 +33,6 @@ const ProductID = (props) => {
             menu: item.menu,
             name: item.name,
             rating: item.rating,
-            price: item.price,
             user: sessionStorage.user,
             productId: item.id
         }
@@ -60,7 +59,6 @@ const ProductID = (props) => {
                     menu: res.data.menu,
                     name: res.data.name,
                     rating: res.data.rating,
-                    price: res.data.price,
                     user: sessionStorage.user,
                     productId: res.data.id
                 }
