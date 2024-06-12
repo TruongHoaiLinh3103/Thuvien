@@ -4,17 +4,15 @@ import React, { useEffect, useState } from 'react';
 import "../styles/profile.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding } from '@fortawesome/free-regular-svg-icons';
-import { faBell, faLocationDot, faRightFromBracket, faPencil, faCheck, faBlog } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faLocationDot, faRightFromBracket, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import Bloger from './Bloger';
 import Notification from './Notification';
 
 const Profile = () => {
     const [seeMore, setSeeMore] = useState(false);
     const [cancelImg, setCancelImg] = useState(true)
-    const [commentsItem, setCommentItem] = useState(true);
-    const [notification, setNotification] = useState(false);
+    const [notification, setNotification] = useState(true);
     const [profileDetail, setProfileDetail] = useState({});
     const [bio, setBio] = useState("")
     const [company, setCompany] = useState("");
@@ -30,14 +28,6 @@ const Profile = () => {
         sessionStorage.removeItem("user");
         sessionStorage.removeItem("avatar");
         router.push("/");
-    }
-    const openCMT = () => {
-        setCommentItem(true);
-        setNotification(false);
-    }
-    const openNotifi = () => {
-        setNotification(true);
-        setCommentItem(false);
     }
     const openEditProfile = () => {
         setSeeMore(true);
@@ -186,15 +176,9 @@ const Profile = () => {
             </div>
             <div className='Profile_Page'>
                 <ul>
-                    <li onClick={() => openCMT()} title='Comments'><FontAwesomeIcon icon={faBlog} /> <span className='Profile_page-span'>Note</span></li>
-                    <li onClick={() => openNotifi()} title='Notification'><FontAwesomeIcon icon={faBell} /> <span className='Profile_page-span'>Notification</span></li>
+                    <li onClick={() => setNotification(true)} title='Notification'><FontAwesomeIcon icon={faBell} /> <span className='Profile_page-span'>Notification</span></li>
                     <li onClick={() => logOutAccount()} title='Log out'><FontAwesomeIcon icon={faRightFromBracket} /> <span className='Profile_page-span'>Log out</span></li>
                 </ul>
-                {commentsItem &&
-                    <div>
-                        <Bloger/>
-                    </div>
-                }
                 {notification &&
                     <div>
                         <Notification/>
