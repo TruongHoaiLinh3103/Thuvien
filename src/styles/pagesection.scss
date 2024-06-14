@@ -12,7 +12,8 @@
 }
 .PageSection-section_data{
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 32% 32% 32%;
+  justify-content: center;
   .PageSection-section_data-card {
     @include card(auto);
   }
@@ -61,7 +62,7 @@
 }
 @media only screen and (max-width : 30em){
   .PageSection-section_data{
-    grid-template-columns: 49% 49%;
+    grid-template-columns: 47% 47%;
     .PageSection-section_data-card {
       @include card(auto);
     }
