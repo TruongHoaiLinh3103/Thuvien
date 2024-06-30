@@ -222,7 +222,7 @@ const WishList = (props) => {
                     </div>
                 </div>
             }
-            {path === "/product/cooking" &&
+            {path === "/product/document" &&
                 <div className='WishList'>
                     <h2><b>YOU ESPEC</b>IALLY LIKE</h2>
                     <div className='WishList-Navbar'>

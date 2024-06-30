@@ -28,7 +28,7 @@ const Product = (props) => {
     }
     const addWishlist = (item) => {
         const data = {
-            img: item.imgOne,
+            img: item.img,
             menu: item.menu,
             name: item.name,
             rating: item.rating,
@@ -105,7 +105,7 @@ const Product = (props) => {
                     return(
                         <div className="card" key={item.id}>
                             <img className="product"
-                                src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
+                                src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                             <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
                             ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                             <div className="rating">
@@ -119,7 +119,10 @@ const Product = (props) => {
                                 <a className="button" onClick={() => addWishlist(item)}>
                                     Add to wishlist
                                 </a>
+                                {item.menu === "comic" ? ""
+                                :
                                 <a className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                }
                             </div>
                         </div>
                     )

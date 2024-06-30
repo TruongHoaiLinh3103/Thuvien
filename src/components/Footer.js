@@ -2,7 +2,7 @@ import React from 'react';
 import "../styles/footer.scss";
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUtensils, faBook, faPhone, faEnvelope, faMapLocation, faFaceSmile, faHouse, faHeart, faUser, faBlog} from '@fortawesome/free-solid-svg-icons';
+import { faBook, faPhone, faEnvelope, faMapLocation, faFaceSmile, faHouse, faHeart, faCode} from '@fortawesome/free-solid-svg-icons';
 const Footer = () => {
     return (
         <div className='Footer maxWidth1400px'>
@@ -24,7 +24,7 @@ const Footer = () => {
                 <ul>
                     <li><FontAwesomeIcon icon={faHouse} /><Link href="/">Home</Link></li>
                     <li><FontAwesomeIcon icon={faHeart} /><Link href="/wishlist">Wishlist</Link></li>
-                    <li><FontAwesomeIcon icon={faUtensils} /><Link href="/product/cooking">Cooking</Link></li>
+                    <li><FontAwesomeIcon icon={faCode} /><Link href="/product/document">Document</Link></li>
                     <li><FontAwesomeIcon icon={faBook} /><Link href="/product/comic">Comic</Link></li>
                 </ul>
             </div>

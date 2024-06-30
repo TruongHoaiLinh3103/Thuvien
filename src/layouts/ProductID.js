@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faBookOpen, faHouse } from '@fortawesome/free-solid-svg-icons';
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
-import SliderBanner from './SliderBanner';
 import { printfID } from '@/utils/ViewURL';
 import Comment from './Comment';
 
@@ -84,18 +83,7 @@ const ProductID = (props) => {
                     </div>
                     <div className='ProductID-detail'>
                         <div className='Product-detai-img'>
-                            <SliderBanner id={data.id}/>
-                            <div className='Product-detai-img_other'>
-                                <div>
-                                    <img src={data.imgOne} alt={data.name} />
-                                </div>
-                                <div>
-                                    <img src={data.imgTwo} alt={data.name} />
-                                </div>
-                                <div>
-                                    <img src={data.imgThree} alt={data.name} />
-                                </div>
-                            </div>
+                            <img src={data.img} alt='Product'/>
                         </div>
                         <div className='ProductID-cmt'>
                             <h3>{data.name}</h3>
@@ -104,7 +92,11 @@ const ProductID = (props) => {
                             </div>
                             <div className='ProductID-detail_name-btn'>
                                 <button onClick={() => addWishlist(data)}><FontAwesomeIcon icon={faHeart} /></button>
+                                {data.menu === "comic" ?
+                                ""
+                                :
                                 <button><FontAwesomeIcon icon={faBookOpen} /></button>
+                                }
                             </div>
                             <div className='ProductID-des-box'>
                                 {data.text}

@@ -14,7 +14,7 @@ import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 const PageSection = (props) => {
     const pathname = usePathname();
     const router = useRouter();
-    const [cooking, setCooking] = useState([]);
+    const [document, setDocument] = useState([]);
     const [comic, setComic] = useState([])
     const [product, setProduct] = useState([]);
     const [temp, setTemp] = useState('_sort=id&_order=desc')
@@ -23,7 +23,7 @@ const PageSection = (props) => {
     const [home, setHome] = useState([]);
     const [Search] = useState(typeof window !== 'undefined' && localStorage.paginateSearch ? localStorage.paginateSearch : 1);
     const [Home] = useState(typeof window !== 'undefined' && localStorage.paginateHome ? localStorage.paginateHome : 1);
-    const [Cooking, setCookingPage] = useState(typeof window !== 'undefined' && localStorage.paginateCooking ? localStorage.paginateCooking : 1);
+    const [Document, setDocumentPage] = useState(typeof window !== 'undefined' && localStorage.paginateDocument ? localStorage.paginateDocument : 1);
     const [Comic, setComicPage] = useState(typeof window !== 'undefined' && localStorage.paginateComic ? localStorage.paginateComic : 1);
     const paragraph = props.name;
 
@@ -63,10 +63,10 @@ const PageSection = (props) => {
             setHome(res.data)
         })
     }
-    const cookingPage = (Children) => {
-        localStorage.setItem("paginateCooking", Children)
-        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Children}&_limit=24&${temp}`).then((res) => {
-            setCooking(res.data)
+    const documentPage = (Children) => {
+        localStorage.setItem("paginateDocument", Children)
+        axios.get(`https://zfakeapi.vercel.app/product?menu=document&_page=${Children}&_limit=24&${temp}`).then((res) => {
+            setDocument(res.data)
         })
     }
     const comicPage = (Children) => {
@@ -81,13 +81,13 @@ const PageSection = (props) => {
         axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Comic}&_limit=24&${Children}`).then((res) => {
             setComic(res.data)
         })
-        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Cooking}&_limit=24&${Children}`).then((res) => {
-            setCooking(res.data)
+        axios.get(`https://zfakeapi.vercel.app/product?menu=document&_page=${Document}&_limit=24&${Children}`).then((res) => {
+            setDocument(res.data)
         })
     }
     const addWishlist = (item) => {
         const data = {
-            img: item.imgOne,
+            img: item.img,
             menu: item.menu,
             name: item.name,
             rating: item.rating,
@@ -127,9 +127,9 @@ const PageSection = (props) => {
         axios.get(`https://zfakeapi.vercel.app/product?_page=${Home}&_limit=24&${temp}`).then((res) => {
             setHome(res.data);
         })
-        //Cooking
-        axios.get(`https://zfakeapi.vercel.app/product?menu=cooking&_page=${Cooking}&_limit=24&${temp}`).then((res) => {
-            setCooking(res.data);
+        //Document
+        axios.get(`https://zfakeapi.vercel.app/product?menu=document&_page=${Document}&_limit=24&${temp}`).then((res) => {
+            setDocument(res.data);
         })
         //Comic
         axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Comic}&_limit=24&${temp}`).then((res) => {
@@ -137,7 +137,7 @@ const PageSection = (props) => {
         })
     }, [])
     useLayoutEffect(() => {
-        setCookingPage(typeof window !== 'undefined' && localStorage.paginateCooking ? localStorage.paginateCooking : 1);
+        setDocumentPage(typeof window !== 'undefined' && localStorage.paginateDocument ? localStorage.paginateDocument : 1);
         setComicPage(typeof window !== 'undefined' && localStorage.paginateComic ? localStorage.paginateComic : 1);
     })
     return (
@@ -151,7 +151,7 @@ const PageSection = (props) => {
                                 return(
                                     <div className='PageSection-section_data-card' key={item.id}>
                                         <img className="data-card_product"
-                                            src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
+                                            src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
@@ -181,7 +181,7 @@ const PageSection = (props) => {
                                     return(
                                         <div className='PageSection-section_data-card' key={item.id}>
                                             <img className="data-card_product"
-                                                src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
+                                                src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
 
                                             ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
@@ -206,16 +206,16 @@ const PageSection = (props) => {
                     </div>
                 </>
             }
-            {pathname === "/product/cooking" && 
+            {pathname === "/product/document" && 
                 <>
                     <Classify rating={ratingReq}/>
                     <section className='PageSection-section'>
                         <div className='PageSection-section_data'>
-                            {cooking.map((item, index) => {
+                            {document.map((item, index) => {
                                 return(
                                     <div className='PageSection-section_data-card' key={item.id}> 
                                         <img className="data-card_product"
-                                            src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
+                                            src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">
@@ -230,8 +230,8 @@ const PageSection = (props) => {
                             })}
                         </div>
                     </section>
-                    {cooking.length === 0  ? "" :
-                        <BtnListProduct page={"cooking"} numberPage={cookingPage} check={checkReq} filter={temp} active={parseInt(Cooking)} />
+                    {document.length === 0  ? "" :
+                        <BtnListProduct page={"document"} numberPage={documentPage} check={checkReq} filter={temp} active={parseInt(Document)} />
                     }
                 </>
             }
@@ -244,7 +244,7 @@ const PageSection = (props) => {
                                 return(
                                     <div className='PageSection-section_data-card' key={item.id}>
                                         <img className="data-card_product"
-                                            src={item.imgOne} alt={`Foto do produtos - ${item.name}`}/>
+                                            src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                         <div className="data-card_rating">

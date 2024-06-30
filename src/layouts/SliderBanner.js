@@ -14,10 +14,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import { usePathname } from 'next/navigation';
-import { convertSlug } from '@/utils/ViewURL';
 
-const SliderBanner = (props) => {
-    const [data, setData] = useState({});
+const SliderBanner = () => {
     const pathname = usePathname();
     const [banner, setbanner] = useState([]);
     var settings = {
@@ -35,12 +33,6 @@ const SliderBanner = (props) => {
         pauseOnHover: false
     }
     useEffect(() => {
-        const id = props.id;
-        if(id){
-            axios.get(`https://zfakeapi.vercel.app/product/${id}`).then((res) => {
-                setData(res.data)
-            });
-        }
         axios.get("https://zfakeapi.vercel.app/banner").then((res) => {
             setbanner(res.data)
         });
@@ -93,18 +85,6 @@ const SliderBanner = (props) => {
                     <Image src={ic6} alt='banner'/>
                 </div>
             </Slider>}
-            {pathname === `/product/${data.menu}/${convertSlug(data.name)}-${data.id}.html` &&
-            <Slider {...settings} className="SliderCarousel">
-                <div>
-                    <img src={data.imgOne} alt='Product'/>
-                </div>
-                <div>
-                    <img src={data.imgTwo} alt='Product'/>
-                </div>
-                <div>
-                    <img src={data.imgThree} alt='Product'/>
-                </div>
-            </Slider>}
             {pathname === "/product/comic" && banner[0] &&
             <Slider {...settings} className="SliderCarousel">
                 <div>
@@ -126,7 +106,7 @@ const SliderBanner = (props) => {
                     <img src={banner[0].imgSix} alt='Banner'/>
                 </div>
             </Slider>}
-            {pathname === "/product/cooking" && banner[1] &&
+            {pathname === "/product/document" && banner[1] &&
             <Slider {...settings} className="SliderCarousel">
                 <div>
                     <img src={banner[1].imgOne} alt='Banner'/>

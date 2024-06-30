@@ -5,7 +5,7 @@ import "../styles/header.scss";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faUser, faHeart, faMagnifyingGlass, faMartiniGlass, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faUser, faHeart, faMagnifyingGlass, faBook, faCode } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import ViewProduct from '@/utils/ViewProduct';
 
@@ -90,7 +90,7 @@ const Header = () => {
                             return(
                                 <div key={item.id} className='Nav_top_searchToLoop-item'>
                                     <div>
-                                        <img src={item.imgOne} alt={item.name} />
+                                        <img src={item.img} alt={item.name} />
                                     </div>
                                     <span onClick={() => setLoopCheck(false)}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></span>
                                 </div>
@@ -112,7 +112,7 @@ const Header = () => {
                         return(
                             <div key={item.id} className='Nav_top_searchToLoop-item'>
                                 <div>
-                                    <img src={item.imgOne} alt={item.name} />
+                                    <img src={item.img} alt={item.name} />
                                 </div>
                                 <span onClick={() => setSearchCheck(false)}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></span>
                             </div>
@@ -125,7 +125,7 @@ const Header = () => {
                 <nav className='Nav-navbar'>
                     <ul className='Nav-navbar-list'>
                         <li title='Home'><Link href="/"><FontAwesomeIcon icon={faHouse} /></Link></li>
-                        <li title='Cooking'><Link href="/product/cooking"><FontAwesomeIcon icon={faMartiniGlass} /></Link></li>
+                        <li title='Document'><Link href="/product/document"><FontAwesomeIcon icon={faCode} /></Link></li>
                         <li title='Comic'><Link href="/product/comic"><FontAwesomeIcon icon={faBook} /></Link></li>
                         <li title='Account'><Link href="/user"><FontAwesomeIcon icon={faUser} /></Link></li>
                     </ul>

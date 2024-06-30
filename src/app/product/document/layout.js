@@ -1,9 +1,9 @@
 export const metadata = {
-    title: 'Cooking',
+    title: 'Document',
     description: 'Library in Anikey',
   }
   
-  export default function CookingLayout({ children }) {
+  export default function DocumentLayout({ children }) {
     return (
       <>
           {children}
