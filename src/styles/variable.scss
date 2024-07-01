@@ -42,14 +42,8 @@ $ctColor: white;
     height: $heghtBox;
 }
 
-%navbar{
-    color: white;
-    text-decoration: none;
-    text-shadow: $textShadow;
-    user-select: none;
-}
 %navbarHover{
-    color: rgb(244, 171, 125);
+    background-color: rgb(244, 171, 125);
     transition: all .3s linear;
 }
 %title{

@@ -12,7 +12,7 @@
 }
 .PageSection-section_data{
   display: grid;
-  grid-template-columns: 32% 32% 32%;
+  grid-template-columns: 16.5% 16.5% 16.5% 16.5% 16.5% 16.5%;
   justify-content: center;
   .PageSection-section_data-card {
     @include card(auto);
@@ -20,7 +20,7 @@
 }
 
 .PageSection-section_data img {
-  @include imgCard(300px);
+  @include imgCard(250px);
 }
 
 .PageSection-section_data .data-card_title {
@@ -50,15 +50,28 @@
   }
 }
 @media only screen and (max-width: 78.75em){
-
+  .PageSection-section_data{
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    .PageSection-section_data-card {
+      @include card(auto);
+    }
+  }
 }
 @media only screen and (max-width: 62.5em){
-  .PageSection-section_data img {
-    @include imgCard(220px);
+  .PageSection-section_data{
+    grid-template-columns: 25% 25% 25% 25%;
+    .PageSection-section_data-card {
+      @include card(auto);
+    }
   }
 }
 @media only screen and (max-width : 46.25em){
-    
+  .PageSection-section_data{
+    grid-template-columns: 33% 33% 33%;
+    .PageSection-section_data-card {
+      @include card(auto);
+    }
+  }
 }
 @media only screen and (max-width : 30em){
   .PageSection-section_data{

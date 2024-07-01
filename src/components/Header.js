@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import "../styles/header.scss";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faUser, faHeart, faMagnifyingGlass, faBook, faCode } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faMagnifyingGlass, faBook, faCode } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import ViewProduct from '@/utils/ViewProduct';
 
@@ -101,11 +101,13 @@ const Header = () => {
                 </div>
                 <nav className='Nav-navbar'>
                     <ul className='Nav-navbar-list' style={{padding: "0px 10px"}}>
+                        <li title='Document' style={{border: "1px solid black", borderRadius: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px"}}><Link href="/product/document"><FontAwesomeIcon icon={faCode} style={{color: "black", fontSize: "20px"}}/></Link></li>
+                        <li title='Comic' style={{border: "1px solid black", borderRadius: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px"}}><Link href="/product/comic"><FontAwesomeIcon icon={faBook} style={{color: "black", fontSize: "20px"}}/></Link></li>
                         <li title='Wishtlist' style={{border: "1px solid black", borderRadius: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "10px"}}><Link href="/wishlist"><FontAwesomeIcon icon={faHeart} style={{color: "black", fontSize: "20px"}}/></Link></li>
                     </ul>
                 </nav>
             </div>
-            <div className='Nav_center'>
+            <div className='Nav-down'>
                 <input type='text' placeholder='Search?' className='search-ip' ref={search} onKeyDown={(e) => nextSearchEnter(e)} onChange={() => searchSearch(search.current.value)}/>
                 <div className='Nav_top_searchToSearch' style={{display: searchCheck ? "block" : "none"}}>
                     {data.map((item) => {
@@ -120,16 +122,6 @@ const Header = () => {
                     })}
                 </div>
                 <span onClick={() => nextSearch()} className='search-span'><FontAwesomeIcon icon={faMagnifyingGlass} /></span>
-            </div>
-            <div className='Nav_down'>
-                <nav className='Nav-navbar'>
-                    <ul className='Nav-navbar-list'>
-                        <li title='Home'><Link href="/"><FontAwesomeIcon icon={faHouse} /></Link></li>
-                        <li title='Document'><Link href="/product/document"><FontAwesomeIcon icon={faCode} /></Link></li>
-                        <li title='Comic'><Link href="/product/comic"><FontAwesomeIcon icon={faBook} /></Link></li>
-                        <li title='Account'><Link href="/user"><FontAwesomeIcon icon={faUser} /></Link></li>
-                    </ul>
-                </nav>
             </div>
         </nav>
     );
