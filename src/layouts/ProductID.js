@@ -7,7 +7,6 @@ import { faHeart, faBookOpen, faHouse } from '@fortawesome/free-solid-svg-icons'
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
 import { printfID } from '@/utils/ViewURL';
-import Comment from './Comment';
 
 const ProductID = (props) => {
     const [data, setData] = useState({});
@@ -26,47 +25,10 @@ const ProductID = (props) => {
         
         return htmlToReturn;
     }
-    const addWishlist = (item) => {
-        const data = {
-            img: item.imgOne,
-            menu: item.menu,
-            name: item.name,
-            rating: item.rating,
-            user: sessionStorage.user,
-            productId: item.id
-        }
-        axios.post("http://localhost:4000/wishlist", data, {
-            headers: {
-                accessToken: sessionStorage.getItem("accessToken")
-            }
-        }).then((res) => {
-            if(res.data.error){
-                alert(res.data.error)
-            }else{
-                alert(res.data);
-                router.push("/wishlist");
-            }
-        })
-    }
     useEffect(() => {
         const id = printfID(props.id);
         axios.get(`https://zfakeapi.vercel.app/product/${id}`).then((res) => {
             setData(res.data);
-            if(sessionStorage.user){
-                const data = {
-                    img: res.data.imgOne,
-                    menu: res.data.menu,
-                    name: res.data.name,
-                    rating: res.data.rating,
-                    user: sessionStorage.user,
-                    productId: res.data.id
-                }
-                axios.post("http://localhost:4000/history", data, {
-                    headers: {
-                        accessToken: sessionStorage.getItem("accessToken")
-                    }
-                })
-            }
         });
     },[])
     const Data = Object.keys(data).length === 0
@@ -91,7 +53,7 @@ const ProductID = (props) => {
                                 {handleRating(data.rating)}
                             </div>
                             <div className='ProductID-detail_name-btn'>
-                                <button onClick={() => addWishlist(data)}><FontAwesomeIcon icon={faHeart} /></button>
+                                <button><FontAwesomeIcon icon={faHeart} /></button>
                                 {data.menu === "comic" ?
                                 ""
                                 :
@@ -102,7 +64,6 @@ const ProductID = (props) => {
                                 {data.text}
                             </div>
                         </div>
-                        <Comment id={props.id} data={data}/>
                     </div>
                 </div>
             }

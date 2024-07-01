@@ -26,29 +26,6 @@ const Product = (props) => {
         }
         return htmlToReturn;
     }
-    const addWishlist = (item) => {
-        const data = {
-            img: item.img,
-            menu: item.menu,
-            name: item.name,
-            rating: item.rating,
-            user: sessionStorage.user,
-            productId: item.id
-        }
-        axios.post("http://localhost:4000/wishlist", data, {
-            headers: {
-                accessToken: sessionStorage.getItem("accessToken")
-            }
-        }).then((res) => {
-            if(res.data.error){
-                alert(res.data.error);
-                router.push("/user")
-            }else{
-                alert(res.data);
-                router.push("/wishlist");
-            }
-        })
-    }
     // const handlePrice = (price, discount = false) => {
     //     if (discount) {
     //         price *= 0.9;
@@ -116,7 +93,7 @@ const Product = (props) => {
                                 <h5>{handlePrice(item.price, true)}</h5>
                             </div> */}
                             <div className='data-card_btn'>
-                                <a className="button" onClick={() => addWishlist(item)}>
+                                <a className="button">
                                     Add to wishlist
                                 </a>
                                 {item.menu === "comic" ? ""

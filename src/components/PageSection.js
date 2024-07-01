@@ -85,29 +85,6 @@ const PageSection = (props) => {
             setDocument(res.data)
         })
     }
-    const addWishlist = (item) => {
-        const data = {
-            img: item.img,
-            menu: item.menu,
-            name: item.name,
-            rating: item.rating,
-            user: sessionStorage.user,
-            productId: item.id
-        }
-        axios.post("http://localhost:4000/wishlist", data, {
-            headers: {
-                accessToken: sessionStorage.getItem("accessToken")
-            }
-        }).then((res) => {
-            if(res.data.error){
-                alert(res.data.error)
-                router.push("/user")
-            }else{
-                alert(res.data);
-                router.push("/wishlist");
-            }
-        })
-    }
     useEffect(() => {
         //Search
         axios.get(`https://zfakeapi.vercel.app/product?_page=${Search}&_limit=24&q=${paragraph}&${temp}`).then((res) => {
@@ -158,8 +135,11 @@ const PageSection = (props) => {
                                             {handleRating(item.rating)}
                                         </div>
                                         <div className='data-card_btn'>
-                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>
+                                            <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
+                                            {item.menu === "comic" ? ""
+                                            :
                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                            }
                                         </div>
                                     </div>
                                 )
@@ -189,8 +169,11 @@ const PageSection = (props) => {
                                                 {handleRating(item.rating)}
                                             </div>
                                             <div className='data-card_btn'>
-                                                <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>
+                                                <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
+                                                {item.menu === "comic" ? ""
+                                                :
                                                 <a className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                                }
                                             </div>
                                         </div>
                                     )
@@ -222,7 +205,7 @@ const PageSection = (props) => {
                                             {handleRating(item.rating)}
                                         </div>
                                         <div className='data-card_btn'>
-                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>
+                                            <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
                                             <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                         </div>
                                     </div>
@@ -251,8 +234,7 @@ const PageSection = (props) => {
                                             {handleRating(item.rating)}
                                         </div>
                                         <div className='data-card_btn'>
-                                            <a className="button" onClick={() => addWishlist(item)}><FontAwesomeIcon icon={faHeart} /></a>
-                                            <a className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                            <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
                                         </div>
                                     </div>
                                 )
