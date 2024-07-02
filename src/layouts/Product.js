@@ -6,13 +6,10 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ViewProduct from '@/utils/ViewProduct';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
-import { useRouter } from 'next/navigation';
 
 const Product = (props) => {
-    const router = useRouter();
     const handleRating = (rating) => {
         let htmlToReturn = "";
         const maximumRatingStars = 5;
@@ -84,7 +81,7 @@ const Product = (props) => {
                             <img className="product"
                                 src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                             <h4 className="title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
-                            ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
+                            ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                             <div className="rating">
                                 {handleRating(item.rating)}
                             </div>
@@ -98,7 +95,7 @@ const Product = (props) => {
                                 </a>
                                 {item.menu === "comic" ? ""
                                 :
-                                <a className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                 }
                             </div>
                         </div>

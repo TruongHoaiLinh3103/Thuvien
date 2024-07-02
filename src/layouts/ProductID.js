@@ -7,9 +7,6 @@ import { faHeart, faBookOpen, faHouse } from '@fortawesome/free-solid-svg-icons'
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
 import { printfID } from '@/utils/ViewURL';
-import PageSection from '@/components/PageSection';
-import Product from './Product';
-import ProductMenu from './ProductMenu';
 
 const ProductID = (props) => {
     const [data, setData] = useState({});
@@ -37,7 +34,7 @@ const ProductID = (props) => {
     const Data = Object.keys(data).length === 0
     return (
         <div>
-            {!Data && 
+            {!Data &&
                 <div className='ProductID'>
                     <div className='ProductID-title'>
                         <FontAwesomeIcon icon={faHouse} onClick={() => router.push("/")}/>
@@ -60,7 +57,7 @@ const ProductID = (props) => {
                                 {data.menu === "comic" ?
                                 ""
                                 :
-                                <button><FontAwesomeIcon icon={faBookOpen} /></button>
+                                <button onClick={() => router.push(data.text)}><FontAwesomeIcon icon={faBookOpen} /></button>
                                 }
                             </div>
                             <div className='ProductID-des-box'>

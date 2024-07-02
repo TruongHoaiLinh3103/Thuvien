@@ -10,7 +10,6 @@ import BtnListProduct from './BtnListProduct';
 import BtnHome from './BtnHome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { convertSlug } from '@/utils/ViewURL';
 
 const PageSection = (props) => {
     const pathname = usePathname();
@@ -130,7 +129,7 @@ const PageSection = (props) => {
                                         <img className="data-card_product"
                                             src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
-                                        ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
+                                        ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
                                         </div>
@@ -138,7 +137,7 @@ const PageSection = (props) => {
                                             <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
                                             {item.menu === "comic" ? ""
                                             :
-                                            <a className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                            <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                             }
                                         </div>
                                     </div>
@@ -163,8 +162,7 @@ const PageSection = (props) => {
                                             <img className="data-card_product"
                                                 src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-
-                                            ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
+                                            ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                             <div className="data-card_rating">
                                                 {handleRating(item.rating)}
                                             </div>
@@ -172,7 +170,7 @@ const PageSection = (props) => {
                                                 <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
                                                 {item.menu === "comic" ? ""
                                                 :
-                                                <a className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                                <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                 }
                                             </div>
                                         </div>
@@ -200,13 +198,13 @@ const PageSection = (props) => {
                                         <img className="data-card_product"
                                             src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                        ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
+                                        ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
                                         </div>
                                         <div className='data-card_btn'>
                                             <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
-                                            <a className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                            <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                         </div>
                                     </div>
                                 )
@@ -229,7 +227,7 @@ const PageSection = (props) => {
                                         <img className="data-card_product"
                                             src={item.img} alt={`Foto do produtos - ${item.name}`}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                        ><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
+                                        ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                         <div className="data-card_rating">
                                             {handleRating(item.rating)}
                                         </div>

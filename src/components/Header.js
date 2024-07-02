@@ -92,7 +92,7 @@ const Header = () => {
                                     <div>
                                         <img src={item.img} alt={item.name} />
                                     </div>
-                                    <span onClick={() => setLoopCheck(false)}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></span>
+                                    <span onClick={() => setLoopCheck(false)}><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></span>
                                 </div>
                             )
                         })}
@@ -116,7 +116,7 @@ const Header = () => {
                                 <div>
                                     <img src={item.img} alt={item.name} />
                                 </div>
-                                <span onClick={() => setSearchCheck(false)}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></span>
+                                <span onClick={() => setSearchCheck(false)}><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></span>
                             </div>
                         )
                     })}

@@ -51,7 +51,7 @@
 }
 @media only screen and (max-width: 78.75em){
   .PageSection-section_data{
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 19% 19% 19% 19% 19%;
     .PageSection-section_data-card {
       @include card(auto);
     }
@@ -59,7 +59,7 @@
 }
 @media only screen and (max-width: 62.5em){
   .PageSection-section_data{
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 24% 24% 24% 24%;
     .PageSection-section_data-card {
       @include card(auto);
     }
@@ -67,7 +67,7 @@
 }
 @media only screen and (max-width : 46.25em){
   .PageSection-section_data{
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 32% 32% 32%;
     .PageSection-section_data-card {
       @include card(auto);
     }
