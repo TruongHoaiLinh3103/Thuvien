@@ -5,7 +5,6 @@ const inter = Inter({ subsets: ['latin'] })
 import "../styles/app.scss";
 import { applicationIdJsonone } from '@/story/applicationIdJsonone';
 import StoreProvider from './storeprovider';
-// import { PersistGate } from 'redux-persist/integration/react';
 
 export const metadata = {
   title: 'LisohAnikey',
@@ -25,9 +24,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} maxWidth1400px`}>
         <Header/>
           <StoreProvider>
-          {/* <PersistGate loading={null} persistor={store}> */}
             {children}
-          {/* </PersistGate> */}
           </StoreProvider>
         <Footer/>
         <script

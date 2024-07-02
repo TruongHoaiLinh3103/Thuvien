@@ -10,8 +10,8 @@ import BtnListProduct from './BtnListProduct';
 import BtnHome from './BtnHome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { useSelector, useDispatch } from 'react-redux'
-import { DELETE__COMMENT, ADD__COMMENT } from '../redux/reduccer/counterReducer';
+import { useDispatch } from 'react-redux'
+import { ADD__COMMENT } from '../redux/reduccer/counterReducer';
 
 const PageSection = (props) => {
     const pathname = usePathname();
@@ -89,7 +89,16 @@ const PageSection = (props) => {
         })
     }
     const addWL = (data) => {
-        dispatch(ADD__COMMENT(data));
+        const temp = {
+            id: Math.random() * 10000,
+            img: data.img,
+            name: data.name,
+            rating: data.rating,
+            text: data.text,
+            menu: data.menu,
+            prId: data.id
+        }
+        dispatch(ADD__COMMENT(temp));
         router.push("/wishlist")
     }
     useEffect(() => {

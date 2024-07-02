@@ -16,7 +16,7 @@ export const counterSlice = createSlice({
       }
     },
     ADD__COMMENT: (state, action) => {
-      let chats = {id: action.payload.id, img:action.payload.img, name: action.payload.name, rating: action.payload.rating, text: action.payload.text, menu: action.payload.menu}
+      let chats = {id: action.payload.id, img:action.payload.img, name: action.payload.name, rating: action.payload.rating, text: action.payload.text, menu: action.payload.menu, prId: action.payload.prId}
       return{
         ...state, wishlist:[...state.wishlist, chats]
     } 

@@ -31,8 +31,8 @@ const WishList = () => {
 
         return htmlToReturn;
     }
-    const deleteWishlist = (id) => {
-        dispatch(DELETE__COMMENT(id));
+    const deleteWishlist = (item) => {
+        dispatch(DELETE__COMMENT(item.id));
     }
     // const resetPage = async (Children) => {
     //     setNumberPage(Children)
@@ -65,12 +65,12 @@ const WishList = () => {
                                             <img src={item.img} alt='Foto do produtos'/>
                                         </div>
                                         <div className='WishList-Item_Describe'>
-                                            <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.productId} menu={item.menu}></ViewProduct></h4>
+                                            <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.prId} menu={item.menu}></ViewProduct></h4>
                                             <div className="Item_Describe-rating">
                                                 {handleRating(item.rating)}
                                             </div>
                                             <div className='Item_Describe-btn'>
-                                                <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
+                                                <a className="button" onClick={() => deleteWishlist(item)}><FontAwesomeIcon icon={faXmark} /></a>
                                                 <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                             </div>
                                         </div>
