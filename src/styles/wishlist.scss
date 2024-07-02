@@ -1,0 +1,118 @@
+@import "./variable.scss";
+
+.WishList-Navbar{
+    @include ProductID--box(590px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}
+.WishList, .HistoryAccess{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0px 10px
+}
+.WishList h2, .HistoryAccess h2{
+    @extend %title;
+    text-transform: uppercase;
+}
+.WishList h2::after, .HistoryAccess h2::after{
+    @extend %titleAffter;
+}
+.WishList p, .HistoryAccess p{
+    font-size: 24px;
+    color: rgb(31, 31, 31);
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    margin: 0px 10px;
+    user-select: none;
+}
+.WishList img, .HistoryAccess img{
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.WishList-Body, .HistoryAccess-Body{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.WishList-Item, .HistoryAccess-Item{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 10px;
+    .WishList-Item_img, .HistoryAccess-Item_img{
+        height: 150px;
+        width: 105.5px;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .WishList-Item_Describe, .HistoryAccess-Item_Describe{
+        @include card(100%);
+        h4{
+            @extend %titleCard;
+        }
+        .Item_Describe-rating{
+            @extend %ratingCard;
+        }
+        .Item_Describe-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a.button:nth-child(1){
+                @include btnCard(rgb(241, 60, 60));
+                &:hover{
+                    @include btnHvCard(white, rgb(241, 60, 60));
+                }
+            }
+            a.button:nth-child(2){
+                margin-left: 10px;
+                @include btnCard();
+                &:hover{
+                    @include btnHvCard();
+                }
+            }
+        }
+    }
+}
+.WishList-Total{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.WishList-Total_d, .WishList-Total_btn{
+    display: flex;
+    align-items: center;
+}
+.WishList-Total_d p{
+    color: red;
+    font-size: 20px;
+}
+.WishList-Total_btn button{
+    padding: 15px;
+    color: white;
+    background-color: black;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+}

@@ -7,10 +7,13 @@ import { faHeart, faBookOpen, faHouse } from '@fortawesome/free-solid-svg-icons'
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
 import { printfID } from '@/utils/ViewURL';
+import { useDispatch } from 'react-redux'
+import { ADD__COMMENT } from '../redux/reduccer/counterReducer';
 
 const ProductID = (props) => {
     const [data, setData] = useState({});
     const router = useRouter();
+    const dispatch = useDispatch();
     const handleRating = (rating) => {
         let htmlToReturn = "";
         const maximumRatingStars = 5;
@@ -24,6 +27,10 @@ const ProductID = (props) => {
         }
         
         return htmlToReturn;
+    }
+    const addWL = (data) => {
+        dispatch(ADD__COMMENT(data));
+        router.push("/wishlist")
     }
     useEffect(() => {
         const id = printfID(props.id);
@@ -53,7 +60,7 @@ const ProductID = (props) => {
                                 {handleRating(data.rating)}
                             </div>
                             <div className='ProductID-detail_name-btn'>
-                                <button><FontAwesomeIcon icon={faHeart} /></button>
+                                <button onClick={() => addWL(data)}><FontAwesomeIcon icon={faHeart} /></button>
                                 {data.menu === "comic" ?
                                 ""
                                 :

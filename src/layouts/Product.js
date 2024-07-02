@@ -8,8 +8,13 @@ import 'slick-carousel/slick/slick-theme.css';
 import ViewProduct from '@/utils/ViewProduct';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux'
+import { ADD__COMMENT } from '../redux/reduccer/counterReducer';
 
 const Product = (props) => {
+    const router = useRouter();
+    const dispatch = useDispatch();
     const handleRating = (rating) => {
         let htmlToReturn = "";
         const maximumRatingStars = 5;
@@ -22,6 +27,10 @@ const Product = (props) => {
             htmlToReturn += " ✩";
         }
         return htmlToReturn;
+    }
+    const addWL = (data) => {
+        dispatch(ADD__COMMENT(data));
+        router.push("/wishlist")
     }
     // const handlePrice = (price, discount = false) => {
     //     if (discount) {
@@ -90,7 +99,7 @@ const Product = (props) => {
                                 <h5>{handlePrice(item.price, true)}</h5>
                             </div> */}
                             <div className='data-card_btn'>
-                                <a className="button">
+                                <a className="button" onClick={() => addWL(item)}>
                                     Add to wishlist
                                 </a>
                                 {item.menu === "comic" ? ""

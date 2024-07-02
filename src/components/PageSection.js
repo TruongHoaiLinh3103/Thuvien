@@ -10,6 +10,8 @@ import BtnListProduct from './BtnListProduct';
 import BtnHome from './BtnHome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from 'react-redux'
+import { DELETE__COMMENT, ADD__COMMENT } from '../redux/reduccer/counterReducer';
 
 const PageSection = (props) => {
     const pathname = usePathname();
@@ -25,6 +27,8 @@ const PageSection = (props) => {
     const [Document, setDocumentPage] = useState(typeof window !== 'undefined' && localStorage.paginateDocument ? localStorage.paginateDocument : 1);
     const [Comic, setComicPage] = useState(typeof window !== 'undefined' && localStorage.paginateComic ? localStorage.paginateComic : 1);
     const paragraph = props.name;
+    const dispatch = useDispatch();
+    const router = useRouter(); 
 
     const handleRating = (rating) => {
         let htmlToReturn = "";
@@ -84,6 +88,10 @@ const PageSection = (props) => {
             setDocument(res.data)
         })
     }
+    const addWL = (data) => {
+        dispatch(ADD__COMMENT(data));
+        router.push("/wishlist")
+    }
     useEffect(() => {
         //Search
         axios.get(`https://zfakeapi.vercel.app/product?_page=${Search}&_limit=24&q=${paragraph}&${temp}`).then((res) => {
@@ -134,7 +142,7 @@ const PageSection = (props) => {
                                             {handleRating(item.rating)}
                                         </div>
                                         <div className='data-card_btn'>
-                                            <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
+                                            <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
                                             {item.menu === "comic" ? ""
                                             :
                                             <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
@@ -167,7 +175,7 @@ const PageSection = (props) => {
                                                 {handleRating(item.rating)}
                                             </div>
                                             <div className='data-card_btn'>
-                                                <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
+                                                <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
                                                 {item.menu === "comic" ? ""
                                                 :
                                                 <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
@@ -203,7 +211,7 @@ const PageSection = (props) => {
                                             {handleRating(item.rating)}
                                         </div>
                                         <div className='data-card_btn'>
-                                            <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
+                                            <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
                                             <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                         </div>
                                     </div>
@@ -232,7 +240,7 @@ const PageSection = (props) => {
                                             {handleRating(item.rating)}
                                         </div>
                                         <div className='data-card_btn'>
-                                            <a className="button" ><FontAwesomeIcon icon={faHeart} /></a>
+                                            <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
                                         </div>
                                     </div>
                                 )
