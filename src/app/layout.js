@@ -4,7 +4,7 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 import "../styles/app.scss";
 import { applicationIdJsonone } from '@/story/applicationIdJsonone';
-import StoreProvider from './StoreProvider';
+import StoreProvider from './storeprovider';
 // import { PersistGate } from 'redux-persist/integration/react';
 
 export const metadata = {
