@@ -99,10 +99,10 @@ const Product = (props) => {
                                 <h5>{handlePrice(item.price, true)}</h5>
                             </div> */}
                             <div className='data-card_btn'>
+                                {item.menu === "comic" ?
                                 <a className="button" onClick={() => addWL(item)}>
                                     Add to wishlist
                                 </a>
-                                {item.menu === "comic" ? ""
                                 :
                                 <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                 }

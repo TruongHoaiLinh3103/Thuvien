@@ -142,8 +142,8 @@ const PageSection = (props) => {
                                             {handleRating(item.rating)}
                                         </div>
                                         <div className='data-card_btn'>
+                                            {item.menu === "comic" ?
                                             <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
-                                            {item.menu === "comic" ? ""
                                             :
                                             <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                             }
@@ -175,8 +175,8 @@ const PageSection = (props) => {
                                                 {handleRating(item.rating)}
                                             </div>
                                             <div className='data-card_btn'>
+                                                {item.menu === "comic" ?
                                                 <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
-                                                {item.menu === "comic" ? ""
                                                 :
                                                 <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                 }
@@ -211,7 +211,6 @@ const PageSection = (props) => {
                                             {handleRating(item.rating)}
                                         </div>
                                         <div className='data-card_btn'>
-                                            <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
                                             <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                         </div>
                                     </div>

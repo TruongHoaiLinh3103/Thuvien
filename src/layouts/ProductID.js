@@ -60,9 +60,8 @@ const ProductID = (props) => {
                                 {handleRating(data.rating)}
                             </div>
                             <div className='ProductID-detail_name-btn'>
-                                <button onClick={() => addWL(data)}><FontAwesomeIcon icon={faHeart} /></button>
                                 {data.menu === "comic" ?
-                                ""
+                                <button onClick={() => addWL(data)}><FontAwesomeIcon icon={faHeart} /></button>
                                 :
                                 <button onClick={() => router.push(data.text)}><FontAwesomeIcon icon={faBookOpen} /></button>
                                 }

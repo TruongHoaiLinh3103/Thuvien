@@ -14,7 +14,7 @@ import { DELETE__COMMENT } from '../redux/reduccer/counterReducer';
 
 const WishList = () => {
     const path = usePathname();
-    const [wishlist, setWishList] = useState(useSelector((state) => state.counter.wishlist))
+    const data = useSelector((state) => state.counter.wishlist);
     const dispatch = useDispatch();
 
     const handleRating = (rating) => {
@@ -43,24 +43,22 @@ const WishList = () => {
     //         }
     //     }
     // }
-    // useEffect(() => {
-    //     if(data.length > 0){
-    //         setWishList(data)
-    //     }
-    // }, [])
+    useEffect(() => {
+        
+    }, [])
     return (
         <>
             {path === "/wishlist" &&
                 <div className='WishList'>
                     <h2><b>YOU ESPEC</b>IALLY LIKE</h2>
-                    {wishlist.length === 0 ?
+                    {data.length === 0 ?
                         <>
                             <p>There are no products liked!</p>
                             <Image src={img} alt='Not wishlist!'/>
                         </>
                         :
                         <div className='WishList-Body'>
-                            {wishlist.map((item) => {
+                            {data.map((item) => {
                                 return(
                                     <div key={item.id} className='WishList-Item'>
                                         <div className='WishList-Item_img'>
@@ -73,7 +71,7 @@ const WishList = () => {
                                             </div>
                                             <div className='Item_Describe-btn'>
                                                 <a className="button" onClick={() => deleteWishlist(item.id)}><FontAwesomeIcon icon={faXmark} /></a>
-                                                <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                                <a className="button"><FontAwesomeIcon icon={faBook} /></a>
                                             </div>
                                         </div>
                                     </div>
