@@ -10,10 +10,10 @@ import BtnListProduct from './BtnListProduct';
 import BtnHome from './BtnHome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { convertSlug } from '@/utils/ViewURL';
 
 const PageSection = (props) => {
     const pathname = usePathname();
-    const router = useRouter();
     const [document, setDocument] = useState([]);
     const [comic, setComic] = useState([])
     const [product, setProduct] = useState([]);

@@ -7,6 +7,9 @@ import { faHeart, faBookOpen, faHouse } from '@fortawesome/free-solid-svg-icons'
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
 import { printfID } from '@/utils/ViewURL';
+import PageSection from '@/components/PageSection';
+import Product from './Product';
+import ProductMenu from './ProductMenu';
 
 const ProductID = (props) => {
     const [data, setData] = useState({});
