@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import img from "../../public/cart-empty.png";
 import "../styles/wishlist.scss";
 import Image from 'next/image';
@@ -8,9 +8,8 @@ import { usePathname } from 'next/navigation';
 import ViewProduct from '@/utils/ViewProduct';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faXmark } from '@fortawesome/free-solid-svg-icons';
-import BtnWishlist from '@/components/BtnWishlist';
-import { useSelector, useDispatch } from 'react-redux'
-import { DELETE__COMMENT } from '../redux/reduccer/counterReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { ADD__COMMENT } from '../redux/reduccer/counterReducer';
 
 const WishList = () => {
     const path = usePathname();
@@ -32,20 +31,8 @@ const WishList = () => {
         return htmlToReturn;
     }
     const deleteWishlist = (item) => {
-        dispatch(DELETE__COMMENT(item.id));
+        dispatch(ADD__COMMENT(item));
     }
-    // const resetPage = async (Children) => {
-    //     setNumberPage(Children)
-    //     if(wishlist.length > 0){
-    //         const res = await axios.get(`http://localhost:4000/wishlist?keyword=${sessionStorage.user}&page=${Children}&limit=24&sortBy=desc`)
-    //         if(res && res.data && res.data.data && res.data.data.data){
-    //             setWishList(res.data.data.data);
-    //         }
-    //     }
-    // }
-    useEffect(() => {
-        
-    }, [])
     return (
         <>
             {path === "/wishlist" &&
@@ -65,7 +52,7 @@ const WishList = () => {
                                             <img src={item.img} alt='Foto do produtos'/>
                                         </div>
                                         <div className='WishList-Item_Describe'>
-                                            <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.prId} menu={item.menu}></ViewProduct></h4>
+                                            <h4 title={item.name} style={{textAlign: "center", cursor:"pointer"}}><ViewProduct name={item.name} id={item.id} menu={item.menu}></ViewProduct></h4>
                                             <div className="Item_Describe-rating">
                                                 {handleRating(item.rating)}
                                             </div>

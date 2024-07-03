@@ -89,16 +89,7 @@ const PageSection = (props) => {
         })
     }
     const addWL = (data) => {
-        const temp = {
-            id: Math.random() * 10000,
-            img: data.img,
-            name: data.name,
-            rating: data.rating,
-            text: data.text,
-            menu: data.menu,
-            prId: data.id
-        }
-        dispatch(ADD__COMMENT(temp));
+        dispatch(ADD__COMMENT(data));
         router.push("/wishlist")
     }
     useEffect(() => {
