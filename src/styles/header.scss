@@ -22,8 +22,9 @@
             text-shadow: $textShadow;
             font-family: 'Nothing You Could Do', cursive;
             user-select: none;
-            padding: 0px 10px;
             cursor: pointer;
+            width: 130px;
+            text-align: center;
         }
     }
 }
