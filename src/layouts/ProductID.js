@@ -3,17 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faBookOpen, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
 import { printfID } from '@/utils/ViewURL';
-import { useDispatch } from 'react-redux'
-import { ADD__COMMENT } from '../redux/reduccer/counterReducer';
 
 const ProductID = (props) => {
     const [data, setData] = useState({});
     const router = useRouter();
-    const dispatch = useDispatch();
     const handleRating = (rating) => {
         let htmlToReturn = "";
         const maximumRatingStars = 5;
@@ -27,10 +24,6 @@ const ProductID = (props) => {
         }
         
         return htmlToReturn;
-    }
-    const addWL = (data) => {
-        dispatch(ADD__COMMENT(data));
-        router.push("/wishlist")
     }
     useEffect(() => {
         const id = printfID(props.id);
@@ -58,13 +51,6 @@ const ProductID = (props) => {
                             <h3>{data.name}</h3>
                             <div className="ProductID-detail_name_rating">
                                 {handleRating(data.rating)}
-                            </div>
-                            <div className='ProductID-detail_name-btn'>
-                                {data.menu === "comic" ?
-                                <button onClick={() => addWL(data)}><FontAwesomeIcon icon={faHeart} /></button>
-                                :
-                                <button onClick={() => router.push(data.text)}><FontAwesomeIcon icon={faBookOpen} /></button>
-                                }
                             </div>
                             <div className='ProductID-des-box'>
                                 {data.text}

@@ -49,21 +49,6 @@
         display: flex;
         color: rgb(248, 199, 51);
     }
-    .ProductID-detail_name-btn{
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        svg{
-            font-size: 15px;
-        }
-        button:nth-child(1){
-            @include buttonDetail(black, red, white);
-            margin-right: 10px;
-        }
-        button:nth-child(2){
-            @include buttonDetail(white, green, black);
-        }
-    }
     .ProductID-des-box{
         @include ProductID--box(auto);
     }
