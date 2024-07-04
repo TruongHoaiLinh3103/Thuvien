@@ -7,10 +7,10 @@ import { applicationIdJsonone } from '@/story/applicationIdJsonone';
 import StoreProvider from './storeprovider';
 
 export const metadata = {
-  title: 'LisohAnikey',
+  title: 'Thư viện',
   description: 'Library in Anikey',
   openGraph: {
-    title: "LisohAnikey",
+    title: "Thư viện",
     description: "Library in Anikey",
     type: "website",
     author: ["Trương Hoài Linh", "Anikey"],
