@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/home.scss";
 import PageSection from "@/components/PageSection";
+import PageHome from "@/components/PageHome";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -40,7 +41,7 @@ function Home() {
         <SliderBanner/>
         <ProductMenu/>
         <Product data ={data}/>
-        <PageSection/>
+        <PageHome/>
     </main>
   )
 }
