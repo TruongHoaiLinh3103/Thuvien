@@ -8,8 +8,8 @@ import "../styles/pagesection.scss";
 import BtnListProduct from './BtnListProduct';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux'
-import { ADD__COMMENT } from '../redux/reduccer/counterReducer';
+import { useDispatch, useSelector } from 'react-redux'
+import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
 
 const PageSection = (props) => {
     const pathname = usePathname();
@@ -20,21 +20,37 @@ const PageSection = (props) => {
     const paragraph = props.name;
     const dispatch = useDispatch();
     const router = useRouter();
-    const [Search, setSearch] = useState(1)
-    const [Doc, setDoc] = useState(1)
-    const [Com, setCom] = useState(1)
+    const data = useSelector((state) => state.counter.page);
+    const [Search, setSearch] = useState(data[1].number ? data[1].number : 1)
+    const [Doc, setDoc] = useState(data[2].number ? data[2].number : 1)
+    const [Com, setCom] = useState(data[3].number ? data[3].number : 1);
 
     
     const productPage = (Children) => {
         setSearch(Children)
+        const temp = {
+            id: 1,
+            number: Children
+        }
+        data.filter(item => item.id === 1 && dispatch(EDIT__PAGE(temp)))
     }
 
     const documentPage = (Children) => {
         setDoc(Children)
+        const temp = {
+            id: 2,
+            number: Children
+        }
+        data.filter(item => item.id === 2 && dispatch(EDIT__PAGE(temp)))
     }
 
     const comicPage = (Children) => {
         setCom(Children)
+        const temp = {
+            id: 3,
+            number: Children
+        }
+        data.filter(item => item.id === 3 && dispatch(EDIT__PAGE(temp)))
     }
 
     const addWL = (data) => {
@@ -111,7 +127,7 @@ const PageSection = (props) => {
                             </div>
                         </section>
                         {product.length === 0 ? "" :
-                            <BtnListProduct numberPage={productPage} namePage={paragraph}/>
+                            <BtnListProduct numberPage={productPage} pageActive={data[1].number} namePage={paragraph}/>
                         }
                     </div>
                     <div style={{display: resultS ? "flex" : "none", alignItems: "center", justifyContent: 'center'}}>
@@ -142,7 +158,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {document.length === 0  ? "" :
-                        <BtnListProduct page={"document"} numberPage={documentPage}/>
+                        <BtnListProduct page={"document"} pageActive={data[2].number} numberPage={documentPage}/>
                     }
                 </>
             }
@@ -169,7 +185,7 @@ const PageSection = (props) => {
                         </div>
                     </section>
                     {comic.length === 0  ? "" :
-                        <BtnListProduct page={"comic"} numberPage={comicPage}/>
+                        <BtnListProduct page={"comic"} pageActive={data[3].number} numberPage={comicPage}/>
                     }
                 </>
             }

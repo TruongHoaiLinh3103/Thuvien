@@ -5,10 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 import "../styles/btnbutton.scss"
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
+import { useRouter } from 'next/navigation';
 
 const PageHome = () => {
     const [home, setHome] = useState([]);
-
+    const data = useSelector((state) => state.counter.page);
+    const dispatch = useDispatch();
+    const router = useRouter();
     const [max, setMax] = useState(() => {
         axios.get(`https://zfakeapi.vercel.app/product`).then((res) => {
             const number = res.data.length/24;
@@ -16,11 +21,22 @@ const PageHome = () => {
         });
     });
 
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(data[0].number ? data[0].number : 1);
 
     const handleChange = (event, value) => {
+        const temp = {
+            id: 0,
+            number: value
+        }
         setPage(value)
+        data.filter(item => item.id === 0 && dispatch(EDIT__PAGE(temp)))
     };
+
+
+    const addWL = (data) => {
+        dispatch(ADD__COMMENT(data));
+        router.push("/wishlist")
+    }
 
     const handleRating = (rating) => {
         let htmlToReturn = "";
@@ -69,9 +85,11 @@ const PageHome = () => {
                 })}
             </div>
         </section>
-        <div className='BtnPagination'>
-            <Pagination count={max} page={page} variant="outlined" color="primary" onChange={handleChange} defaultPage={6} siblingCount={0}/>
-        </div>
+        {home.length === 0 ? "" :
+            <div className='BtnPagination'>
+                <Pagination count={max} page={page} variant="outlined" color="primary" onChange={handleChange} defaultPage={6} siblingCount={0}/>
+            </div>
+        }
     </>
     );
 };

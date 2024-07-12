@@ -1,7 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { number } from 'yup';
 
 const initialState = {
-  wishlist: []
+  wishlist: [],
+  page: [
+    {id: 0, number: 1},
+    {id: 1, number: 1},
+    {id: 2, number: 1},
+    {id: 3, number: 1},
+  ]
 }
 
 export const counterSlice = createSlice({
@@ -12,7 +19,7 @@ export const counterSlice = createSlice({
       let wishlist = state.wishlist;
       wishlist = wishlist.filter(item => item.id !== action.payload.id)
       return{
-        wishlist
+        ...state, wishlist
       }
     },
     ADD__COMMENT: (state, action) => {
@@ -27,7 +34,7 @@ export const counterSlice = createSlice({
           if(chats.id === wishlist[i].id){
             wishlist = wishlist.filter(item => item.id !== action.payload.id)
             return{
-              wishlist
+              ...state, wishlist
             }
           }else{
             return{
@@ -36,11 +43,16 @@ export const counterSlice = createSlice({
           }
         }
       }
+    },
+    EDIT__PAGE: (state, action) => {
+      let page = state.page;
+      page = page.filter(item => item.id === action.payload.id ? item.number = action.payload.number : item.number)
+      state.page = page
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { ADD__COMMENT, DELETE__COMMENT } = counterSlice.actions
+export const { ADD__COMMENT, DELETE__COMMENT, EDIT__PAGE } = counterSlice.actions
 
 export default counterSlice.reducer

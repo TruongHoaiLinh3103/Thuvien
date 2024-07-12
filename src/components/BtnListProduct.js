@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import "../styles/btnbutton.scss"
 
 const BtnListProduct = (props) => {
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(props.pageActive ? props.pageActive : 1);
     const [max, setMax] = useState(() => {
         if(props.page){
             axios.get(`https://zfakeapi.vercel.app/product?menu=${props.page}`).then((res) => {
