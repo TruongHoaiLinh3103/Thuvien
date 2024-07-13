@@ -14,12 +14,13 @@
   display: grid;
   grid-template-columns: 16.5% 16.5% 16.5% 16.5% 16.5% 16.5%;
   justify-content: center;
-  .PageSection-section_data-card {
-    @include card(auto);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+}
+
+.PageSection-section_data-card {
+  @include card(auto);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .PageSection-section_data img {

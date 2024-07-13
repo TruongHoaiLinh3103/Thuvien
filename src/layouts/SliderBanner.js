@@ -2,17 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import "../styles/slider.scss";
-import ic1 from "../../public/ic-1.jpg";
-import ic2 from "../../public/ic-2.jpg";
-import ic3 from "../../public/ic-3.jpg";
-import ic4 from "../../public/ic-4.jpg";
-import ic5 from "../../public/ic-5.jpg";
-import ic6 from "../../public/ic-6.jpg";
-import Image from 'next/image';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import "../styles/home.scss";
+import "../styles/loader.scss";
 import axios from 'axios';
 import { usePathname } from 'next/navigation';
 
@@ -79,25 +72,25 @@ const SliderBanner = () => {
             </svg>
             {/* <button type='button' className='slick-prev'>Previous</button>
             <button type='button' className='slick-next'>Next</button> */}
-            {pathname === "/" && 
+            {pathname === "/" && banner[0] &&
             <Slider {...settings} className="SliderCarousel">
                 <div>
-                    <Image src={ic1} alt='banner'/>
+                    <img src={banner[0].imgOne} alt='Banner'/>
                 </div>
                 <div>
-                    <Image src={ic2} alt='banner'/>
+                    <img src={banner[0].imgTwo} alt='Banner'/>
                 </div>
                 <div>
-                    <Image src={ic3} alt='banner'/>
+                    <img src={banner[0].imgThree} alt='Banner'/>
                 </div>
                 <div>
-                    <Image src={ic4} alt='banner'/>
+                    <img src={banner[0].imgFour} alt='Banner'/>
                 </div>
                 <div>
-                    <Image src={ic5} alt='banner'/>
+                    <img src={banner[0].imgFive} alt='Banner'/>
                 </div>
                 <div>
-                    <Image src={ic6} alt='banner'/>
+                    <img src={banner[0].imgSix} alt='Banner'/>
                 </div>
             </Slider>}
             {pathname === "/product/comic" && banner[0] &&

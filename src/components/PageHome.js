@@ -4,7 +4,8 @@ import ViewProduct from '@/utils/ViewProduct';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
-import "../styles/btnbutton.scss"
+import "../styles/btnbutton.scss";
+import "../styles/pagesection.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
 import { useRouter } from 'next/navigation';
