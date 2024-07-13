@@ -29,7 +29,6 @@
         ul{
             padding-left: 0px;
             li{
-                // list-style: url("../assets/Svg/icons8-tick-24.png");
                 list-style: none;
                 display: flex;
                 align-items: center;
@@ -48,7 +47,8 @@
                 svg{
                     color: white;
                     margin-right: 5px;
-                    font-size: 15px;
+                    width: 15px;
+                    height: 15px;
                 }
             }
     

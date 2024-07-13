@@ -12,12 +12,14 @@ import Image from 'next/image';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import "../styles/home.scss";
 import axios from 'axios';
 import { usePathname } from 'next/navigation';
 
 const SliderBanner = () => {
     const pathname = usePathname();
     const [banner, setbanner] = useState([]);
+    const [loading, setLoading] = useState(true);
     var settings = {
         arrows: false,
         dots: false,
@@ -38,7 +40,20 @@ const SliderBanner = () => {
         });
     })
     return (
-        <div className='SliderHeader maxWidth1400px'>
+    <>
+        <ul className="wave-menu" style={{display : loading ? "flex" : "none"}}>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div className='SliderHeader maxWidth1400px' style={{display : !loading ? "flex" : "none"}} onLoad={() => setLoading(false)}>
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
             width="0" height="0" viewBox="0 0 1366 768">
                 <defs>
@@ -128,6 +143,7 @@ const SliderBanner = () => {
                 </div>
             </Slider>}
         </div>
+    </>
     );
 };
 

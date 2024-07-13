@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 const PageHome = () => {
     const [home, setHome] = useState([]);
     const data = useSelector((state) => state.counter.page);
+    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
     const router = useRouter();
     const [max, setMax] = useState(() => {
@@ -66,8 +67,8 @@ const PageHome = () => {
                 {home.map((item) => {
                     return(
                         <div className='PageSection-section_data-card' key={item.id}>
-                            <img className="data-card_product"
-                                src={item.img} alt={`Foto do produtos - ${item.name}`}/>
+                            <span className="loader" style={{display : loading ? "flex" : "none"}}></span>
+                            <img style={{display : !loading ? "flex" : "none"}} className="data-card_product" src={item.img} alt={item.name} onLoad={() => setLoading(false)}/>
                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
                             ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                             <div className="data-card_rating">
