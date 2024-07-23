@@ -45,7 +45,7 @@ const ProductID = (props) => {
                     </div>
                     <div className='ProductID-detail'>
                         <div className='Product-detai-img'>
-                            <img src={data.img} alt='Product'/>
+                            <img src={data.img} alt={data.name}/>
                         </div>
                         <div className='ProductID-cmt'>
                             <h3>{data.name}</h3>

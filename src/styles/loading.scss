@@ -1,14 +1,19 @@
 @import "./variable.scss";
 
+.container-loaderR{
+  @include imgCard(250px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .loaderR {
     transform: rotateZ(45deg);
     perspective: 1000px;
     border-radius: 50%;
-    color: #000000;
-    @include imgCard(250px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 48px;
+    height: 48px;
+    color: black;
   }
     .loaderR:before,
     .loaderR:after {
