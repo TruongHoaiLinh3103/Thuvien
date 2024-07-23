@@ -67,7 +67,23 @@ const PageHome = () => {
             <div className='PageSection-section_data'>
                 {home.map((item) => {
                     return(
-                        <LazyLoad className='PageSection-section_data-card' key={item.id} placeholder={<span className="loader"></span>} once>
+                        <LazyLoad className='PageSection-section_data-card' key={item.id} placeholder={
+                            <>
+                                <span className="loader"></span>
+                                <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
+                                ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
+                                <div className="data-card_rating">
+                                    {handleRating(item.rating)}
+                                </div>
+                                <div className='data-card_btn'>
+                                    {item.menu === "comic" ?
+                                    <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
+                                    :
+                                    <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
+                                    }
+                                </div>
+                            </>
+                        } once>
                             <img className="data-card_product" src={item.img} alt={item.name}/>
                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
                             ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
