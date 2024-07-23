@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
 import { useRouter } from 'next/navigation';
 import LazyLoad from 'react-lazyload';
+import Loading from './Loading';
 
 const PageHome = () => {
     const [home, setHome] = useState([]);
@@ -68,7 +69,7 @@ const PageHome = () => {
                 {home.map((item) => {
                     return(
                         <div className='PageSection-section_data-card' key={item.id}>
-                            <LazyLoad placeholder={<span className="loader"></span>} once><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
+                            <LazyLoad placeholder={<Loading/>}><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
                             ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                             <div className="data-card_rating">

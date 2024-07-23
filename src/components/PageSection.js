@@ -11,6 +11,7 @@ import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
 import LazyLoad from 'react-lazyload';
+import Loading from './Loading';
 
 const PageSection = (props) => {
     const pathname = usePathname();
@@ -108,7 +109,7 @@ const PageSection = (props) => {
                                 {product.map((item, index) => {
                                     return(
                                         <div className='PageSection-section_data-card' key={item.id}>
-                                            <LazyLoad placeholder={<span className="loader"></span>} once><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
+                                            <LazyLoad placeholder={<Loading/>}><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
                                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
                                             ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                             <div className="data-card_rating">
@@ -142,7 +143,7 @@ const PageSection = (props) => {
                             {document.map((item, index) => {
                                 return(
                                     <div className='PageSection-section_data-card' key={item.id}> 
-                                        <LazyLoad placeholder={<span className="loader"></span>} once><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
+                                        <LazyLoad placeholder={<Loading/>}><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                         <div className="data-card_rating">
@@ -168,7 +169,7 @@ const PageSection = (props) => {
                             {comic.map((item, index) => {
                                 return(
                                     <div className='PageSection-section_data-card' key={item.id}>
-                                        <LazyLoad placeholder={<span className="loader"></span>} once><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
+                                        <LazyLoad placeholder={<Loading/>}><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                         <div className="data-card_rating">
