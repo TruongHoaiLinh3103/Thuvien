@@ -9,11 +9,11 @@ import "../styles/pagesection.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
 import { useRouter } from 'next/navigation';
+import LazyLoad from 'react-lazyload';
 
 const PageHome = () => {
     const [home, setHome] = useState([]);
     const data = useSelector((state) => state.counter.page);
-    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
     const router = useRouter();
     const [max, setMax] = useState(() => {
@@ -67,9 +67,8 @@ const PageHome = () => {
             <div className='PageSection-section_data'>
                 {home.map((item) => {
                     return(
-                        <div className='PageSection-section_data-card' key={item.id}>
-                            <span className="loader" style={{display : loading ? "flex" : "none"}}></span>
-                            <img style={{display : !loading ? "flex" : "none"}} className="data-card_product" src={item.img} alt={item.name} onLoad={() => setLoading(false)}/>
+                        <LazyLoad className='PageSection-section_data-card' key={item.id} placeholder={<span className="loader"></span>} once>
+                            <img className="data-card_product" src={item.img} alt={item.name}/>
                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
                             ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                             <div className="data-card_rating">
@@ -82,7 +81,7 @@ const PageHome = () => {
                                 <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                 }
                             </div>
-                        </div>
+                        </LazyLoad>
                     )
                 })}
             </div>

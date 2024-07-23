@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
+import LazyLoad from 'react-lazyload';
 
 const PageSection = (props) => {
     const pathname = usePathname();
@@ -17,7 +18,6 @@ const PageSection = (props) => {
     const [comic, setComic] = useState([])
     const [product, setProduct] = useState([]);
     const [resultS, setResultS] = useState(false);
-    const [loading, setLoading] = useState(true);
     const paragraph = props.name;
     const dispatch = useDispatch();
     const router = useRouter();
@@ -107,9 +107,8 @@ const PageSection = (props) => {
                             <div className='PageSection-section_data'>
                                 {product.map((item, index) => {
                                     return(
-                                        <div className='PageSection-section_data-card' key={item.id}>
-                                            <span className="loader" style={{display : loading ? "flex" : "none"}}></span>
-                                            <img style={{display : !loading ? "flex" : "none"}} className="data-card_product" src={item.img} alt={item.name} onLoad={() => setLoading(false)}/>
+                                        <LazyLoad className='PageSection-section_data-card' key={item.id} placeholder={<span className="loader"></span>} once>
+                                            <img className="data-card_product" src={item.img} alt={item.name}/>
                                             <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
                                             ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                             <div className="data-card_rating">
@@ -122,7 +121,7 @@ const PageSection = (props) => {
                                                 <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                                 }
                                             </div>
-                                        </div>
+                                        </LazyLoad>
                                     )
                                 })}
                             </div>
@@ -142,9 +141,8 @@ const PageSection = (props) => {
                         <div className='PageSection-section_data'>
                             {document.map((item, index) => {
                                 return(
-                                    <div className='PageSection-section_data-card' key={item.id}> 
-                                        <span className="loader" style={{display : loading ? "flex" : "none"}}></span>
-                                        <img style={{display : !loading ? "flex" : "none"}} className="data-card_product" src={item.img} alt={item.name} onLoad={() => setLoading(false)}/>
+                                    <LazyLoad className='PageSection-section_data-card' key={item.id} placeholder={<span className="loader"></span>} once> 
+                                        <img className="data-card_product" src={item.img} alt={item.name}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                         <div className="data-card_rating">
@@ -153,7 +151,7 @@ const PageSection = (props) => {
                                         <div className='data-card_btn'>
                                             <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
                                         </div>
-                                    </div>
+                                    </LazyLoad>
                                 )
                             })}
                         </div>
@@ -169,9 +167,8 @@ const PageSection = (props) => {
                         <div className='PageSection-section_data'>
                             {comic.map((item, index) => {
                                 return(
-                                    <div className='PageSection-section_data-card' key={item.id}>
-                                        <span className="loader" style={{display : loading ? "flex" : "none"}}></span>
-                                        <img style={{display : !loading ? "flex" : "none"}} className="data-card_product" src={item.img} alt={item.name} onLoad={() => setLoading(false)}/>
+                                    <LazyLoad className='PageSection-section_data-card' key={item.id} placeholder={<span className="loader"></span>} once>
+                                        <img className="data-card_product" src={item.img} alt={item.name}/>
                                         <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
                                         ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
                                         <div className="data-card_rating">
@@ -180,7 +177,7 @@ const PageSection = (props) => {
                                         <div className='data-card_btn'>
                                             <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
                                         </div>
-                                    </div>
+                                    </LazyLoad>
                                 )
                             })}
                         </div>
