@@ -17,6 +17,7 @@ const PageHome = () => {
     const data = useSelector((state) => state.counter.page);
     const dispatch = useDispatch();
     const router = useRouter();
+    const temp = useSelector((state) => state.counter.wishlist);
     const [max, setMax] = useState(() => {
         axios.get(`https://zfakeapi.vercel.app/product`).then((res) => {
             const number = res.data.length/24;
@@ -36,10 +37,18 @@ const PageHome = () => {
         router.push("#PageSectionTitle")
     };
 
-
     const addWL = (data) => {
-        dispatch(ADD__COMMENT(data));
-        router.push("/wishlist")
+        if(temp.length === 0){
+            dispatch(ADD__COMMENT(data))
+            router.push("/wishlist");
+        }else{
+            if(temp.some((item) => item.id === data.id)){
+                window.alert("Đã có trong danh sách yêu thích!")
+            }else{
+                dispatch(ADD__COMMENT(data))
+                router.push("/wishlist");
+            }
+        }
     }
 
     const handleRating = (rating) => {

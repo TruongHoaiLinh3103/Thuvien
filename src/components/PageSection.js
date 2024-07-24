@@ -26,6 +26,7 @@ const PageSection = (props) => {
     const [Search, setSearch] = useState(data[1].number ? data[1].number : 1)
     const [Doc, setDoc] = useState(data[2].number ? data[2].number : 1)
     const [Com, setCom] = useState(data[3].number ? data[3].number : 1);
+    const temp = useSelector((state) => state.counter.wishlist);
 
     
     const productPage = (Children) => {
@@ -59,8 +60,17 @@ const PageSection = (props) => {
     }
 
     const addWL = (data) => {
-        dispatch(ADD__COMMENT(data));
-        router.push("/wishlist")
+        if(temp.length === 0){
+            dispatch(ADD__COMMENT(data))
+            router.push("/wishlist");
+        }else{
+            if(temp.some((item) => item.id === data.id)){
+                window.alert("Đã có trong danh sách yêu thích!")
+            }else{
+                dispatch(ADD__COMMENT(data))
+                router.push("/wishlist");
+            }
+        }
     }
 
     const handleRating = (rating) => {

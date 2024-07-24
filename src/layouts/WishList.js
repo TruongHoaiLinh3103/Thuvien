@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import img from "../../public/cart-empty.png";
 import "../styles/wishlist.scss";
 import Image from 'next/image';
@@ -17,7 +17,6 @@ const WishList = () => {
     const path = usePathname();
     const data = useSelector((state) => state.counter.wishlist);
     const dispatch = useDispatch();
-    const [wishlist, setWishlist] = useState([])
 
     const handleRating = (rating) => {
         let htmlToReturn = "";
@@ -36,22 +35,19 @@ const WishList = () => {
     const deleteWishlist = (item) => {
         dispatch(DELETE__COMMENT(item));
     }
-    useEffect(() => {
-        setWishlist(data);
-    })
     return (
         <>
             {path === "/wishlist" &&
                 <div className='WishList'>
                     <h2><b>YOU ESPEC</b>IALLY LIKE</h2>
-                    {wishlist.length === 0 ?
+                    {data.length === 0 ?
                         <>
                             <p>There are no products liked!</p>
                             <Image src={img} alt='Not wishlist!'/>
                         </>
                         :
                         <div className='WishList-Body'>
-                            {wishlist.map((item) => {
+                            {data.map((item) => {
                                 return(
                                     <div key={item.id} className='WishList-Item'>
                                         <div className='WishList-Item_img'>
