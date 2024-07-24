@@ -7,6 +7,7 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import "../styles/productid.scss";
 import { useRouter } from 'next/navigation';
 import { printfID } from '@/utils/ViewURL';
+import copy from 'copy-to-clipboard';
 
 const ProductID = (props) => {
     const [data, setData] = useState({});
@@ -48,7 +49,7 @@ const ProductID = (props) => {
                             <img src={data.img} alt={data.name}/>
                         </div>
                         <div className='ProductID-cmt'>
-                            <h3>{data.name}</h3>
+                            <h3 onClick={() => copy(data.name)}>{data.name}</h3>
                             <div className="ProductID-detail_name_rating">
                                 {handleRating(data.rating)}
                             </div>

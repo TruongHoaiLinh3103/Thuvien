@@ -35,6 +35,7 @@ const PageSection = (props) => {
             number: Children
         }
         data.filter(item => item.id === 1 && dispatch(EDIT__PAGE(temp)))
+        router.push("#PageSection-section")
     }
 
     const documentPage = (Children) => {
@@ -44,6 +45,7 @@ const PageSection = (props) => {
             number: Children
         }
         data.filter(item => item.id === 2 && dispatch(EDIT__PAGE(temp)))
+        router.push("#PageSection-section")
     }
 
     const comicPage = (Children) => {
@@ -52,7 +54,8 @@ const PageSection = (props) => {
             id: 3,
             number: Children
         }
-        data.filter(item => item.id === 3 && dispatch(EDIT__PAGE(temp)))
+        data.filter(item => item.id === 3 && dispatch(EDIT__PAGE(temp)));
+        router.push("#PageSection-section")
     }
 
     const addWL = (data) => {
@@ -104,7 +107,7 @@ const PageSection = (props) => {
                 <>
                     <div style={{display: !resultS ? "block" : "none"}}>
                         <p style={{margin: "0px 10px",fontSize: "20px"}}>Keyword | <b>{decodeURI(paragraph)}</b></p>
-                        <section className='PageSection-section'>
+                        <section className='PageSection-section' id='PageSection-section'>
                             <div className='PageSection-section_data'>
                                 {product.map((item, index) => {
                                     return(
@@ -138,7 +141,7 @@ const PageSection = (props) => {
             }
             {pathname === "/product/document" && 
                 <>
-                    <section className='PageSection-section'>
+                    <section className='PageSection-section' id='PageSection-section'>
                         <div className='PageSection-section_data'>
                             {document.map((item, index) => {
                                 return(
@@ -164,7 +167,7 @@ const PageSection = (props) => {
             }
             {pathname === "/product/comic" && 
                 <>
-                    <section className='PageSection-section'>
+                    <section className='PageSection-section' id='PageSection-section'>
                         <div className='PageSection-section_data'>
                             {comic.map((item, index) => {
                                 return(

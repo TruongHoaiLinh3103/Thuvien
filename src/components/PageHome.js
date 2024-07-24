@@ -32,7 +32,8 @@ const PageHome = () => {
             number: value
         }
         setPage(value)
-        data.filter(item => item.id === 0 && dispatch(EDIT__PAGE(temp)))
+        data.filter(item => item.id === 0 && dispatch(EDIT__PAGE(temp)));
+        router.push("#PageSectionTitle")
     };
 
 
@@ -63,7 +64,7 @@ const PageHome = () => {
     },[page])
     return (
     <>
-        <h2 className='PageSection_title'><b>LAT</b>EST</h2>
+        <h2 className='PageSection_title' id='PageSectionTitle'><b>LAT</b>EST</h2>
         <section className='PageSection-section'>
             <div className='PageSection-section_data'>
                 {home.map((item) => {
@@ -89,7 +90,7 @@ const PageHome = () => {
         </section>
         {home.length === 0 ? "" :
             <div className='BtnPagination'>
-                <Pagination count={max} page={page} variant="outlined" color="primary" onChange={handleChange} defaultPage={6} siblingCount={0}/>
+                <Pagination count={max} page={page} variant="outlined" color="primary" onChange={handleChange} defaultPage={6} siblingCount={0} />
             </div>
         }
     </>
