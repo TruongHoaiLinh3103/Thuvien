@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Pagination } from '@mui/material';
-import ViewProduct from '@/utils/ViewProduct';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 import "../styles/btnbutton.scss";
 import "../styles/pagesection.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
 import { useRouter } from 'next/navigation';
-import LazyLoad from 'react-lazyload';
-import Loading from './Loading';
+import Gallery from '@/layouts/Gallery';
 
 const PageHome = () => {
     const [home, setHome] = useState([]);
@@ -75,27 +71,7 @@ const PageHome = () => {
     <>
         <h2 className='PageSection_title' id='PageSectionTitle'><b>LAT</b>EST</h2>
         <section className='PageSection-section'>
-            <div className='PageSection-section_data'>
-                {home.map((item) => {
-                    return(
-                        <div className='PageSection-section_data-card' key={item.id}>
-                            <LazyLoad placeholder={<Loading/>} once offset={100}><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
-                            <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}}
-                            ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
-                            <div className="data-card_rating">
-                                {handleRating(item.rating)}
-                            </div>
-                            <div className='data-card_btn'>
-                                {item.menu === "comic" ?
-                                <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
-                                :
-                                <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
-                                }
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
+            <Gallery images={home} handleRating={handleRating} addWL={addWL}/>
         </section>
         {home.length === 0 ? "" :
             <div className='BtnPagination'>

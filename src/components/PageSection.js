@@ -3,15 +3,11 @@
 import React, { useEffect , useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
-import ViewProduct from '@/utils/ViewProduct';
 import "../styles/pagesection.scss";
 import BtnListProduct from './BtnListProduct';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
-import LazyLoad from 'react-lazyload';
-import Loading from './Loading';
+import Gallery from '@/layouts/Gallery';
 
 const PageSection = (props) => {
     const pathname = usePathname();
@@ -118,27 +114,7 @@ const PageSection = (props) => {
                     <div style={{display: !resultS ? "block" : "none"}}>
                         <p style={{margin: "0px 10px",fontSize: "20px"}}>Keyword | <b>{decodeURI(paragraph)}</b></p>
                         <section className='PageSection-section' id='PageSection-section'>
-                            <div className='PageSection-section_data'>
-                                {product.map((item, index) => {
-                                    return(
-                                        <div className='PageSection-section_data-card' key={item.id}>
-                                            <LazyLoad once offset={100} placeholder={<Loading/>}><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
-                                            <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                            ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
-                                            <div className="data-card_rating">
-                                                {handleRating(item.rating)}
-                                            </div>
-                                            <div className='data-card_btn'>
-                                                {item.menu === "comic" ?
-                                                <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
-                                                :
-                                                <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
-                                                }
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                            <Gallery images={product} handleRating={handleRating} addWL={addWL}/>
                         </section>
                         {product.length === 0 ? "" :
                             <BtnListProduct numberPage={productPage} pageActive={data[1].number} namePage={paragraph}/>
@@ -152,23 +128,7 @@ const PageSection = (props) => {
             {pathname === "/product/document" && 
                 <>
                     <section className='PageSection-section' id='PageSection-section'>
-                        <div className='PageSection-section_data'>
-                            {document.map((item, index) => {
-                                return(
-                                    <div className='PageSection-section_data-card' key={item.id}> 
-                                        <LazyLoad once offset={100} placeholder={<Loading/>}><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
-                                        <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                        ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
-                                        <div className="data-card_rating">
-                                            {handleRating(item.rating)}
-                                        </div>
-                                        <div className='data-card_btn'>
-                                            <a href={item.text} className="button"><FontAwesomeIcon icon={faBook} /></a>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        <Gallery images={document} handleRating={handleRating} addWL={addWL}/>
                     </section>
                     {document.length === 0  ? "" :
                         <BtnListProduct page={"document"} pageActive={data[2].number} numberPage={documentPage}/>
@@ -178,23 +138,7 @@ const PageSection = (props) => {
             {pathname === "/product/comic" && 
                 <>
                     <section className='PageSection-section' id='PageSection-section'>
-                        <div className='PageSection-section_data'>
-                            {comic.map((item, index) => {
-                                return(
-                                    <div className='PageSection-section_data-card' key={item.id}>
-                                        <LazyLoad once offset={100} placeholder={<Loading/>}><img className="data-card_product" src={item.img} alt={item.name}/></LazyLoad>
-                                        <h4 className="data-card_title" title={item.name} style={{textAlign: "center", cursor:"pointer"}} 
-                                        ><ViewProduct name={item.name} id={item.id} menu={item.menu} text={item.text}></ViewProduct></h4>
-                                        <div className="data-card_rating">
-                                            {handleRating(item.rating)}
-                                        </div>
-                                        <div className='data-card_btn'>
-                                            <a className="button" onClick={() => addWL(item)}><FontAwesomeIcon icon={faHeart} /></a>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        <Gallery images={comic} handleRating={handleRating} addWL={addWL}/>
                     </section>
                     {comic.length === 0  ? "" :
                         <BtnListProduct page={"comic"} pageActive={data[3].number} numberPage={comicPage}/>
