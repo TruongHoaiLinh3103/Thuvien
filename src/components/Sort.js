@@ -22,7 +22,7 @@ const Sort = ({ handleSort, handleList }) => {
                     <span>|</span>
                     <button className='-dash-list_btn' onClick={() => handleList("&list_like=Cổ_đại")}>Cổ đại</button>
                     <span>|</span>
-                    <button className='-dash-list_btn' onClick={() => handleList("&list_like=Truyện_18+")}>Truyện 18+</button>
+                    <button className='-dash-list_btn' onClick={() => handleList("&list_like=Truyện_18")}>Truyện 18+</button>
                     <span>|</span>
                     <button className='-dash-list_btn' onClick={() => handleList("&list_like=Phim")}>Phim</button>
                     <span>|</span>
