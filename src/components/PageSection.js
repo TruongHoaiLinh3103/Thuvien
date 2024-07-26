@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect , useState } from 'react';
+import React, { Children, useEffect , useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 import "../styles/pagesection.scss";
@@ -8,6 +8,7 @@ import BtnListProduct from './BtnListProduct';
 import { useDispatch, useSelector } from 'react-redux'
 import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
 import Gallery from '@/layouts/Gallery';
+import Sort from './Sort';
 
 const PageSection = (props) => {
     const pathname = usePathname();
@@ -23,8 +24,28 @@ const PageSection = (props) => {
     const [Doc, setDoc] = useState(data[2].number ? data[2].number : 1)
     const [Com, setCom] = useState(data[3].number ? data[3].number : 1);
     const temp = useSelector((state) => state.counter.wishlist);
+    const [sort, setSort] = useState("&_sort=id&_order=desc")
+    const [list, setList] = useState("")
 
-    
+    const comicPage = (Children) => {
+        setCom(Children)
+        const temp = {
+            id: 3,
+            number: Children
+        }
+        data.filter(item => item.id === 3 && dispatch(EDIT__PAGE(temp)));
+        router.push("#PageSection-section")
+    }
+
+    const handleList = (Children) => {
+        setList(Children);
+        comicPage(1);
+    }
+
+    const handleSort = (Children) => {
+        setSort(Children);
+    }
+
     const productPage = (Children) => {
         setSearch(Children)
         const temp = {
@@ -42,16 +63,6 @@ const PageSection = (props) => {
             number: Children
         }
         data.filter(item => item.id === 2 && dispatch(EDIT__PAGE(temp)))
-        router.push("#PageSection-section")
-    }
-
-    const comicPage = (Children) => {
-        setCom(Children)
-        const temp = {
-            id: 3,
-            number: Children
-        }
-        data.filter(item => item.id === 3 && dispatch(EDIT__PAGE(temp)));
         router.push("#PageSection-section")
     }
 
@@ -103,10 +114,10 @@ const PageSection = (props) => {
             setDocument(res.data);
         })
         //Comic
-        axios.get(`https://zfakeapi.vercel.app/product?menu=comic&_page=${Com}&_limit=24&_sort=id&_order=desc`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=comic${list}&_page=${Com}&_limit=24${sort}`).then((res) => {
             setComic(res.data)
         })
-    }, [Search, Doc, Com])
+    }, [Search, Doc, Com, sort, list])
     return (
         <div className='PageSection'>
             {pathname === `/product/${paragraph}` && 
@@ -137,11 +148,18 @@ const PageSection = (props) => {
             }
             {pathname === "/product/comic" && 
                 <>
+                    <Sort handleSort={handleSort} handleList={handleList}/>
                     <section className='PageSection-section' id='PageSection-section'>
-                        <Gallery images={comic} handleRating={handleRating} addWL={addWL}/>
+                        {comic.length === 0 ? 
+                            <div style={{display: "flex", alignItems: "center", justifyContent: 'center'}}>
+                                <p style={{fontSize: "20px", margin: "10px"}}><b>404</b> | Không có kết quả thể loại</p>
+                            </div>
+                        :
+                            <Gallery images={comic} handleRating={handleRating} addWL={addWL}/>
+                        }
                     </section>
                     {comic.length === 0  ? "" :
-                        <BtnListProduct page={"comic"} pageActive={data[3].number} numberPage={comicPage}/>
+                        <BtnListProduct page={"comic"} list={list} pageActive={data[3].number} numberPage={comicPage}/>
                     }
                 </>
             }

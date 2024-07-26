@@ -1,13 +1,20 @@
 import { Pagination } from '@mui/material';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/btnbutton.scss"
 
 const BtnListProduct = (props) => {
     const [page, setPage] = useState(props.pageActive ? props.pageActive : 1);
-    const [max, setMax] = useState(() => {
+    const [max, setMax] = useState()
+
+    const handleChange = (event, value) => {
+        setPage(value);
+        props.numberPage(value)
+    };
+    
+    useEffect(() => {
         if(props.page){
-            axios.get(`https://zfakeapi.vercel.app/product?menu=${props.page}`).then((res) => {
+            axios.get(`https://zfakeapi.vercel.app/product?menu=${props.page}${props.list ? props.list: ""}`).then((res) => {
                 const number = res.data.length/24;
                 setMax(Math.ceil(number));
             });
@@ -17,12 +24,7 @@ const BtnListProduct = (props) => {
                 setMax(Math.ceil(number));
             });
         }
-    })
-
-    const handleChange = (event, value) => {
-        setPage(value);
-        props.numberPage(value)
-    };
+    }, [props.list])
 
     return (
         <div className='BtnPagination'>
