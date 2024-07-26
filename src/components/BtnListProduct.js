@@ -1,10 +1,10 @@
 import { Pagination } from '@mui/material';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import "../styles/btnbutton.scss"
 
 const BtnListProduct = (props) => {
-    const [page, setPage] = useState(props.pageActive ? props.pageActive : 1);
+    const [page, setPage] = useState(1);
     const [max, setMax] = useState()
 
     const handleChange = (event, value) => {
@@ -25,7 +25,9 @@ const BtnListProduct = (props) => {
             });
         }
     }, [props.list])
-
+    useLayoutEffect(() => {
+        props.pageActive ? setPage(props.pageActive) : setPage(1)
+    })
     return (
         <div className='BtnPagination'>
             <Pagination count={max} page={page} variant="outlined" color="primary" onChange={handleChange} defaultPage={6} siblingCount={0}/>

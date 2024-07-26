@@ -39,7 +39,9 @@ const PageSection = (props) => {
 
     const handleList = (Children) => {
         setList(Children);
-        comicPage(1);
+        setCom(1);
+        data.filter(item => item.id === 3 && dispatch(EDIT__PAGE({id: 3, number: 1})));
+        router.push("#PageSection-section")
     }
 
     const handleSort = (Children) => {
