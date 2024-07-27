@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "@/styles/sort.scss";
+import { memo } from 'react';
 
 const Sort = ({ handleSort, handleList }) => {
     const [sort, setSort] = useState(false);
@@ -35,4 +36,4 @@ const Sort = ({ handleSort, handleList }) => {
     );
 };
 
-export default Sort;
+export default memo(Sort);

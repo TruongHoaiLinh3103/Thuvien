@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Children, useEffect , useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 import "../styles/pagesection.scss";
@@ -25,48 +25,48 @@ const PageSection = (props) => {
     const [Com, setCom] = useState(data[3].number ? data[3].number : 1);
     const temp = useSelector((state) => state.counter.wishlist);
     const [sort, setSort] = useState("&_sort=id&_order=desc")
-    const [list, setList] = useState("")
+    const [list, setList] = useState("");
 
-    const comicPage = (Children) => {
+    const comicPage = useCallback((Children) => {
         setCom(Children)
         const temp = {
             id: 3,
             number: Children
         }
         data.filter(item => item.id === 3 && dispatch(EDIT__PAGE(temp)));
-        router.push("#PageSection-section")
-    }
+        router.push("#PageSection")
+    },[Com])
 
-    const handleList = (Children) => {
+    const handleList = useCallback((Children) => {
         setList(Children);
         setCom(1);
         data.filter(item => item.id === 3 && dispatch(EDIT__PAGE({id: 3, number: 1})));
-        router.push("#PageSection-section")
-    }
+        router.push("#PageSection")
+    },[list, Com])
 
-    const handleSort = (Children) => {
+    const handleSort = useCallback((Children) => {
         setSort(Children);
-    }
+    },[sort])
 
-    const productPage = (Children) => {
+    const productPage = useCallback((Children) => {
         setSearch(Children)
         const temp = {
             id: 1,
             number: Children
         }
         data.filter(item => item.id === 1 && dispatch(EDIT__PAGE(temp)))
-        router.push("#PageSection-section")
-    }
+        router.push("#PageSection")
+    },[Search])
 
-    const documentPage = (Children) => {
+    const documentPage = useCallback((Children) => {
         setDoc(Children)
         const temp = {
             id: 2,
             number: Children
         }
         data.filter(item => item.id === 2 && dispatch(EDIT__PAGE(temp)))
-        router.push("#PageSection-section")
-    }
+        router.push("#PageSection")
+    },[Doc])
 
     const addWL = (data) => {
         if(temp.length === 0){
@@ -119,14 +119,14 @@ const PageSection = (props) => {
         axios.get(`https://zfakeapi.vercel.app/product?menu=comic${list}&_page=${Com}&_limit=24${sort}`).then((res) => {
             setComic(res.data)
         })
-    }, [Search, Doc, Com, sort, list])
+    }, [Search, Doc, Com, list, sort])
     return (
-        <div className='PageSection'>
+        <div className='PageSection' id='PageSection' onLoad={() => router.push("#PageSection")}>
             {pathname === `/product/${paragraph}` && 
                 <>
                     <div style={{display: !resultS ? "block" : "none"}}>
                         <p style={{margin: "0px 10px",fontSize: "20px"}}>Keyword | <b>{decodeURI(paragraph)}</b></p>
-                        <section className='PageSection-section' id='PageSection-section'>
+                        <section className='PageSection-section'>
                             <Gallery images={product} handleRating={handleRating} addWL={addWL}/>
                         </section>
                         {product.length === 0 ? "" :
@@ -140,7 +140,7 @@ const PageSection = (props) => {
             }
             {pathname === "/product/document" && 
                 <>
-                    <section className='PageSection-section' id='PageSection-section'>
+                    <section className='PageSection-section'>
                         <Gallery images={document} handleRating={handleRating} addWL={addWL}/>
                     </section>
                     {document.length === 0  ? "" :
@@ -151,7 +151,7 @@ const PageSection = (props) => {
             {pathname === "/product/comic" && 
                 <>
                     <Sort handleSort={handleSort} handleList={handleList}/>
-                    <section className='PageSection-section' id='PageSection-section'>
+                    <section className='PageSection-section'>
                         {comic.length === 0 ? 
                             <div style={{display: "flex", alignItems: "center", justifyContent: 'center'}}>
                                 <p style={{fontSize: "20px", margin: "10px"}}><b>404</b> | Không có kết quả thể loại</p>

@@ -70,7 +70,7 @@ const PageHome = () => {
     return (
     <>
         <h2 className='PageSection_title' id='PageSectionTitle'><b>LAT</b>EST</h2>
-        <section className='PageSection-section'>
+        <section className='PageSection-section' onLoad={() => router.push("#PageSectionTitle")}>
             <Gallery images={home} handleRating={handleRating} addWL={addWL}/>
         </section>
         {home.length === 0 ? "" :

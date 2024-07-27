@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 import "../styles/pagesection.scss";
 import Loading from '@/components/Loading';
+import { memo } from 'react';
 
 const Gallery = ({ images, scrollPosition, addWL, handleRating }) => (
   <div className='PageSection-section_data'>
@@ -32,4 +33,4 @@ const Gallery = ({ images, scrollPosition, addWL, handleRating }) => (
 );
 // Wrap Gallery with trackWindowScroll HOC so it receives
 // a scrollPosition prop to pass down to the images
-export default trackWindowScroll(Gallery);
+export default memo(trackWindowScroll(Gallery));

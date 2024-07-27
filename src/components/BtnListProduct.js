@@ -1,7 +1,8 @@
 import { Pagination } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import "../styles/btnbutton.scss"
+import "../styles/btnbutton.scss";
+import { memo } from 'react';
 
 const BtnListProduct = (props) => {
     const [page, setPage] = useState(1);
@@ -35,4 +36,4 @@ const BtnListProduct = (props) => {
     );
 };
 
-export default BtnListProduct;
+export default memo(BtnListProduct);
