@@ -82,7 +82,7 @@ const Header = () => {
     return (
         <nav className='Nav maxWidth1400px'>
             <div className='Nav_top'>
-                <h3 title='Home' onClick={() => {router.push("/")}}>Thư Viện</h3>
+                <h3 title='Home' onClick={() => {router.push("/")}}>Library</h3>
                 <div className='Nav_top_search'>
                     <input type='text' placeholder='Search?' className='search-ip' ref={loop} onKeyDown={(e) => nextLoopEnter(e)} onChange={() => searchLoop(loop.current.value)}/>
                     <div className='Nav_top_searchToLoop' style={{display: loopCheck ? "block" : "none"}}>

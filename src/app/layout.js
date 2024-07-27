@@ -7,14 +7,14 @@ import { applicationIdJsonone } from '@/story/applicationIdJsonone';
 import StoreProvider from './storeprovider';
 
 export const metadata = {
-  title: 'Thư viện',
-  description: 'Library in Anikey',
+  title: 'Home',
+  description: 'Library',
   openGraph: {
-    title: "Thư viện",
-    description: "Library in Anikey",
+    title: "Home",
+    description: "Library",
     type: "website",
     author: ["Trương Hoài Linh", "Anikey"],
-    images: ["https://i.pinimg.com/originals/9c/5b/16/9c5b16ece475a3257034303b6023c8ee.jpg",]
+    images: ["https://i.pinimg.com/originals/ff/f7/8b/fff78bb663fc3ab1e1554c336eee4efc.jpg",]
   },
 }
 
