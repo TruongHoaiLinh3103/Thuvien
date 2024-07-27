@@ -65,12 +65,13 @@ const PageHome = () => {
     useEffect(() => { 
         axios.get(`https://zfakeapi.vercel.app/product?_page=${page}&_limit=24&_sort=id&_order=desc`).then((res) => {
             setHome(res.data);
+            router.push("#PageSectionTitle")
         })
     },[page])
     return (
     <>
         <h2 className='PageSection_title' id='PageSectionTitle'><b>LAT</b>EST</h2>
-        <section className='PageSection-section' onLoad={() => router.push("#PageSectionTitle")}>
+        <section className='PageSection-section'>
             <Gallery images={home} handleRating={handleRating} addWL={addWL}/>
         </section>
         {home.length === 0 ? "" :

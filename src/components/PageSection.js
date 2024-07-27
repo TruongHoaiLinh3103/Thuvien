@@ -6,7 +6,7 @@ import axios from 'axios';
 import "../styles/pagesection.scss";
 import BtnListProduct from './BtnListProduct';
 import { useDispatch, useSelector } from 'react-redux'
-import { ADD__COMMENT, EDIT__PAGE } from '../redux/reduccer/counterReducer';
+import { ADD__COMMENT, EDIT__PAGE, EDIT__SORT, EDIT__LIST } from '../redux/reduccer/counterReducer';
 import Gallery from '@/layouts/Gallery';
 import Sort from './Sort';
 
@@ -23,9 +23,9 @@ const PageSection = (props) => {
     const [Search, setSearch] = useState(data[1].number ? data[1].number : 1)
     const [Doc, setDoc] = useState(data[2].number ? data[2].number : 1)
     const [Com, setCom] = useState(data[3].number ? data[3].number : 1);
-    const temp = useSelector((state) => state.counter.wishlist);
-    const [sort, setSort] = useState("&_sort=id&_order=desc")
-    const [list, setList] = useState("");
+    const inLove = useSelector((state) => state.counter.wishlist);
+    const sort = useSelector((state) => state.counter.sort)
+    const list = useSelector((state) => state.counter.list)
 
     const comicPage = useCallback((Children) => {
         setCom(Children)
@@ -38,14 +38,14 @@ const PageSection = (props) => {
     },[Com])
 
     const handleList = useCallback((Children) => {
-        setList(Children);
+        dispatch(EDIT__LIST(Children))
         setCom(1);
         data.filter(item => item.id === 3 && dispatch(EDIT__PAGE({id: 3, number: 1})));
         router.push("#PageSection")
     },[list, Com])
 
     const handleSort = useCallback((Children) => {
-        setSort(Children);
+        dispatch(EDIT__SORT(Children))
     },[sort])
 
     const productPage = useCallback((Children) => {
@@ -69,11 +69,11 @@ const PageSection = (props) => {
     },[Doc])
 
     const addWL = (data) => {
-        if(temp.length === 0){
+        if(inLove.length === 0){
             dispatch(ADD__COMMENT(data))
             router.push("/wishlist");
         }else{
-            if(temp.some((item) => item.id === data.id)){
+            if(inLove.some((item) => item.id === data.id)){
                 window.alert("Đã có trong danh sách yêu thích!")
             }else{
                 dispatch(ADD__COMMENT(data))
@@ -110,18 +110,21 @@ const PageSection = (props) => {
                     }       
                 })
             }
+            router.push("#PageSection")
         })
         //Document
         axios.get(`https://zfakeapi.vercel.app/product?menu=document&_page=${Doc}&_limit=24&_sort=id&_order=desc`).then((res) => {
             setDocument(res.data);
+            router.push("#PageSection")
         })
         //Comic
         axios.get(`https://zfakeapi.vercel.app/product?menu=comic${list}&_page=${Com}&_limit=24${sort}`).then((res) => {
             setComic(res.data)
+            router.push("#PageSection")
         })
     }, [Search, Doc, Com, list, sort])
     return (
-        <div className='PageSection' id='PageSection' onLoad={() => router.push("#PageSection")}>
+        <div className='PageSection' id='PageSection'>
             {pathname === `/product/${paragraph}` && 
                 <>
                     <div style={{display: !resultS ? "block" : "none"}}>

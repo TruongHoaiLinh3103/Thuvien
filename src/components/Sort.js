@@ -30,6 +30,8 @@ const Sort = ({ handleSort, handleList }) => {
                     <button className='-dash-list_btn' onClick={() => handleList("&list_like=Trinh-thám")}>Trinh thám</button>
                     <span>|</span>
                     <button className='-dash-list_btn' onClick={() => handleList("&list_like=Truyện-cười")}>Truyện cười</button>
+                    <span>|</span>
+                    <button className='-dash-list_btn' onClick={() => handleList("")}>Thoát</button>
                 </div>
             </div>
         </div>
