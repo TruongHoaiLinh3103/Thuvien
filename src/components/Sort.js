@@ -19,9 +19,9 @@ const Sort = ({ handleSort, handleList, handleListDocument }) => {
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Personal")}>Personal</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Editor")}>Editor</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Check")}>Check</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=UIUX")}>UI/UX</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Icon")}>Icon</button>
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Convert")}>Convert</button>
                             <span>|</span>
@@ -29,7 +29,7 @@ const Sort = ({ handleSort, handleList, handleListDocument }) => {
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Ingredients")}>Ingredients</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Icon-Check")}>Icon/Check</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Other-options")}>Other-options</button>
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleListDocument("")}>Thoát</button>
                         </div>
