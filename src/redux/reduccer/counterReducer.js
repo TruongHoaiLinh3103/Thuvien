@@ -9,7 +9,8 @@ const initialState = {
     {id: 3, number: 1},
   ],
   sort: "&_sort=id&_order=desc",
-  list: ""
+  list: "",
+  listDocument: ""
 }
 
 export const counterSlice = createSlice({
@@ -43,11 +44,16 @@ export const counterSlice = createSlice({
       let list = state.list;
       list = list !== action.payload ? list = action.payload : list
       state.list = list
+    },
+    EDIT__LISTDOCUMENT: (state, action) => {
+      let listDocument = state.listDocument;
+      listDocument = listDocument !== action.payload ? listDocument = action.payload : listDocument
+      state.listDocument = listDocument
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { ADD__COMMENT, DELETE__COMMENT, EDIT__PAGE, EDIT__SORT, EDIT__LIST } = counterSlice.actions
+export const { ADD__COMMENT, DELETE__COMMENT, EDIT__PAGE, EDIT__SORT, EDIT__LIST, EDIT__LISTDOCUMENT } = counterSlice.actions
 
 export default counterSlice.reducer

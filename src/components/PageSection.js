@@ -6,7 +6,7 @@ import axios from 'axios';
 import "../styles/pagesection.scss";
 import BtnListProduct from './BtnListProduct';
 import { useDispatch, useSelector } from 'react-redux'
-import { ADD__COMMENT, EDIT__PAGE, EDIT__SORT, EDIT__LIST } from '../redux/reduccer/counterReducer';
+import { ADD__COMMENT, EDIT__PAGE, EDIT__SORT, EDIT__LIST, EDIT__LISTDOCUMENT } from '../redux/reduccer/counterReducer';
 import Gallery from '@/layouts/Gallery';
 import Sort from './Sort';
 
@@ -25,7 +25,8 @@ const PageSection = (props) => {
     const [Com, setCom] = useState(data[3].number ? data[3].number : 1);
     const inLove = useSelector((state) => state.counter.wishlist);
     const sort = useSelector((state) => state.counter.sort)
-    const list = useSelector((state) => state.counter.list)
+    const list = useSelector((state) => state.counter.list);
+    const listDocument = useSelector((state) => state.counter.listDocument)
 
     const comicPage = useCallback((Children) => {
         setCom(Children)
@@ -43,6 +44,13 @@ const PageSection = (props) => {
         data.filter(item => item.id === 3 && dispatch(EDIT__PAGE({id: 3, number: 1})));
         router.push("#PageSection")
     },[list, Com])
+
+    const handleListDocument = useCallback((Children) => {
+        dispatch(EDIT__LISTDOCUMENT(Children))
+        setDoc(1);
+        data.filter(item => item.id === 2 && dispatch(EDIT__PAGE({id: 2, number: 1})));
+        router.push("#PageSection")
+    },[listDocument, Doc])
 
     const handleSort = useCallback((Children) => {
         dispatch(EDIT__SORT(Children))
@@ -113,7 +121,7 @@ const PageSection = (props) => {
             router.push("#PageSection")
         })
         //Document
-        axios.get(`https://zfakeapi.vercel.app/product?menu=document&_page=${Doc}&_limit=24&_sort=id&_order=desc`).then((res) => {
+        axios.get(`https://zfakeapi.vercel.app/product?menu=document${listDocument}&_page=${Doc}&_limit=24&_sort=id&_order=desc`).then((res) => {
             setDocument(res.data);
             router.push("#PageSection")
         })
@@ -122,7 +130,7 @@ const PageSection = (props) => {
             setComic(res.data)
             router.push("#PageSection")
         })
-    }, [Search, Doc, Com, list, sort])
+    }, [Search, Doc, Com, list, sort, listDocument])
     return (
         <div className='PageSection' id='PageSection'>
             {pathname === `/product/${paragraph}` && 
@@ -143,8 +151,15 @@ const PageSection = (props) => {
             }
             {pathname === "/product/document" && 
                 <>
+                    <Sort handleListDocument={handleListDocument}/>
                     <section className='PageSection-section'>
-                        <Gallery images={document} handleRating={handleRating} addWL={addWL}/>
+                        {document.length === 0 ? 
+                            <div style={{display: "flex", alignItems: "center", justifyContent: 'center'}}>
+                                <p style={{fontSize: "20px", margin: "10px"}}><b>404</b> | Không có kết quả thể loại</p>
+                            </div>
+                        :
+                            <Gallery images={document} handleRating={handleRating} addWL={addWL}/>
+                        }
                     </section>
                     {document.length === 0  ? "" :
                         <BtnListProduct page={"document"} pageActive={data[2].number} numberPage={documentPage}/>
