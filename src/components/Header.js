@@ -8,8 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faMagnifyingGlass, faBook, faCode } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import ViewProduct from '@/utils/ViewProduct';
+import { useDispatch, useSelector } from 'react-redux';
+import { EDIT__PAGE } from '@/redux/reduccer/counterReducer';
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const array = useSelector((state) => state.counter.page);
     const router = useRouter();
     const search = useRef("");
     const loop = useRef("");
@@ -22,6 +26,7 @@ const Header = () => {
             search.current.focus();
         }else{
             router.push(`/product/${search.current.value}`);
+            array.filter(item => item.id === 1 && dispatch(EDIT__PAGE({id: 1, number: 1})))
         }
         
     }
@@ -31,6 +36,7 @@ const Header = () => {
             loop.current.focus();
         }else{
             router.push(`/product/${loop.current.value}`);
+            array.filter(item => item.id === 1 && dispatch(EDIT__PAGE({id: 1, number: 1})))
         }
     }
     const nextSearchEnter = (e) => {
@@ -40,6 +46,7 @@ const Header = () => {
                 search.current.focus();
             }else{
                 router.push(`/product/${search.current.value}`);
+                array.filter(item => item.id === 1 && dispatch(EDIT__PAGE({id: 1, number: 1})))
             }
         }
     }
@@ -50,6 +57,7 @@ const Header = () => {
                 loop.current.focus();
             }else{
                 router.push(`/product/${loop.current.value}`);
+                array.filter(item => item.id === 1 && dispatch(EDIT__PAGE({id: 1, number: 1})))
             }
         }
     }

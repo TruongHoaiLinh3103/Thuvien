@@ -20,61 +20,56 @@ const PageSection = (props) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const data = useSelector((state) => state.counter.page);
-    const [Search, setSearch] = useState(data[1].number ? data[1].number : 1)
-    const [Doc, setDoc] = useState(data[2].number ? data[2].number : 1)
-    const [Com, setCom] = useState(data[3].number ? data[3].number : 1);
+    const Search = data[1].number;
+    const Doc = data[2].number;
+    const Com = data[3].number;
     const inLove = useSelector((state) => state.counter.wishlist);
     const sort = useSelector((state) => state.counter.sort)
     const list = useSelector((state) => state.counter.list);
     const listDocument = useSelector((state) => state.counter.listDocument)
 
     const comicPage = useCallback((Children) => {
-        setCom(Children)
         const temp = {
             id: 3,
             number: Children
         }
         data.filter(item => item.id === 3 && dispatch(EDIT__PAGE(temp)));
         router.push("#PageSection")
-    },[Com])
+    },[])
 
     const handleList = useCallback((Children) => {
         dispatch(EDIT__LIST(Children))
-        setCom(1);
         data.filter(item => item.id === 3 && dispatch(EDIT__PAGE({id: 3, number: 1})));
         router.push("#PageSection")
-    },[list, Com])
+    },[list])
 
     const handleListDocument = useCallback((Children) => {
         dispatch(EDIT__LISTDOCUMENT(Children))
-        setDoc(1);
         data.filter(item => item.id === 2 && dispatch(EDIT__PAGE({id: 2, number: 1})));
         router.push("#PageSection")
-    },[listDocument, Doc])
+    },[listDocument])
 
     const handleSort = useCallback((Children) => {
         dispatch(EDIT__SORT(Children))
     },[sort])
 
     const productPage = useCallback((Children) => {
-        setSearch(Children)
         const temp = {
             id: 1,
             number: Children
         }
         data.filter(item => item.id === 1 && dispatch(EDIT__PAGE(temp)))
         router.push("#PageSection")
-    },[Search])
+    },[])
 
     const documentPage = useCallback((Children) => {
-        setDoc(Children)
         const temp = {
             id: 2,
             number: Children
         }
         data.filter(item => item.id === 2 && dispatch(EDIT__PAGE(temp)))
         router.push("#PageSection")
-    },[Doc])
+    },[])
 
     const addWL = (data) => {
         if(inLove.length === 0){
@@ -162,7 +157,7 @@ const PageSection = (props) => {
                         }
                     </section>
                     {document.length === 0  ? "" :
-                        <BtnListProduct page={"document"} pageActive={data[2].number} numberPage={documentPage}/>
+                        <BtnListProduct page={"document"} listDocument={listDocument} pageActive={data[2].number} numberPage={documentPage}/>
                     }
                 </>
             }

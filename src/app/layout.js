@@ -22,11 +22,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} maxWidth1400px`}>
-        <Header/>
-          <StoreProvider>
-            {children}
-          </StoreProvider>
-        <Footer/>
+        <StoreProvider>
+          <Header/>
+          {children}
+          <Footer/>
+        </StoreProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(applicationIdJsonone) }}
