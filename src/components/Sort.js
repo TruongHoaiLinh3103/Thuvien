@@ -13,26 +13,25 @@ const Sort = ({ handleSort, handleList, handleListDocument }) => {
                     <button className='Sort-btn' onClick={() => setSort(true)}>Thể Loại</button>
                     <div className='Sort-dash' style={{display: !sort ? "none" : "flex"}} onClick={() => setSort(false)}>
                         <div className='Sort-dash-list'>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Animation")}>Animation</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Animation")}>Chuyển động</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Design")}>Design</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Design")}>Thiết kế</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Personal")}>Personal</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Personal")}>Cá nhân hóa</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Check")}>Check</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Check")}>Kiểm tra</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Icon")}>Icon</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Icon")}>Biểu tượng</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Convert")}>Convert</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Convert")}>Chuyển đổi</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Tool")}>Tool</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Tool")}>Công cụ</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Ingredients")}>Ingredients</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Ingredients")}>Thành phần</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Other-options")}>Other-options</button>
-                            <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("")}>Thoát</button>
+                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Other-options")}>Ngôn ngữ</button>
                         </div>
+                        <button className='-dash-list_btn' onClick={() => handleListDocument("")}>Thoát</button>
                     </div>
                 </div>
             }
@@ -62,9 +61,8 @@ const Sort = ({ handleSort, handleList, handleListDocument }) => {
                             <button className='-dash-list_btn' onClick={() => handleList("&list_like=Trinh-thám")}>Trinh thám</button>
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleList("&list_like=Truyện-cười")}>Truyện cười</button>
-                            <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleList("")}>Thoát</button>
                         </div>
+                        <button className='-dash-list_btn' onClick={() => handleList("")}>Thoát</button>
                     </div>
                 </div>
             }
