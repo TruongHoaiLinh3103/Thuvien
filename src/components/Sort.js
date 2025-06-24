@@ -15,11 +15,7 @@ const Sort = ({ handleSort, handleList, handleListDocument }) => {
                         <div className='Sort-dash-list'>
                             <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Animation")}>Chuyển động</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Design")}>Thiết kế</button>
-                            <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Personal")}>Cá nhân hóa</button>
-                            <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Check")}>Kiểm tra</button>
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Icon")}>Biểu tượng</button>
                             <span>|</span>
@@ -28,8 +24,6 @@ const Sort = ({ handleSort, handleList, handleListDocument }) => {
                             <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Tool")}>Công cụ</button>
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Ingredients")}>Thành phần</button>
-                            <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleListDocument("&list_like=Other-options")}>Ngôn ngữ</button>
                         </div>
                         <button className='-dash-list_btn' onClick={() => handleListDocument("")}>Thoát</button>
                     </div>
@@ -50,15 +44,9 @@ const Sort = ({ handleSort, handleList, handleListDocument }) => {
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleList("&list_like=Ngôn-tình")}>Ngôn tình</button>
                             <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleList("&list_like=Mưu-sự")}>Mưu sự</button>
-                            <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleList("&list_like=Dị-giới")}>Dị giới</button>
-                            <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleList("&list_like=Truyện-18")}>Truyện 18+</button>
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleList("&list_like=Phim")}>Phim</button>
-                            <span>|</span>
-                            <button className='-dash-list_btn' onClick={() => handleList("&list_like=Trinh-thám")}>Trinh thám</button>
                             <span>|</span>
                             <button className='-dash-list_btn' onClick={() => handleList("&list_like=Truyện-cười")}>Truyện cười</button>
                         </div>
